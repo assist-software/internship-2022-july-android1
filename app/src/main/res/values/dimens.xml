@@ -1,2 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <dimen name="logo_width">100dp</dimen>
+    <dimen name="logo_margin_top">160dp</dimen>
+    <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="log_in_layout_margin_top">20dp</dimen>
+    <dimen name="line_spacing_1">3sp</dimen>
+    <dimen name="line_spacing_2">5sp</dimen>
+    <dimen name="margin_4dp">4dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen>
+    <dimen name="sign_up_google_btn">48dp</dimen>
+    <dimen name="placeholder_padding">12dp</dimen>
+    <dimen name="margin_30dp">30dp</dimen>
+    <dimen name="margin_50dp">50dp</dimen>
+    <dimen name="log_in_padding">16dp</dimen>
+    <dimen name="margin_24dp">24dp</dimen>
+    <dimen name="google_logo_padding">8dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+
+
+</resources>
