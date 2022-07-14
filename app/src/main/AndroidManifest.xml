@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImobilAndroidApp">
         <activity
+            android:name="com.assist.imobilandroidapp.toolbar.ToolbarActivity"
+            android:exported="false" />
+        <activity
             android:name="com.assist.imobilandroidapp.screens.onboarding.resetpassword.main.ResetPasswordActivity"
             android:exported="false" />
         <activity

@@ -18,6 +18,7 @@
     <dimen name="google_logo_padding">8dp</dimen>
     <dimen name="margin_20dp">20dp</dimen>
     <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="toolbar_height">60dp</dimen>
 
 
 </resources>

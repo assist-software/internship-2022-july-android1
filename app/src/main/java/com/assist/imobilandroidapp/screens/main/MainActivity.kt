@@ -5,36 +5,35 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.assist.imobilandroidapp.R
+import com.assist.imobilandroidapp.databinding.ActivityMainBinding
 import com.assist.imobilandroidapp.screens.onboarding.resetpassword.main.ResetPasswordActivity
 import com.assist.imobilandroidapp.screens.onboarding.singup.main.SignUpActivity
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var signUp: Button
-    private lateinit var resetPasswd: Button
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        signUp = findViewById(R.id.sign_up_btn)
-        signUp.setOnClickListener {
-            btn1()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.signUpBtn.setOnClickListener {
+            sendMeToSignUp()
         }
 
-        resetPasswd = findViewById(R.id.reset_passwd_btn)
-        resetPasswd.setOnClickListener {
-            btn2()
+        binding.resetPasswdBtn.setOnClickListener {
+            sendMeToResetPassword()
         }
-
     }
-    fun btn1() {
+    fun sendMeToSignUp() {
         val intent = Intent(this@MainActivity, SignUpActivity::class.java)
         startActivity(intent)
     }
 
-    fun btn2() {
+    fun sendMeToResetPassword() {
         val intent = Intent(this@MainActivity, ResetPasswordActivity::class.java)
         startActivity(intent)
     }

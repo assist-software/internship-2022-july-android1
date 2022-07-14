@@ -21,4 +21,7 @@
     <string name="confirm_passwd">Confirm password</string>
     <string name="no_match_passwd">Passwords do not match!</string>
 
+    <string name="for_toast_error">Something is wrong</string>
+    <string name="for_toast_okay">Good job!</string>
+
 </resources>

@@ -12,117 +12,139 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.assist.imobilandroidapp.R
+import com.assist.imobilandroidapp.databinding.ActivitySignUpBinding
 import com.google.android.material.textfield.TextInputEditText
-
-private val Drawable.setOnClickListener: Unit
-    get() {}
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var emailEditText: EditText
-    private lateinit var emailErrorMsg: TextView
-    private lateinit var passwdEditText: EditText
-    private lateinit var passwdErrorMsg: TextView
-    private lateinit var signUpBtn: AppCompatButton
+    private lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
 
-        registerNewUser()
-    }
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    private fun validateEmail() : Boolean {
-        emailEditText = findViewById(R.id.TextInputEditText_email)
-        emailErrorMsg = findViewById(R.id.tv_wrong_email_input)
-
-        val padding = emailEditText.paddingLeft
-        emailEditText.setPadding(padding, padding, padding, padding)
-
-        val email = emailEditText.text.toString()
-
-        if(email.isEmpty()) {
-            emailErrorMsg.setText(R.string.empty_field)
-            emailErrorMsg.isVisible = true
-            emailEditText.background = ContextCompat.getDrawable(applicationContext, R.drawable.input_border_red)
-            emailEditText.setPadding(padding,padding,padding,padding)
-            return false
-        }
-        else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            emailErrorMsg.setText(R.string.wrong_email)
-            emailErrorMsg.isVisible = true
-            emailEditText.background = ContextCompat.getDrawable(applicationContext, R.drawable.input_border_red)
-            emailEditText.setPadding(padding,padding,padding,padding)
-            return false
-        }
-        else {
-            emailErrorMsg.isVisible = false
-            emailEditText.background = ContextCompat.getDrawable(applicationContext, R.drawable.input_border_normal)
-            emailEditText.setPadding(padding,padding,padding,padding)
-            return true
+        binding.btnSignUp.setOnClickListener {
+            if (!validateEmail() or !validatePassword()) {
+                Toast.makeText(applicationContext, R.string.for_toast_error, Toast.LENGTH_LONG)
+                    .show()
+            } else {
+                Toast.makeText(applicationContext, R.string.for_toast_okay, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
-    private fun hasDigits(string: String) : Boolean {
+    private fun editMessageTextViewsEmail(
+        editText: EditText,
+        textView: TextView,
+        msg: Int,
+        bool: Boolean,
+        border: Int,
+        padding: Int
+    ) {
+        textView.setText(msg)
+        textView.isVisible = bool
+        editText.background = ContextCompat.getDrawable(applicationContext, border)
+        editText.setPadding(padding, padding, padding, padding)
+    }
 
-        for(char in string) {
-            if(char.isDigit()) {
+    private fun editMessageTextViewsPassword(
+        editText: EditText,
+        textView: TextView,
+        msg: Int,
+        color: Int,
+        border: Int,
+        padding: Int
+    ) {
+        textView.setText(msg)
+        textView.setTextColor(resources.getColor(color))
+        editText.background = ContextCompat.getDrawable(applicationContext, border)
+        editText.setPadding(padding, padding, padding, padding)
+    }
+
+    private fun validateEmail(): Boolean {
+        val padding = binding.textInputEditTextEmail.paddingLeft
+        binding.textInputEditTextEmail.setPadding(padding, padding, padding, padding)
+        val email = binding.textInputEditTextEmail.text.toString()
+
+        when {
+            email.isEmpty() -> {
+                editMessageTextViewsEmail(
+                    binding.textInputEditTextEmail, binding.tvWrongEmailInput,
+                    R.string.empty_field, true, R.drawable.input_border_red, padding
+                )
+                return false
+            }
+
+            !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                editMessageTextViewsEmail(
+                    binding.textInputEditTextEmail, binding.tvWrongEmailInput,
+                    R.string.wrong_email, true, R.drawable.input_border_red, padding
+                )
+                return false
+            }
+
+            else -> {
+                editMessageTextViewsEmail(
+                    binding.textInputEditTextEmail, binding.tvWrongEmailInput,
+                    R.string.wrong_email, false, R.drawable.input_border_normal, padding
+                )
                 return true
             }
         }
+    }
 
+    private fun hasDigits(string: String): Boolean {
+        for (char in string) {
+            if (char.isDigit()) {
+                return true
+            }
+        }
         return false
     }
 
-    private fun validatePasswd() : Boolean {
-        passwdEditText = findViewById(R.id.TextInputEditText_passwd)
-        passwdErrorMsg = findViewById(R.id.tv_invalid_passwd)
-        emailEditText = findViewById(R.id.TextInputEditText_email)
-        val padding = emailEditText.paddingLeft
+    private fun validatePassword(): Boolean {
+        val padding = binding.textInputEditTextEmail.paddingLeft
+        val passwd = binding.textInputEditTextPasswd.text.toString()
+        binding.textInputEditTextPasswd.setPadding(padding, padding, padding, padding)
 
-        val passwd = passwdEditText.text.toString()
-        passwdEditText.setPadding(padding, padding, padding, padding)
-
-        if(passwd.isEmpty()) {
-            passwdErrorMsg.setText(R.string.empty_field)
-            passwdErrorMsg.setTextColor(resources.getColor(R.color.red_500))
-            passwdEditText.background = ContextCompat.getDrawable(applicationContext, R.drawable.input_border_red)
-            passwdEditText.setPadding(padding,padding,padding,padding)
-            return false
-        }
-        else if(passwd.length < 9){
-            passwdErrorMsg.setText(R.string.insufficient_chars)
-            passwdErrorMsg.setTextColor(resources.getColor(R.color.red_500))
-            passwdEditText.background = ContextCompat.getDrawable(applicationContext, R.drawable.input_border_red)
-            passwdEditText.setPadding(padding,padding,padding,padding)
-            return false
-        }
-        else if(!hasDigits(passwd)) {
-            passwdErrorMsg.setText(R.string.lacks_digit)
-            passwdErrorMsg.setTextColor(resources.getColor(R.color.red_500))
-            passwdEditText.background = ContextCompat.getDrawable(applicationContext, R.drawable.input_border_red)
-            passwdEditText.setPadding(padding,padding,padding,padding)
-            return false
-        }
-        else {
-            passwdErrorMsg.setText(R.string.pwd_helper)
-            passwdErrorMsg.setTextColor(resources.getColor(R.color.gray_500))
-            passwdEditText.background = ContextCompat.getDrawable(applicationContext, R.drawable.input_border_normal)
-            passwdEditText.setPadding(padding,padding,padding,padding)
-            return true
-        }
-    }
-
-    private fun registerNewUser() {
-        signUpBtn = findViewById(R.id.btn_sign_up)
-        signUpBtn.setOnClickListener {
-            if(!validateEmail() or !validatePasswd()) {
-                Toast.makeText(applicationContext, "Invalid email or password!", Toast.LENGTH_LONG).show()
+        when {
+            passwd.isEmpty() -> {
+                editMessageTextViewsPassword(
+                    binding.textInputEditTextPasswd, binding.tvInvalidPasswd,
+                    R.string.empty_field, R.color.red_500, R.drawable.input_border_red, padding
+                )
+                return false
             }
-            else {
-                Toast.makeText(applicationContext, "Cool, good job", Toast.LENGTH_LONG).show()
+
+            passwd.length < 9 -> {
+                editMessageTextViewsPassword(
+                    binding.textInputEditTextPasswd,
+                    binding.tvInvalidPasswd,
+                    R.string.insufficient_chars,
+                    R.color.red_500,
+                    R.drawable.input_border_red,
+                    padding
+                )
+                return false
+            }
+
+            !hasDigits(passwd) -> {
+                editMessageTextViewsPassword(
+                    binding.textInputEditTextPasswd, binding.tvInvalidPasswd,
+                    R.string.lacks_digit, R.color.red_500, R.drawable.input_border_red, padding
+                )
+                return false
+            }
+
+            else -> {
+                editMessageTextViewsPassword(
+                    binding.textInputEditTextPasswd, binding.tvInvalidPasswd,
+                    R.string.pwd_helper, R.color.gray_500, R.drawable.input_border_normal, padding
+                )
+                return true
             }
         }
     }
-
 }
