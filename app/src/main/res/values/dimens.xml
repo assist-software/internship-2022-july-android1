@@ -37,4 +37,9 @@
     <dimen name="space_377dp">377dp</dimen>
     <dimen name="space_40dp">40dp</dimen>
     <dimen name="space_2dp">2dp</dimen>
+    <dimen name="text_32sp">32sp</dimen>
+    <dimen name="space_43dp">43sp</dimen>
+    <dimen name="text_19sp">19sp</dimen>
+    <dimen name="space_68dp">68dp</dimen>
+    <dimen name="space_148dp">148dp</dimen>
 </resources>

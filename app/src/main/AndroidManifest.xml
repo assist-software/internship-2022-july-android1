@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImobilAndroidApp">
         <activity
-            android:name=".screens.onboarding.login.main.ForgotPasswordActivity"
+            android:name=".screens.onboarding.forgotpassword.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name="com.assist.imobilandroidapp.screens.onboarding.login.main.LogInActivity"
+            android:name="com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

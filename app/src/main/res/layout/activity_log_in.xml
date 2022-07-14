@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.onboarding.login.main.LogInActivity">
+    tools:context=".screens.onboarding.login.LogInActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,36 +18,35 @@
             android:layout_marginTop="@dimen/space_185dp"
             android:background="@drawable/logo_assist_tagline"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-             />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/log_in"
+            style="@style/styleTitleOnboarding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_24.23dp"
             android:text="@string/LogIn"
-            android:textSize="@dimen/text_24sp"
             app:layout_constraintLeft_toLeftOf="@id/logo_assist"
             app:layout_constraintTop_toBottomOf="@id/logo_assist" />
 
         <TextView
             android:id="@+id/EnterYourDetails"
+            style="@style/styleSubTitleOnboarding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_4dp"
             android:text="@string/EnterYourDetails"
-            android:textSize="@dimen/text_14sp"
             app:layout_constraintLeft_toLeftOf="@id/log_in"
             app:layout_constraintTop_toBottomOf="@id/log_in" />
 
         <TextView
             android:id="@+id/LabelEmail"
+            style="@style/styleTitleEditBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_20dp"
             android:text="@string/email"
-            android:textSize="@dimen/text_14sp"
             app:layout_constraintLeft_toLeftOf="@id/EnterYourDetails"
             app:layout_constraintTop_toBottomOf="@id/EnterYourDetails"
 
@@ -61,32 +60,32 @@
             android:layout_marginTop="@dimen/space_4dp"
             android:layout_marginEnd="@dimen/space_11dp"
             android:background="@drawable/loginbox_border"
-            android:hint="@string/placeholder"
+            android:hint="@string/email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
             android:padding="@dimen/space_10dp"
             android:textSize="@dimen/text_16sp"
             app:layout_constraintLeft_toLeftOf="@id/LabelEmail"
-            app:layout_constraintTop_toBottomOf="@id/LabelEmail"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress" />
+            app:layout_constraintTop_toBottomOf="@id/LabelEmail" />
 
         <TextView
+            android:id="@+id/ErrorMsgEmail"
+            style="@style/styleWarningRed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/PleaseUseValidEmail"
-            app:layout_constraintLeft_toLeftOf="@id/LabelEmail"
-            app:layout_constraintTop_toBottomOf="@id/EditTextEmail"
             android:layout_marginTop="@dimen/space_4dp"
-            style="@style/styleWarningRed"
+            android:text="@string/PleaseUseValidEmail"
             android:visibility="invisible"
-            />
+            app:layout_constraintLeft_toLeftOf="@id/LabelEmail"
+            app:layout_constraintTop_toBottomOf="@id/EditTextEmail" />
 
         <TextView
             android:id="@+id/LabelPassword"
+            style="@style/styleTitleEditBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_28dp"
             android:text="@string/Password"
-            android:textSize="@dimen/text_14sp"
             app:layout_constraintLeft_toLeftOf="@id/LabelEmail"
             app:layout_constraintTop_toBottomOf="@id/EditTextEmail" />
 
@@ -99,24 +98,24 @@
             android:layout_marginEnd="@dimen/space_11dp"
             android:background="@drawable/loginbox_border"
             android:drawableEnd="@drawable/password_visible_icon"
-            android:hint="@string/placeholder"
+            android:hint="@string/Password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
             android:padding="@dimen/space_10dp"
             android:textSize="@dimen/text_16sp"
-            android:inputType="textPassword"
             app:layout_constraintLeft_toLeftOf="@id/LabelPassword"
-            app:layout_constraintTop_toBottomOf="@id/LabelPassword"
-            android:importantForAutofill="no" />
+            app:layout_constraintTop_toBottomOf="@id/LabelPassword" />
 
         <TextView
+            android:id="@+id/ErrorMsgPassword"
+            style="@style/styleWarningRed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/PleaseUseValidPassword"
-            app:layout_constraintLeft_toLeftOf="@id/LabelEmail"
-            app:layout_constraintTop_toBottomOf="@id/EditTextPassword"
             android:layout_marginTop="@dimen/space_4dp"
-            style="@style/styleWarningRed"
+            android:text="@string/PleaseUseValidPassword"
             android:visibility="invisible"
-            />
+            app:layout_constraintLeft_toLeftOf="@id/LabelEmail"
+            app:layout_constraintTop_toBottomOf="@id/EditTextPassword" />
 
         <CheckBox
             android:id="@+id/CheckBoxRememberMe"
@@ -132,6 +131,7 @@
 
         <TextView
             android:id="@+id/LabelRememberMe"
+            style="@style/styleCheckBoxText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_6.5dp"
@@ -148,9 +148,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_28dp"
             android:layout_marginEnd="@dimen/space_10dp"
-            android:text="@string/ForgotYourPassword"
             android:clickable="true"
             android:focusable="true"
+            android:text="@string/ForgotYourPassword"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/EditTextPassword" />
 
@@ -169,8 +169,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ForgotYourPassword"
-            />
+            app:layout_constraintTop_toBottomOf="@id/ForgotYourPassword" />
 
         <Button
             android:id="@+id/GoogleButton"
@@ -202,6 +201,7 @@
             app:layout_constraintTop_toBottomOf="@id/GoogleButton">
 
             <TextView
+                style="@style/styleQuestionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/DontHaveAnAccount" />
