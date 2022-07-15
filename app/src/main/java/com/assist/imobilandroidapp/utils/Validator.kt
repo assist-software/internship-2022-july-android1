@@ -102,7 +102,7 @@ class Validator(editText: EditText, errorMsg: TextView, context: Context, resour
                 return false
             }
 
-            passwd.length < 9 -> {
+            passwd.length < 8 -> {
                 editMessageTextViewsPassword(
                     R.string.insufficient_chars,
                     R.color.red_500,
