@@ -59,16 +59,6 @@ class Validator(editText: EditText, errorMsg: TextView, context: Context, resour
         return false
     }
 
-    private fun hasEnoughCharacters(string: String): Boolean {
-        var count = 0
-        for (char in string) {
-            if (char.isLetter()) {
-                count++
-            }
-        }
-        return (count >= 8)
-    }
-
     fun validateEmail(): Boolean {
         val email = getText()
         val padding = getPadding()
@@ -115,16 +105,6 @@ class Validator(editText: EditText, errorMsg: TextView, context: Context, resour
             passwd.length < 9 -> {
                 editMessageTextViewsPassword(
                     R.string.insufficient_chars,
-                    R.color.red_500,
-                    R.drawable.input_border_red,
-                    padding
-                )
-                return false
-            }
-
-            !hasEnoughCharacters(passwd) -> {
-                editMessageTextViewsPassword(
-                    R.string.insufficient_letters,
                     R.color.red_500,
                     R.drawable.input_border_red,
                     padding
