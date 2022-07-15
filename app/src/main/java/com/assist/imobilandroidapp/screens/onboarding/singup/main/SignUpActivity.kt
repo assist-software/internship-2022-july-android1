@@ -34,6 +34,10 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, R.string.for_toast_okay, Toast.LENGTH_LONG).show()
             }
         }
+
+        binding.tvLogIn.setOnClickListener {
+            // Do nothing, I do not have access to the Log In activity, yet
+        }
     }
 
     private fun validateEmail(): Boolean {

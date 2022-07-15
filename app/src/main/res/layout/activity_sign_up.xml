@@ -170,6 +170,19 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <ImageView
+            android:id="@+id/iv_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_passwd"
+            app:layout_constraintBottom_toTopOf="@+id/tv_invalid_passwd"
+            android:layout_marginBottom="@dimen/margin_2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/vertical_line"
+            android:layout_marginEnd="@dimen/margin_70dp"
+            android:layout_marginTop="@dimen/margin_4dp"
+            />
+
         <TextView
             android:id="@+id/tv_invalid_passwd"
             android:layout_width="match_parent"
