@@ -176,4 +176,47 @@ class Validator(editText: EditText, errorMsg: TextView, context: Context, resour
             }
         }
     }
+
+    fun validateLogInPassword(): Boolean {
+        val passwd = getText()
+        val padding = getPadding()
+        editText.setPadding(padding, padding, padding, padding)
+
+        when {
+            passwd.isEmpty() -> {
+                editMessageTextViewsPassword(
+                    R.string.empty_field, R.color.red_500, R.drawable.input_border_red, padding
+                )
+                errorMsg.isVisible = true
+                return false
+            }
+
+            passwd.length < 8 -> {
+                editMessageTextViewsPassword(
+                    R.string.insufficient_chars,
+                    R.color.red_500,
+                    R.drawable.input_border_red,
+                    padding
+                )
+                errorMsg.isVisible = true
+                return false
+            }
+
+            !hasDigits(passwd) -> {
+                editMessageTextViewsPassword(
+                    R.string.lacks_digit, R.color.red_500, R.drawable.input_border_red, padding
+                )
+                errorMsg.isVisible = true
+                return false
+            }
+
+            else -> {
+                editMessageTextViewsPassword(
+                    R.string.pwd_helper, R.color.gray_500, R.drawable.input_border_normal, padding
+                )
+                errorMsg.isVisible = false
+                return true
+            }
+        }
+    }
 }
