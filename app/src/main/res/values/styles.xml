@@ -113,6 +113,24 @@
         </item>
     </style>
 
+    <style name="styleTitleEstate">
+        <item name="android:textColor">
+            @color/black
+        </item>
+        <item name="android:textSize">
+            @dimen/text_14sp
+        </item>
+    </style>
+
+    <style name="styleLocationEstate">
+        <item name="android:textColor">
+            @color/gray_400
+        </item>
+        <item name="android:textSize">
+            @dimen/text_12sp
+        </item>
+    </style>
+
 
     <dimen name="text_18sp">18sp</dimen>
 </resources>

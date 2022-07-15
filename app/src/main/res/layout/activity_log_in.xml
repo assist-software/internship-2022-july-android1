@@ -11,138 +11,138 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/logo_assist"
+            android:id="@+id/iv_logo_assist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_21dp"
+            android:layout_marginStart="@dimen/space_16dp"
             android:layout_marginTop="@dimen/space_185dp"
             android:background="@drawable/logo_assist_tagline"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/log_in"
+            android:id="@+id/tv_title_login"
             style="@style/styleTitleOnboarding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_24.23dp"
-            android:text="@string/LogIn"
-            app:layout_constraintLeft_toLeftOf="@id/logo_assist"
-            app:layout_constraintTop_toBottomOf="@id/logo_assist" />
+            android:layout_marginTop="@dimen/space_24dp"
+            android:text="@string/log_in"
+            app:layout_constraintLeft_toLeftOf="@id/iv_logo_assist"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo_assist" />
 
         <TextView
-            android:id="@+id/EnterYourDetails"
+            android:id="@+id/tv_subtitle_login"
             style="@style/styleSubTitleOnboarding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_4dp"
-            android:text="@string/EnterYourDetails"
-            app:layout_constraintLeft_toLeftOf="@id/log_in"
-            app:layout_constraintTop_toBottomOf="@id/log_in" />
+            android:text="@string/enterYourDetails"
+            app:layout_constraintLeft_toLeftOf="@id/tv_title_login"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_login" />
 
         <TextView
-            android:id="@+id/LabelEmail"
+            android:id="@+id/tv_email"
             style="@style/styleTitleEditBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_20dp"
             android:text="@string/email"
-            app:layout_constraintLeft_toLeftOf="@id/EnterYourDetails"
-            app:layout_constraintTop_toBottomOf="@id/EnterYourDetails"
+            app:layout_constraintLeft_toLeftOf="@id/tv_subtitle_login"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle_login"
 
             />
 
         <EditText
-            android:id="@+id/EditTextEmail"
+            android:id="@+id/et_email_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_21dp"
+            android:layout_marginStart="@dimen/space_16dp"
             android:layout_marginTop="@dimen/space_4dp"
-            android:layout_marginEnd="@dimen/space_11dp"
-            android:background="@drawable/loginbox_border"
+            android:layout_marginEnd="@dimen/space_16dp"
+            android:background="@drawable/input_border_normal"
             android:hint="@string/email"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:padding="@dimen/space_10dp"
             android:textSize="@dimen/text_16sp"
-            app:layout_constraintLeft_toLeftOf="@id/LabelEmail"
-            app:layout_constraintTop_toBottomOf="@id/LabelEmail" />
+            app:layout_constraintLeft_toLeftOf="@id/tv_email"
+            app:layout_constraintTop_toBottomOf="@id/tv_email" />
 
         <TextView
-            android:id="@+id/ErrorMsgEmail"
+            android:id="@+id/tv_error_email"
             style="@style/styleWarningRed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_4dp"
-            android:text="@string/PleaseUseValidEmail"
+            android:text="@string/pleaseUseValidEmail"
             android:visibility="invisible"
-            app:layout_constraintLeft_toLeftOf="@id/LabelEmail"
-            app:layout_constraintTop_toBottomOf="@id/EditTextEmail" />
+            app:layout_constraintLeft_toLeftOf="@id/tv_email"
+            app:layout_constraintTop_toBottomOf="@id/et_email_input" />
 
         <TextView
-            android:id="@+id/LabelPassword"
+            android:id="@+id/tv_password"
             style="@style/styleTitleEditBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_28dp"
-            android:text="@string/Password"
-            app:layout_constraintLeft_toLeftOf="@id/LabelEmail"
-            app:layout_constraintTop_toBottomOf="@id/EditTextEmail" />
+            android:text="@string/password"
+            app:layout_constraintLeft_toLeftOf="@id/tv_email"
+            app:layout_constraintTop_toBottomOf="@id/et_email_input" />
 
         <EditText
-            android:id="@+id/EditTextPassword"
+            android:id="@+id/et_password_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_21dp"
+            android:layout_marginStart="@dimen/space_16dp"
             android:layout_marginTop="@dimen/space_4dp"
-            android:layout_marginEnd="@dimen/space_11dp"
-            android:background="@drawable/loginbox_border"
+            android:layout_marginEnd="@dimen/space_16dp"
+            android:background="@drawable/input_border_normal"
             android:drawableEnd="@drawable/password_visible_icon"
-            android:hint="@string/Password"
+            android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:padding="@dimen/space_10dp"
             android:textSize="@dimen/text_16sp"
-            app:layout_constraintLeft_toLeftOf="@id/LabelPassword"
-            app:layout_constraintTop_toBottomOf="@id/LabelPassword" />
+            app:layout_constraintLeft_toLeftOf="@id/tv_password"
+            app:layout_constraintTop_toBottomOf="@id/tv_password" />
 
         <TextView
-            android:id="@+id/ErrorMsgPassword"
+            android:id="@+id/tv_error_password"
             style="@style/styleWarningRed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_4dp"
             android:text="@string/PleaseUseValidPassword"
             android:visibility="invisible"
-            app:layout_constraintLeft_toLeftOf="@id/LabelEmail"
-            app:layout_constraintTop_toBottomOf="@id/EditTextPassword" />
+            app:layout_constraintLeft_toLeftOf="@id/tv_email"
+            app:layout_constraintTop_toBottomOf="@id/et_password_input" />
 
         <CheckBox
-            android:id="@+id/CheckBoxRememberMe"
+            android:id="@+id/cb_remember"
             android:layout_width="@dimen/space_15dp"
             android:layout_height="@dimen/space_15dp"
-            android:layout_marginStart="@dimen/space_21dp"
+            android:layout_marginStart="@dimen/space_16dp"
             android:layout_marginTop="@dimen/space_28dp"
-            android:background="@drawable/checkbox_border"
+            android:background="@drawable/input_border_normal"
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/EditTextPassword" />
+            app:layout_constraintTop_toBottomOf="@id/et_password_input" />
 
         <TextView
-            android:id="@+id/LabelRememberMe"
+            android:id="@+id/tv_remember"
             style="@style/styleCheckBoxText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_6.5dp"
+            android:layout_marginStart="@dimen/space_6dp"
             android:layout_marginTop="@dimen/space_28dp"
             android:text="@string/RememberMe"
             android:textSize="@dimen/text_14sp"
-            app:layout_constraintLeft_toRightOf="@id/CheckBoxRememberMe"
-            app:layout_constraintTop_toBottomOf="@id/EditTextPassword" />
+            app:layout_constraintLeft_toRightOf="@id/cb_remember"
+            app:layout_constraintTop_toBottomOf="@id/et_password_input" />
 
         <TextView
-            android:id="@+id/ForgotYourPassword"
+            android:id="@+id/tv_forgot_pass"
             style="@style/styleAssistBlue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -152,16 +152,16 @@
             android:focusable="true"
             android:text="@string/ForgotYourPassword"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/EditTextPassword" />
+            app:layout_constraintTop_toBottomOf="@id/et_password_input" />
 
         <Button
-            android:id="@+id/LoginButton"
+            android:id="@+id/btn_login"
             style="@style/styleLoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_21dp"
+            android:layout_marginStart="@dimen/space_16dp"
             android:layout_marginTop="@dimen/space_40dp"
-            android:layout_marginEnd="@dimen/space_11dp"
+            android:layout_marginEnd="@dimen/space_16dp"
             android:layout_marginBottom="@dimen/space_276dp"
             android:background="@drawable/login_button_border"
             android:text="@string/Login"
@@ -169,16 +169,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ForgotYourPassword" />
+            app:layout_constraintTop_toBottomOf="@id/tv_forgot_pass" />
 
         <Button
-            android:id="@+id/GoogleButton"
+            android:id="@+id/btn_google"
             style="@style/styleGoogleButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_21dp"
+            android:layout_marginStart="@dimen/space_16dp"
             android:layout_marginTop="@dimen/space_8dp"
-            android:layout_marginEnd="@dimen/space_11dp"
+            android:layout_marginEnd="@dimen/space_16dp"
             android:layout_marginBottom="@dimen/space_224dp"
             android:background="@drawable/google_button_border"
             android:drawableLeft="@drawable/google_icon"
@@ -186,7 +186,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/LoginButton" />
+            app:layout_constraintTop_toBottomOf="@id/btn_login" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -198,16 +198,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/GoogleButton">
+            app:layout_constraintTop_toBottomOf="@id/btn_google">
 
             <TextView
+                android:id="@+id/tv_question_account"
                 style="@style/styleQuestionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/DontHaveAnAccount" />
 
             <TextView
-                android:id="@+id/SignUpButton"
+                android:id="@+id/tv_sign_up"
                 style="@style/styleAssistBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -3,8 +3,8 @@
     <string name="email">Email</string>
     <string name="placeholder">Placeholder</string>
     <string name="log_in">Log in</string>
-    <string name="EnterYourDetails">Enter your account details below.</string>
-    <string name="Password">Password</string>
+    <string name="enterYourDetails">Enter your account details below.</string>
+    <string name="password">Password</string>
     <string name="RememberMe">Remember Me</string>
     <string name="ForgotYourPassword">Forgot Your Password?</string>
     <string name="Login">Login</string>
@@ -16,7 +16,7 @@
     <string name="PasswordResetLink">Password reset link sent to your email address.</string>
     <string name="BackToLogin">Back to Log in</string>
     <string name="SendResetLink">Send Reset Link</string>
-    <string name="PleaseUseValidEmail">Please use a valid email address</string>
+    <string name="pleaseUseValidEmail">Please use a valid email address</string>
     <string name="PleaseUseValidPassword">Please enter a valid password</string>
     <string name="empty_field">Field cannot be empty!</string>
     <string name="wrong_email">Email is not valid!</string>
@@ -27,4 +27,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="WhatAreYouInterested">What are you interested in?</string>
     <string name="Category">Category</string>
+    <string name="correct_email">Valid email address format</string>
+    <string name="login_button">Login Button</string>
+    <string name="google_button">Google Button</string>
+    <string name="no_match_passwd">No passwords match</string>
+    <string name="invalidPassword">Invalid Username or Password</string>
+    <string name="succesfulLogin">Succesful Login</string>
 </resources>

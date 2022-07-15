@@ -42,4 +42,6 @@
     <dimen name="text_19sp">19sp</dimen>
     <dimen name="space_68dp">68dp</dimen>
     <dimen name="space_148dp">148dp</dimen>
+    <dimen name="space_6dp">6dp</dimen>
+    <dimen name="space_16dp">16dp</dimen>
 </resources>
