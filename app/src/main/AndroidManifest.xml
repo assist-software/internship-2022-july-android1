@@ -10,16 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImobilAndroidApp">
         <activity
-            android:name="com.assist.imobilandroidapp.toolbar.ToolbarActivity"
+            android:name=".screens.onboarding.forgotpassword.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity"
             android:exported="false" />
         <activity
             android:name="com.assist.imobilandroidapp.screens.onboarding.resetpassword.main.ResetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name="com.assist.imobilandroidapp.screens.onboarding.singup.main.SignUpActivity"
+            android:name="com.assist.imobilandroidapp.screens.main.MainActivity"
             android:exported="false" />
         <activity
-            android:name="com.assist.imobilandroidapp.screens.main.MainActivity"
+            android:name="com.assist.imobilandroidapp.screens.onboarding.singup.main.SignUpActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,7 @@
 package com.assist.imobilandroidapp.screens.onboarding.singup.main
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.databinding.ActivitySignUpBinding
+import com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity
 import com.assist.imobilandroidapp.utils.Validator
 import com.google.android.material.textfield.TextInputEditText
 
@@ -36,7 +38,8 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         binding.tvLogIn.setOnClickListener {
-            // Do nothing, I do not have access to the Log In activity, yet
+            val intent = Intent(this@SignUpActivity, LogInActivity::class.java)
+            startActivity(intent)
         }
     }
 
