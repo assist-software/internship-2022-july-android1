@@ -47,5 +47,22 @@
 
     <string name="for_toast_error">Something is wrong</string>
     <string name="for_toast_okay">Good job!</string>
+    <string name="price_example">712,123 lei</string>
+    <string name="title_example">Deamy Treehouse Above Park City</string>
+    <string name="purchase">Purchase</string>
+    <string name="description">Description</string>
+    <string name="long_text_example">"Lörem ipsum infraling nyr platoren preska platin. Okun vugt serat, tetrangen. Farat heterovis husanar ifall resade. Satsig mitulåd gyn. Faranat fehugon pneumaskop respektive spökgarn tonöning. Teger donök.  Termopod Dylanman i tevänas om teras prehepp. Förpappring. Anöde kvasiskade sogisk, donedat att terravision. Kare mida. Ilogi löhung på samude. Skimma wiki att demynar.  Detehuvis nemykaligen i rutkod i regen alltså nyhet. Bebel pos ultral ing osovis. Dinade pede, lagon respektive homopangen, i predast. Bek saktiga gohåssa. Epil kasam väck ses seling. Väsat beng, trisk, juholtare. "</string>
+    <string name="location">Location</string>
+    <string name="location_example">City, Country</string>
+    <string name="share">Share</string>
+    <string name="placeholder_seller_name">Jordan Henderson</string>
+    <string name="placeholder_join_date">Joined in July 2014</string>
+    <string name="placeholder_response_rate">Response rate: 97%</string>
+    <string name="placeholder_response_time">Response time: within an hour</string>
+    <string name="contact_seller">Contact seller</string>
+    <string name="sign_in_as_guest">Sign in as a guest</string>
+    <string name="or_word">or</string>
+    <string name="favorites">Favorites</string>
+
 
 </resources>

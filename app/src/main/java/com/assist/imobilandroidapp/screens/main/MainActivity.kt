@@ -9,7 +9,6 @@ import com.assist.imobilandroidapp.databinding.ActivityMainBinding
 import com.assist.imobilandroidapp.screens.onboarding.resetpassword.main.ResetPasswordActivity
 import com.assist.imobilandroidapp.screens.onboarding.singup.main.SignUpActivity
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -20,21 +19,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.signUpBtn.setOnClickListener {
-            sendMeToSignUp()
-        }
 
-        binding.resetPasswdBtn.setOnClickListener {
-            sendMeToResetPassword()
-        }
-    }
-    fun sendMeToSignUp() {
-        val intent = Intent(this@MainActivity, SignUpActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun sendMeToResetPassword() {
-        val intent = Intent(this@MainActivity, ResetPasswordActivity::class.java)
-        startActivity(intent)
     }
 }
