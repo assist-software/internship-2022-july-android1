@@ -13,7 +13,7 @@ import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.databinding.ActivityForgotPasswordBinding
 import com.assist.imobilandroidapp.databinding.ActivityLogInBinding
 import com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity
-import com.assist.imobilandroidapp.validator.Validator
+import com.assist.imobilandroidapp.utils.Validator
 
 class ForgotPasswordActivity : AppCompatActivity() {
 

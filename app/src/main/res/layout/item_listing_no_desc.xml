@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/space_150dp"
+    android:layout_height="@dimen/space_160dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/item_listing_no_desc_border"
+    android:layout_marginEnd="@dimen/space_16dp">
+
+    <ImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_68dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/photo_replacement_1"
+        />
+
+    <ImageButton
+        android:id="@+id/ib_favourites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/space_12dp"
+        android:layout_marginEnd="@dimen/space_12dp"
+        android:src="@drawable/favourites_icon_white"
+        android:background="@drawable/fav_icon_circle_transparent"
+        />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/iv_photo"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/space_12dp"
+        android:layout_marginEnd="@dimen/space_12dp"
+        android:layout_marginTop="@dimen/space_8dp"
+        android:text="@string/placeholder"
+        android:fontFamily="@font/inter"
+        android:textSize="@dimen/text_14sp"
+        android:textColor="@color/for_item_listing"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/space_12dp"
+        android:layout_marginEnd="@dimen/space_12dp"
+        android:layout_marginTop="@dimen/space_4dp"
+        android:layout_marginBottom="@dimen/space_8dp"
+        android:text="@string/placeholder"
+        android:fontFamily="@font/inter"
+        android:textSize="@dimen/text_12sp"
+        android:textColor="@color/gray_400"
+        android:singleLine="true"
+        android:ellipsize="end"
+        />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_location"
+        android:layout_marginStart="@dimen/space_12dp"
+        android:layout_marginTop="@dimen/space_8dp"
+        android:layout_marginEnd="@dimen/space_12dp"
+        android:layout_marginBottom="@dimen/space_8dp"
+        android:text="@string/placeholder"
+        android:singleLine="true"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

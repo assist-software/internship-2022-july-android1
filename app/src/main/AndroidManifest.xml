@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImobilAndroidApp">
         <activity
+            android:name="com.assist.imobilandroidapp.screens.averageuser.main.AverageUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".screens.onboarding.forgotpassword.ForgotPasswordActivity"
             android:exported="false" />
         <activity

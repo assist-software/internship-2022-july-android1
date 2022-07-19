@@ -2,6 +2,7 @@ package com.assist.imobilandroidapp.screens.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.assist.imobilandroidapp.R
@@ -19,22 +20,11 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.signUpBtn.setOnClickListener {
-            sendMeToSignUp()
-        }
-
-        binding.resetPasswdBtn.setOnClickListener {
-            sendMeToResetPassword()
-        }
-    }
-    fun sendMeToSignUp() {
-        val intent = Intent(this@MainActivity, SignUpActivity::class.java)
-        startActivity(intent)
     }
 
-    fun sendMeToResetPassword() {
-        val intent = Intent(this@MainActivity, ResetPasswordActivity::class.java)
-        startActivity(intent)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
 }

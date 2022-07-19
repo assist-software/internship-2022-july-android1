@@ -169,10 +169,6 @@
     </style>
 
 
-    <!--    <dimen name="text_18sp">18sp</dimen>-->
-    <!--=======-->
-    <!--    </style>-->
-
     <style name="sign_up_btn">
         <item name="android:textSize">
             14sp

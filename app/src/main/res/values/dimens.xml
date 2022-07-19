@@ -4,6 +4,11 @@
     <dimen name="text_14sp">14sp</dimen>
     <dimen name="text_24sp">24sp</dimen>
     <dimen name="text_185sp">185sp</dimen>
+    <dimen name="text_19sp">19sp</dimen>
+    <dimen name="text_32sp">32sp</dimen>
+    <dimen name="text_18sp">18sp</dimen>
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="text_20sp">20sp</dimen>
 
     <dimen name="space_4dp">4dp</dimen>
     <dimen name="space_6.5dp">6.5dp</dimen>
@@ -16,9 +21,7 @@
     <dimen name="space_33dp">33dp</dimen>
     <dimen name="space_185dp">185dp</dimen>
     <dimen name="space_10dp">10dp</dimen>
-    <dimen name="text_16sp">16sp</dimen>
     <dimen name="space_11dp">11dp</dimen>
-    <dimen name="text_18sp">18sp</dimen>
     <dimen name="space_15dp">15dp</dimen>
     <dimen name="space_79.5dp">79.5dp</dimen>
     <dimen name="space_114dp">114dp</dimen>
@@ -37,35 +40,38 @@
     <dimen name="space_377dp">377dp</dimen>
     <dimen name="space_40dp">40dp</dimen>
     <dimen name="space_2dp">2dp</dimen>
-    <dimen name="text_32sp">32sp</dimen>
     <dimen name="space_43dp">43sp</dimen>
-    <dimen name="text_19sp">19sp</dimen>
     <dimen name="space_68dp">68dp</dimen>
     <dimen name="space_148dp">148dp</dimen>
     <dimen name="space_6dp">6dp</dimen>
     <dimen name="space_16dp">16dp</dimen>
+    <dimen name="space_70dp">70dp</dimen>
+    <dimen name="space_50dp">50dp</dimen>
+    <dimen name="space_30dp">30dp</dimen>
+    <dimen name="space_5dp">5dp</dimen>
+    <dimen name="space_14dp">14dp</dimen>
+    <dimen name="space_48dp">48dp</dimen>
+    <dimen name="space_32dp">32dp</dimen>
+    <dimen name="space_45dp">45</dimen>
+    <dimen name="space_41dp">41dp</dimen>
+    <dimen name="space_18dp">18dp</dimen>
+    <dimen name="space_3dp">3dp</dimen>
+    <dimen name="space_71dp">71dp</dimen>
+    <dimen name="space_160dp">160dp</dimen>
+    <dimen name="space_150dp">150dp</dimen>
+    <dimen name="space_51dp">51dp</dimen>
+    <dimen name="space_140dp">140dp</dimen>
+    <dimen name="space_120dp">120dp</dimen>
 
     <dimen name="logo_width">100dp</dimen>
     <dimen name="logo_margin_top">160dp</dimen>
-    <dimen name="margin_16dp">16dp</dimen>
     <dimen name="log_in_layout_margin_top">20dp</dimen>
     <dimen name="line_spacing_1">3sp</dimen>
     <dimen name="line_spacing_2">5sp</dimen>
-    <dimen name="margin_4dp">4dp</dimen>
-    <dimen name="margin_5dp">5dp</dimen>
     <dimen name="sign_up_google_btn">48dp</dimen>
     <dimen name="placeholder_padding">12dp</dimen>
-    <dimen name="margin_30dp">30dp</dimen>
-    <dimen name="margin_50dp">50dp</dimen>
     <dimen name="log_in_padding">16dp</dimen>
-    <dimen name="margin_24dp">24dp</dimen>
     <dimen name="google_logo_padding">8dp</dimen>
-    <dimen name="margin_20dp">20dp</dimen>
-    <dimen name="margin_10dp">10dp</dimen>
     <dimen name="toolbar_height">60dp</dimen>
-    <dimen name="margin_80dp">80dp</dimen>
-    <dimen name="margin_17dp">17dp</dimen>
-    <dimen name="margin_70dp">70dp</dimen>
-    <dimen name="margin_2dp">2dp</dimen>
 
 </resources>
