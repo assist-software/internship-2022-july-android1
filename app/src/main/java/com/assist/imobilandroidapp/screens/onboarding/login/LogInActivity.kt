@@ -2,11 +2,8 @@ package com.assist.imobilandroidapp.screens.onboarding.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View.inflate
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.databinding.ActivityLogInBinding
 import com.assist.imobilandroidapp.screens.main.MainActivity
@@ -61,12 +58,18 @@ class LogInActivity : AppCompatActivity() {
     }
 
     private fun validateEmail(): Boolean {
-        val validate = Validator(binding.etEmailInput, binding.tvErrorEmail, applicationContext, resources)
+        val validate =
+            Validator(binding.etEmailInput, binding.tvErrorEmail, applicationContext, resources)
         return validate.validateEmail()
     }
 
     private fun validatePassword(): Boolean {
-        val validate = Validator(binding.etPasswordInput, binding.tvErrorPassword, applicationContext, resources)
+        val validate = Validator(
+            binding.etPasswordInput,
+            binding.tvErrorPassword,
+            applicationContext,
+            resources
+        )
         return validate.validateLogInPassword()
     }
 

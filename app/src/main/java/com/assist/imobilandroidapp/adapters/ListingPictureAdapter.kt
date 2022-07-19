@@ -40,8 +40,6 @@ class ListingPictureAdapter(var context: Context) :
         Glide.with(context)
             .load(data)
             .into(holder.image)
-
-
     }
 
     override fun getItemCount() = dataList.size

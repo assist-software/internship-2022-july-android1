@@ -4,22 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.databinding.ActivityForgotPasswordBinding
-import com.assist.imobilandroidapp.databinding.ActivityLogInBinding
 import com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity
 import com.assist.imobilandroidapp.utils.Validator
 
 
 class ForgotPasswordActivity : AppCompatActivity() {
 
-    private lateinit var emailEditText: EditText
-    private lateinit var emailErrorMsg: TextView
     private lateinit var sendReqBtn: Button
     private lateinit var binding: ActivityForgotPasswordBinding
 

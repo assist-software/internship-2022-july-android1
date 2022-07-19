@@ -5,41 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.listing.ViewImagesActivity">
+    <include
+        android:id="@+id/toolbar"
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_toolbar_imageview"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/space_52dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/ib_exit_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_20dp"
-            android:layout_marginTop="@dimen/space_15dp"
-            android:layout_marginBottom="@dimen/space_26dp"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/exit_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/ib_heart_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_20dp"
-            android:layout_marginTop="@dimen/space_15dp"
-            android:layout_marginBottom="@dimen/space_26dp"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/heart_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        layout="@layout/toolbar_images_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_view_images"
@@ -48,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_toolbar_imageview" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

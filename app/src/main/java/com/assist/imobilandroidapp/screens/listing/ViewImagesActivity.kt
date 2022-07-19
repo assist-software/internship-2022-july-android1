@@ -20,8 +20,15 @@ class ViewImagesActivity : AppCompatActivity() {
         binding = ActivityViewImagesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        initOnExitButtonClick()
         initRecycleView()
         initImageListing()
+    }
+
+    private fun initOnExitButtonClick() {
+        binding.toolbar.ivExitIcon.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initRecycleView() {
