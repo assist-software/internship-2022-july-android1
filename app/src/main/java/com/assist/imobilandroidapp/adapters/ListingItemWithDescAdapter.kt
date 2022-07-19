@@ -11,49 +11,54 @@ import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.items.ListingItemWithDesc
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 
-class ListingItemWithDescAdapter(listingItem2List: List<ListingItemWithDesc>, private val onFavIconClick: ListingItemWithDescAdapter.OnFavIconCLick) :
-    RecyclerView.Adapter<ListingItemWithDescAdapter.ListingView2Holder>() {
+class ListingItemWithDescAdapter(
+    listingItemWithDescList: List<ListingItemWithDesc>,
+    private val onFavIconClick: ListingItemWithDescAdapter.OnFavIconCLick
+) :
+    RecyclerView.Adapter<ListingItemWithDescAdapter.ListingWithDescViewHolder>() {
 
-    private var listingItem2List: List<ListingItemWithDesc>
+    private var listingItemWithDescList: List<ListingItemWithDesc>
     private var userType: Int = 0
 
     init {
-        this.listingItem2List = listingItem2List
+        this.listingItemWithDescList = listingItemWithDescList
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ListingView2Holder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ListingWithDescViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item_listing_with_desc, viewGroup, false)
 
-        return ListingView2Holder(view)
+        return ListingWithDescViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ListingView2Holder, position: Int) {
-        val listingItem2: ListingItemWithDesc = listingItem2List.get(position)
+    override fun onBindViewHolder(holder: ListingWithDescViewHolder, position: Int) {
+        val listingItemWithDesc: ListingItemWithDesc = listingItemWithDescList.get(position)
 
-        holder.listingImage.setImageResource(listingItem2.getListingImage())
-        holder.listingTitle.text = listingItem2.getListingTitle()
-        holder.listingDescription.text = listingItem2.getListingDescription()
-        holder.listingPrice.text = listingItem2.getListingPrice()
-        holder.favIcon.setOnClickListener {
-            if(userType == StartFragment.UserTypeConstants.GUEST){
-                onFavIconClick.onFavIconClick(listingItem2)
-            }
-            else {
-                // Do nothing, at the moment
+        holder.apply {
+            listingImage.setImageResource(listingItemWithDesc.listingImage)
+            listingTitle.text = listingItemWithDesc.listingTitle
+            listingDescription.text = listingItemWithDesc.listingDescription
+            listingPrice.text = listingItemWithDesc.listingPrice
+            favIcon.setOnClickListener {
+                if (userType == StartFragment.UserTypeConstants.GUEST) {
+                    onFavIconClick.onFavIconClick(listingItemWithDesc)
+                } else {
+                    // Do nothing, at the moment
+                }
             }
         }
     }
 
+
     override fun getItemCount(): Int {
-        return listingItem2List.size
+        return listingItemWithDescList.size
     }
 
     fun setUserType(userType: Int) {
         this.userType = userType
     }
 
-    inner class ListingView2Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ListingWithDescViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val listingImage: ImageView = itemView.findViewById(R.id.iv_photo)
         val listingTitle: TextView = itemView.findViewById(R.id.tv_title)
         val listingDescription: TextView = itemView.findViewById(R.id.tv_description)

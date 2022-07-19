@@ -13,7 +13,10 @@ import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.items.ListingItem
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 
-class ListingItemAdapter(listingItemList: List<ListingItem>, private val onFavIconClickCallback: OnFavIconClick) :
+class ListingItemAdapter(
+    listingItemList: List<ListingItem>,
+    private val onFavIconClickCallback: OnFavIconClick
+) :
     RecyclerView.Adapter<ListingItemAdapter.ListingViewHolder>() {
 
     private var listingItemList: List<ListingItem>
@@ -37,17 +40,18 @@ class ListingItemAdapter(listingItemList: List<ListingItem>, private val onFavIc
     override fun onBindViewHolder(holder: ListingViewHolder, position: Int) {
         val listingItem: ListingItem = listingItemList.get(position)
 
-        holder.listingImage.setImageResource(listingItem.getListingImage())
-        holder.listingTitle.text = listingItem.getListingTitle()
-        holder.listingLocation.text = listingItem.getListingLocation()
-        holder.listingPrice.text = listingItem.getListingPrice()
+        holder.apply {
+            listingImage.setImageResource(listingItem.listingImage)
+            listingTitle.text = listingItem.listingTitle
+            listingLocation.text = listingItem.listingLocation
+            listingPrice.text = listingItem.listingPrice
 
-        holder.addToFavourites.setOnClickListener {
-            if (userType == StartFragment.UserTypeConstants.GUEST){
-                onFavIconClickCallback.onFavIconClick(listingItem)
-            }
-            else {
-                println("This is a logged in user!")
+            addToFavourites.setOnClickListener {
+                if (userType == StartFragment.UserTypeConstants.GUEST) {
+                    onFavIconClickCallback.onFavIconClick(listingItem)
+                } else {
+                    println("This is a logged in user!")
+                }
             }
         }
     }

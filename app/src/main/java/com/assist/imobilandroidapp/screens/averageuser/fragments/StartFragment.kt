@@ -52,11 +52,11 @@ class StartFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemAdapter
         val category1 = CarouselItem(getText(R.string.latest).toString(), listingItemList())
         categoryList.add(category1)
 
-        val category2 = CarouselItem(getText(R.string.cat_1).toString(), listingItemList())
-        categoryList.add(category2)
+        val bigHouse = CarouselItem(getText(R.string.big_house).toString(), listingItemList())
+        categoryList.add(bigHouse)
 
-        val category3 = CarouselItem(getText(R.string.cat_2).toString(), listingItemList())
-        categoryList.add(category3)
+        val smallHouse = CarouselItem(getText(R.string.small_house).toString(), listingItemList())
+        categoryList.add(smallHouse)
 
         return categoryList
     }

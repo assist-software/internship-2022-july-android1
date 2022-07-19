@@ -35,7 +35,7 @@ class CarouselItemAdapter(itemList: List<CarouselItem>, private  val onItemCallb
     override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
         val carouselItem: CarouselItem = carouselItemList.get(position)
 
-        holder.carouselTitle.text = carouselItem.getCarouselTitle()
+        holder.carouselTitle.text = carouselItem.carouselTitle
 
         val layoutManager = LinearLayoutManager(
             holder.listingItemList.context,
@@ -43,15 +43,18 @@ class CarouselItemAdapter(itemList: List<CarouselItem>, private  val onItemCallb
             false
         )
 
-        layoutManager.initialPrefetchItemCount = carouselItem.getListingItemList().size
+        layoutManager.initialPrefetchItemCount = carouselItem.listingItemList.size
 
-        val listingItemAdapter = ListingItemAdapter(carouselItem.getListingItemList(),  onFavIconClick)
-        holder.listingItemList.layoutManager = layoutManager
-        holder.listingItemList.adapter = listingItemAdapter
-        holder.listingItemList.setRecycledViewPool(viewPool)
-        holder.seeEverything.setOnClickListener {
-            onItemCallback.onItemCLick(carouselItem)
+        val listingItemAdapter = ListingItemAdapter(carouselItem.listingItemList,  onFavIconClick)
+        holder.apply {
+            listingItemList.layoutManager = layoutManager
+            listingItemList.adapter = listingItemAdapter
+            listingItemList.setRecycledViewPool(viewPool)
+            seeEverything.setOnClickListener {
+                onItemCallback.onItemCLick(carouselItem)
+            }
         }
+
         listingItemAdapter.setUserType(userType)
     }
 

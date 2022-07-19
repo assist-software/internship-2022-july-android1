@@ -77,8 +77,8 @@
     <string name="price_2">600000 lei</string>
     <string name="price_3">1000000 lei</string>
 
-    <string name="cat_1">Category1</string>
-    <string name="cat_2">Category2</string>
+    <string name="big_house">Big Houses</string>
+    <string name="small_house">Small Houses</string>
 
     <string name="or_word">or</string>
     <string name="sign_in_as_guest">sign in as guest</string>

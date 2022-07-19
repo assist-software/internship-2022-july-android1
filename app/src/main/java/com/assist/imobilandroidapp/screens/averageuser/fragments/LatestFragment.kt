@@ -30,11 +30,11 @@ class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconCLick {
         super.onViewCreated(view, savedInstanceState)
 
         val listingsRecyclerView: RecyclerView = binding.rvListings
-        val layoutManager = LinearLayoutManager(activity)
         val listingItemsAdapter = ListingItemWithDescAdapter(listingsItemList(), this)
 
         listingsRecyclerView.adapter = listingItemsAdapter
-        listingsRecyclerView.layoutManager = layoutManager
+        listingsRecyclerView.layoutManager = LinearLayoutManager(activity)
+        listingItemsAdapter.setUserType(StartFragment.UserTypeConstants.GUEST)
     }
 
     private fun listingsItemList(): List<ListingItemWithDesc> {
