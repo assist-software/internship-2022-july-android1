@@ -10,7 +10,6 @@ import com.assist.imobilandroidapp.databinding.ActivityForgotPasswordBinding
 import com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity
 import com.assist.imobilandroidapp.utils.Validator
 
-
 class ForgotPasswordActivity : AppCompatActivity() {
 
     private lateinit var sendReqBtn: Button

@@ -2,15 +2,15 @@ package com.assist.imobilandroidapp.screens.onboarding.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.databinding.ActivityLogInBinding
+import com.assist.imobilandroidapp.screens.averageuser.main.AverageUserActivity
 import com.assist.imobilandroidapp.screens.main.MainActivity
 import com.assist.imobilandroidapp.screens.onboarding.forgotpassword.ForgotPasswordActivity
 import com.assist.imobilandroidapp.screens.onboarding.singup.main.SignUpActivity
 import com.assist.imobilandroidapp.utils.Validator
-
 
 class LogInActivity : AppCompatActivity() {
 
@@ -41,8 +41,12 @@ class LogInActivity : AppCompatActivity() {
         binding.cbRemember.setOnClickListener {
             Toast.makeText(this, "Check box Button", Toast.LENGTH_SHORT).show()
         }
-    }
 
+        binding.tvSignInAsGuest.setOnClickListener {
+            val intent = Intent(this@LogInActivity, AverageUserActivity::class.java)
+            this.startActivity(intent)
+        }
+    }
 
     private fun loginUser() {
         binding.btnLogin.setOnClickListener {

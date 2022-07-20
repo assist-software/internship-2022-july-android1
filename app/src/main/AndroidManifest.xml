@@ -12,24 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImobilAndroidApp">
         <activity
-            android:name="com.assist.imobilandroidapp.screens.listing.ListingScreenActivity"
-            android:exported="true" >
+            android:name="com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".screens.listing.ViewImagesActivity" />
         <activity
-            android:name=".screens.listing.ViewImagesActivity"
+            android:name="com.assist.imobilandroidapp.screens.averageuser.main.AverageUserActivity"
             android:exported="false" />
         <activity
             android:name=".screens.onboarding.forgotpassword.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name="com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity"
-            android:exported="false">
-        </activity>
+            android:name="com.assist.imobilandroidapp.screens.listing.ListingScreenActivity"
+            android:exported="false" />
         <activity
             android:name="com.assist.imobilandroidapp.screens.onboarding.resetpassword.main.ResetPasswordActivity"
             android:exported="false" />

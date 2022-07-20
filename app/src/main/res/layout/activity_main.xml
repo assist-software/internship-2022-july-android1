@@ -5,97 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.main.MainActivity">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_profile_pic"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="@dimen/space_16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="@dimen/space_10dp"
-            app:cardBackgroundColor="@color/blue_500"
-            app:cardCornerRadius="250dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                app:cardCornerRadius="250dp">
-
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/logo_assist_tagline" />
-            </androidx.cardview.widget.CardView>
-        </androidx.cardview.widget.CardView>
-
-        <ImageView
-            android:id="@+id/iv_logo_assist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/space_20dp"
-            android:layout_marginTop="@dimen/space_10dp"
-            android:layout_marginBottom="@dimen/space_16dp"
-            android:src="@drawable/logo_assist_tagline"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/iv_search_icon"
-            app:layout_constraintStart_toEndOf="@id/cv_profile_pic"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/iv_search_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_16dp"
-            android:layout_marginEnd="@dimen/space_5dp"
-            android:layout_marginBottom="@dimen/space_24dp"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/search_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_favourites_icon"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/iv_favourites_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_16dp"
-            android:layout_marginEnd="@dimen/space_16dp"
-            android:layout_marginBottom="@dimen/space_24dp"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/favourites_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/space_1dp"
-            android:src="@drawable/toolbar_line"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <include layout="@layout/toolbar_layout" />
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/toolbar_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/cl_toolbar" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

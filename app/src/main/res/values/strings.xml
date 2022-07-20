@@ -39,6 +39,13 @@
     <string name="empty_field">Field cannot be empty!</string>
     <string name="invalid_passwd">Invalid password!</string>
     <string name="insufficient_letters">Not enough letters!</string>
+    <string name="filter_by">Filter by:</string>
+    <string name="order_by">Order by:</string>
+    <string name="most_popular">Most popular</string>
+    <string name="favourites">Favourites</string>
+    <string name="log_in_to_view_fav">Log in to view your favourites</string>
+    <string name="info_message">You can add, view, or edit your favourites once you\'ve logged in </string>
+    <string name="home">Home</string>
 
     <string name="reset_passwd">Reset password</string>
     <string name="create_new_passwd">Create new password for your account.</string>
@@ -64,5 +71,36 @@
     <string name="or_word">or</string>
     <string name="favorites">Favorites</string>
 
+    <string name="to_fav">Go to favourites</string>
+    <string name="search">Search</string>
+    <string name="search_for_house">Search for house</string>
+
+    <string name="lorem_ipsum">Designers tend to cut the lorem ipsum text when it pleases them to keep their </string>
+
+    <string name="what_are_you">What are you interested in?</string>
+    <string name="latest">Latest</string>
+    <string name="see_everything">See everything</string>
+
+    <string name="house_random_name_1">Dreamy Treehouse Above Park City asdsa</string>
+    <string name="house_random_name_2">Mother Eve Tiny Apartment</string>
+    <string name="house_random_name_3">Riverside Shipping Container Tiny Home</string>
+    <string name="house_random_name_4">Newly Built City Central Apartment</string>
+
+    <string name="location_suceava">Suceava, Romania</string>
+    <string name="location_bucuresti">Bucuresti, Romania</string>
+    <string name="location_cluj">Cluj, Romania</string>
+
+    <string name="price_1">712250 lei</string>
+    <string name="price_2">600000 lei</string>
+    <string name="price_3">1000000 lei</string>
+
+    <string name="big_house">Big Houses</string>
+    <string name="small_house">Small Houses</string>
+
+    <string name="item_1">Item #1</string>
+    <string name="item_2">Item #2</string>
+    <string name="item_3">Item #3</string>
+
+    <string name="searched_for">You searched for: </string>
 
 </resources>
