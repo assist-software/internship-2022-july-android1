@@ -9,8 +9,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.databinding.ActivityLogInBinding
+import com.assist.imobilandroidapp.screens.averageuser.main.AverageUserActivity
+import com.assist.imobilandroidapp.screens.main.MainActivity
 import com.assist.imobilandroidapp.screens.onboarding.forgotpassword.ForgotPasswordActivity
-import com.assist.imobilandroidapp.validator.Validator
+import com.assist.imobilandroidapp.screens.onboarding.singup.main.SignUpActivity
+import com.assist.imobilandroidapp.utils.Validator
 
 
 class LogInActivity : AppCompatActivity() {
@@ -36,13 +39,18 @@ class LogInActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
         binding.tvSignUp.setOnClickListener {
-            Toast.makeText(this, "Sign Up Button", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this@LogInActivity, SignUpActivity::class.java)
+            this.startActivity(intent)
         }
         binding.cbRemember.setOnClickListener {
             Toast.makeText(this, "Check box Button", Toast.LENGTH_SHORT).show()
         }
-    }
 
+        binding.tvSignInAsGuest.setOnClickListener {
+            val intent = Intent(this@LogInActivity, AverageUserActivity::class.java)
+            this.startActivity(intent)
+        }
+    }
 
     private fun loginUser() {
         binding.btnLogin.setOnClickListener {
@@ -51,7 +59,8 @@ class LogInActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.invalidPassword), Toast.LENGTH_LONG)
                     .show()
             } else {
-                Toast.makeText(this, getString(R.string.succesfulLogin), Toast.LENGTH_LONG).show()
+                intent = Intent(this@LogInActivity, MainActivity::class.java)
+                startActivity(intent)
             }
         }
     }

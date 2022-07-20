@@ -6,32 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".screens.main.MainActivity">
 
-    <Button
-        android:id="@+id/sign_up_btn"
+    <include layout="@layout/toolbar_layout" />
+
+    <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_30dp"
-        android:layout_marginTop="@dimen/margin_30dp"
-        android:layout_marginEnd="@dimen/margin_30dp"
-        android:layout_marginBottom="@dimen/margin_5dp"
-        android:text="Go To Sign Up"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/toolbar_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/reset_passwd_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_30dp"
-        android:layout_marginTop="@dimen/margin_5dp"
-        android:layout_marginEnd="@dimen/margin_30dp"
-        android:layout_marginBottom="@dimen/margin_30dp"
-        android:text="Go to Reset Password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

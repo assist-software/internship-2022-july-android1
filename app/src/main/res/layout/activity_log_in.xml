@@ -12,13 +12,16 @@
 
         <ImageView
             android:id="@+id/iv_logo_assist"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/logo_width"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/space_16dp"
-            android:layout_marginTop="@dimen/space_185dp"
             android:background="@drawable/logo_assist_tagline"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
 
         <TextView
             android:id="@+id/tv_title_login"
@@ -63,7 +66,7 @@
             android:hint="@string/email"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
-            android:padding="@dimen/space_10dp"
+            android:padding="@dimen/space_12dp"
             android:textSize="@dimen/text_16sp"
             app:layout_constraintLeft_toLeftOf="@id/tv_email"
             app:layout_constraintTop_toBottomOf="@id/tv_email" />
@@ -89,21 +92,44 @@
             app:layout_constraintLeft_toLeftOf="@id/tv_email"
             app:layout_constraintTop_toBottomOf="@id/et_email_input" />
 
-        <EditText
-            android:id="@+id/et_password_input"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout_enter_passwd"
+            app:layout_constraintLeft_toLeftOf="@id/tv_password"
+            app:layout_constraintTop_toBottomOf="@id/tv_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_16dp"
-            android:layout_marginTop="@dimen/space_4dp"
             android:layout_marginEnd="@dimen/space_16dp"
-            android:background="@drawable/input_border_normal"
-            android:drawableEnd="@drawable/password_visible_icon"
-            android:hint="@string/password"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:padding="@dimen/space_10dp"
-            android:textSize="@dimen/text_16sp"
-            app:layout_constraintLeft_toLeftOf="@id/tv_password"
+            android:layout_marginTop="@dimen/space_4dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:expandedHintEnabled="false"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/passwd"
+                android:background="@drawable/input_border_normal"
+                android:fontFamily="@font/inter"
+                android:inputType="textPassword"
+                android:padding="@dimen/placeholder_padding"
+                android:textFontWeight="500"
+                android:textSize="@dimen/text_16sp"
+                tools:layout_editor_absoluteX="16dp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/iv_first_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_70dp"
+            android:src="@drawable/vertical_line"
+            app:layout_constraintBottom_toTopOf="@+id/tv_error_password"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_password" />
 
         <TextView
@@ -115,7 +141,7 @@
             android:text="@string/PleaseUseValidPassword"
             android:visibility="invisible"
             app:layout_constraintLeft_toLeftOf="@id/tv_email"
-            app:layout_constraintTop_toBottomOf="@id/et_password_input" />
+            app:layout_constraintTop_toBottomOf="@id/text_input_layout_enter_passwd" />
 
         <CheckBox
             android:id="@+id/cb_remember"
@@ -127,7 +153,7 @@
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_password_input" />
+            app:layout_constraintTop_toBottomOf="@id/text_input_layout_enter_passwd" />
 
         <TextView
             android:id="@+id/tv_remember"
@@ -139,7 +165,7 @@
             android:text="@string/RememberMe"
             android:textSize="@dimen/text_14sp"
             app:layout_constraintLeft_toRightOf="@id/cb_remember"
-            app:layout_constraintTop_toBottomOf="@id/et_password_input" />
+            app:layout_constraintTop_toBottomOf="@id/text_input_layout_enter_passwd" />
 
         <TextView
             android:id="@+id/tv_forgot_pass"
@@ -152,7 +178,7 @@
             android:focusable="true"
             android:text="@string/ForgotYourPassword"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_password_input" />
+            app:layout_constraintTop_toBottomOf="@id/text_input_layout_enter_passwd" />
 
         <Button
             android:id="@+id/btn_login"
@@ -169,23 +195,27 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_forgot_pass" />
+            app:layout_constraintTop_toBottomOf="@id/tv_forgot_pass"
+            android:textAlignment="center"
+            android:textAppearance="@style/sign_up_google"
+            android:textFontWeight="600"
+            android:fontFamily="@font/inter"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_google"
-            style="@style/sign_up_google"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/space_16dp"
-            android:layout_marginTop="@dimen/space_8dp"
+            android:layout_marginTop="@dimen/space_16dp"
             android:layout_marginEnd="@dimen/space_16dp"
-            android:layout_marginBottom="@dimen/space_224dp"
-            android:background="@drawable/google_button_border"
-            android:drawableLeft="@drawable/google_icon"
+            android:background="@drawable/border_passwd"
+            android:drawableStart="@drawable/google_logo"
+            android:drawablePadding="@dimen/google_logo_padding"
+            android:fontFamily="@font/inter"
             android:text="@string/LoginGoogle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:textAlignment="center"
+            android:textAppearance="@style/sign_up_google"
+            android:textFontWeight="600"
             app:layout_constraintTop_toBottomOf="@id/btn_login" />
 
         <LinearLayout
@@ -216,7 +246,23 @@
                 android:focusable="true"
                 android:paddingStart="@dimen/space_4dp"
                 android:text="@string/SignUp" />
-        </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/styleQuestionText"
+                android:text="@string/or_word"
+                android:paddingStart="@dimen/space_4dp"/>
+
+            <TextView
+                android:id="@+id/tv_sign_in_as_guest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/styleAssistBlue"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="@dimen/space_4dp"
+                android:text="@string/sign_in_as_guest" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

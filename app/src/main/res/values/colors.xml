@@ -48,5 +48,9 @@
     <color name="gray_700">#404653</color>
     <color name="gray_800">#333843</color>
     <color name="gray_900">#262A32</color>
+    <color name="for_item_listing">#1C1C1E</color>
     <color name="black">#FF000000</color>
+    <color name="transparent_grey">#1C1C1E33</color>
+    <color name="for_fav_circle_solid">#F1F6FF</color>
+    <color name="for_fab">#F2F2F6</color>
 </resources>
