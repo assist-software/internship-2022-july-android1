@@ -2,11 +2,8 @@ package com.assist.imobilandroidapp.screens.onboarding.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View.inflate
-import android.widget.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.databinding.ActivityLogInBinding
 import com.assist.imobilandroidapp.screens.averageuser.main.AverageUserActivity
@@ -14,7 +11,6 @@ import com.assist.imobilandroidapp.screens.main.MainActivity
 import com.assist.imobilandroidapp.screens.onboarding.forgotpassword.ForgotPasswordActivity
 import com.assist.imobilandroidapp.screens.onboarding.singup.main.SignUpActivity
 import com.assist.imobilandroidapp.utils.Validator
-
 
 class LogInActivity : AppCompatActivity() {
 
@@ -66,12 +62,18 @@ class LogInActivity : AppCompatActivity() {
     }
 
     private fun validateEmail(): Boolean {
-        val validate = Validator(binding.etEmailInput, binding.tvErrorEmail, applicationContext, resources)
+        val validate =
+            Validator(binding.etEmailInput, binding.tvErrorEmail, applicationContext, resources)
         return validate.validateEmail()
     }
 
     private fun validatePassword(): Boolean {
-        val validate = Validator(binding.etPasswordInput, binding.tvErrorPassword, applicationContext, resources)
+        val validate = Validator(
+            binding.etPasswordInput,
+            binding.tvErrorPassword,
+            applicationContext,
+            resources
+        )
         return validate.validateLogInPassword()
     }
 
