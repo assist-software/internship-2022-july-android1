@@ -1,5 +1,6 @@
 package com.assist.imobilandroidapp.screens.averageuser.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.assist.imobilandroidapp.adapters.ListingItemAdapter
 import com.assist.imobilandroidapp.databinding.FragmentStartBinding
 import com.assist.imobilandroidapp.items.CarouselItem
 import com.assist.imobilandroidapp.items.ListingItem
+import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
 
 class StartFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemAdapter.OnFavIconClick {
 
@@ -123,5 +125,10 @@ class StartFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemAdapter
     override fun onFavIconClick(listingItem: ListingItem) {
         val fragment = FavouritesEmptyFragment()
         changeFragment(fragment)
+    }
+
+    override fun onListingItemClick(listingItem: ListingItem) {
+        val intent = Intent(activity, ListingScreenActivity::class.java)
+        startActivity(intent)
     }
 }

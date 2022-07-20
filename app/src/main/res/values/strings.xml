@@ -102,5 +102,9 @@
     <string name="item_3">Item #3</string>
 
     <string name="searched_for">You searched for: </string>
+    <string name="device_type">Mobile</string>
+
+    <string name="account_created">User registered successfully!</string>
+    <string name="failed_to_create">Email is already being used!</string>
 
 </resources>

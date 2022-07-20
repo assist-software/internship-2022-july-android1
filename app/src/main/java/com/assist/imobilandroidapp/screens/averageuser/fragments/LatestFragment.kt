@@ -1,5 +1,6 @@
 package com.assist.imobilandroidapp.screens.averageuser.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.adapters.ListingItemWithDescAdapter
 import com.assist.imobilandroidapp.databinding.FragmentLatestBinding
+import com.assist.imobilandroidapp.items.ListingItem
 import com.assist.imobilandroidapp.items.ListingItemWithDesc
+import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
 
 class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconCLick {
 
@@ -85,5 +88,10 @@ class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconCLick {
         fragmentTransaction?.replace(R.id.fc_fragments, fragment)
         fragmentTransaction?.addToBackStack(null)
         fragmentTransaction?.commit()
+    }
+
+    override fun onListingClick(ListingItemWithDesc: ListingItemWithDesc) {
+        val intent = Intent(activity, ListingScreenActivity::class.java)
+        startActivity(intent)
     }
 }

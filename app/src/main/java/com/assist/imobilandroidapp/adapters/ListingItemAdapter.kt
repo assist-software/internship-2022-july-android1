@@ -46,6 +46,10 @@ class ListingItemAdapter(
             listingLocation.text = listingItem.listingLocation
             listingPrice.text = listingItem.listingPrice
 
+            itemView.setOnClickListener {
+                onFavIconClickCallback.onListingItemClick(listingItem)
+            }
+
             addToFavourites.setOnClickListener {
                 if (userType == StartFragment.UserTypeConstants.GUEST) {
                     onFavIconClickCallback.onFavIconClick(listingItem)
@@ -70,5 +74,6 @@ class ListingItemAdapter(
 
     interface OnFavIconClick {
         fun onFavIconClick(listingItem: ListingItem)
+        fun onListingItemClick(listingItem: ListingItem)
     }
 }
