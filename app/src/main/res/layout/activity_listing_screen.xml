@@ -273,6 +273,5 @@
         android:backgroundTint="@color/gray_200"
         android:src="@drawable/icon_msg"
         app:borderWidth="0dp"
-
         />
 </RelativeLayout>

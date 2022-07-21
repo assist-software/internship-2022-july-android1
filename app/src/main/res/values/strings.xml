@@ -102,5 +102,35 @@
     <string name="item_3">Item #3</string>
 
     <string name="searched_for">You searched for: </string>
+    <string name="profile">Profile</string>
+    <string name="full_name">Full name</string>
+    <string name="full_name_placeholder">James Milner</string>
+    <string name="edit">Edit</string>
+    <string name="gender">Gender</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="birth_date_placeholder">05.05.2000</string>
+    <string name="email_placeholder">james.milner@example.com</string>
+    <string name="email_address">Email address</string>
+    <string name="phone_number">Phone number</string>
+    <string name="phone_placeholder">0123456789</string>
+    <string name="address">Address</string>
+    <string name="address_not_provided">Not provided</string>
+    <string name="login_security"><![CDATA[Login & security]]></string>
+    <string name="notifications">Notifications</string>
+    <string name="messages">Messages</string>
+    <string name="logout">Logout</string>
+    <string name="logout_alert_message">Are you sure, do you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="nso">logoutDialogFragment</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="save">Save</string>
+    <string name="date_format">dd.MM.yyyy</string>
+    <string name="cancel">Cancel</string>
+    <string name="space">" "</string>
+    <string name="point">.</string>
 
 </resources>

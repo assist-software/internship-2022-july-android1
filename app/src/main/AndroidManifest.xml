@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImobilAndroidApp">
         <activity
+            android:name=".screens.profile.MainProfileActivity"
+            android:exported="false" />
+        <activity
             android:name="com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

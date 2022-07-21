@@ -273,4 +273,85 @@
             @dimen/text_14sp
         </item>
     </style>
+
+    <style name="profile_edit_option_title">
+        <item name="android:textColor">
+            @color/gray_700
+        </item>
+        <item name="android:textSize">
+            @dimen/text_16sp
+        </item>
+    </style>
+
+    <style name="profile_edit_option_preview">
+        <item name="android:textColor">
+            @color/gray_400
+        </item>
+        <item name="android:textSize">
+            @dimen/text_14sp
+        </item>
+    </style>
+
+    <style name="profile_menu_blue">
+        <item name="android:textColor">
+            @color/blue_400
+        </item>
+        <item name="android:textSize">
+            @dimen/text_14sp
+        </item>
+        <item name="fontFamily">
+            "@font/inter"
+        </item>
+    </style>
+
+    <style name="profile_menu">
+        <item name="android:textColor">
+            @color/gray_500
+        </item>
+        <item name="android:textSize">
+            @dimen/text_14sp
+        </item>
+        <item name="fontFamily">
+            "@font/inter"
+        </item>
+    </style>
+
+    <style name="logout_dialog_title">
+        <item name="android:textColor">
+            @color/black
+        </item>
+        <item name="android:textSize">
+            @dimen/text_20sp
+        </item>
+        <item name="android:textStyle">
+            bold
+        </item>
+        <item name="fontFamily">
+            "@font/inter"
+        </item>
+    </style>
+
+    <style name="edit_text_profile">
+        <item name="android:textColor">
+            @color/black
+        </item>
+        <item name="android:textSize">
+            @dimen/text_16sp
+        </item>
+        <item name="fontFamily">
+            "@font/inter"
+        </item>
+    </style>
+
+    <style name="title_hidden_profile">
+        <item name="android:textColor">
+            @color/gray_600
+        </item>
+        <item name="android:textSize">
+            @dimen/text_14sp
+        </item>
+        <item name="fontFamily">
+            "@font/inter"
+        </item>
+    </style>
 </resources>
