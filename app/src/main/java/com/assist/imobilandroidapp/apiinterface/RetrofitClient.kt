@@ -7,10 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private val AUTH = "Basic " + Base64.encodeToString("emailcorect:parolacorecta01".toByteArray(), Base64.NO_WRAP)
+    private val AUTH = Base64.encodeToString("emailcorect:parolacorecta01".toByteArray(), Base64.NO_WRAP)
     private val okHttpClient = OkHttpClient.Builder().addInterceptor { chain ->
         val original = chain.request()
-        val requestBuilder = original.newBuilder().addHeader("Authorization", AUTH).method(original.method(), original.body())
+        val requestBuilder = original.newBuilder().addHeader("Bearer", AUTH)
+            .method(original.method(), original.body())
         val request = requestBuilder.build()
         chain.proceed(request)
     }.build()

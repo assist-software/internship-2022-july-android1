@@ -1,4 +1,4 @@
-package com.assist.imobilandroidapp.screens.averageuser.fragments
+package com.assist.imobilandroidapp.screens.client.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,28 +11,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.adapters.CarouselItemAdapter
 import com.assist.imobilandroidapp.adapters.ListingItemAdapter
+import com.assist.imobilandroidapp.databinding.FragmentAllListingsBinding
 import com.assist.imobilandroidapp.databinding.FragmentStartBinding
 import com.assist.imobilandroidapp.items.CarouselItem
 import com.assist.imobilandroidapp.items.ListingItem
+import com.assist.imobilandroidapp.screens.averageuser.fragments.FavouritesEmptyFragment
+import com.assist.imobilandroidapp.screens.averageuser.fragments.LatestFragment
+import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
 
-class StartFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemAdapter.OnFavIconClick {
+class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemAdapter.OnFavIconClick {
 
-    private var _binding: FragmentStartBinding? = null
+    private var _binding: FragmentAllListingsBinding? = null
     private val binding get() = _binding!!
+    private var userType = StartFragment.UserTypeConstants.LOGGED_IN_USER
     private var carouselItemAdapter: CarouselItemAdapter ?= null
-    private var userType: Int = UserTypeConstants.GUEST
-
-    object UserTypeConstants {
-        const val GUEST = 0
-        const val LOGGED_IN_USER = 1
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentStartBinding.inflate(inflater, container, false)
+        _binding = FragmentAllListingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -109,22 +108,12 @@ class StartFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemAdapter
         _binding = null
     }
 
-    private fun changeFragment(fragment: Fragment) {
-        val fragmentManager = activity?.supportFragmentManager
-        val fragmentTransaction = fragmentManager?.beginTransaction()
-        fragmentTransaction?.replace(R.id.fc_fragments, fragment)
-        fragmentTransaction?.addToBackStack(null)
-        fragmentTransaction?.commit()
-    }
-
     override fun onItemCLick(carouselItem: CarouselItem) {
-        val fragment = LatestFragment()
-        changeFragment(fragment)
+        // Do nothing
     }
 
     override fun onFavIconClick(listingItem: ListingItem) {
-        val fragment = FavouritesEmptyFragment()
-        changeFragment(fragment)
+        // Do nothing
     }
 
     override fun onListingItemClick(listingItem: ListingItem) {
