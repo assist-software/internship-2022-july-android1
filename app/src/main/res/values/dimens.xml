@@ -78,4 +78,9 @@
     <dimen name="space_382dp">382dp</dimen>
     <dimen name="space_34dp">34dp</dimen>
     <dimen name="space_0dp">0dp</dimen>
+    <dimen name="space_112dp">112dp</dimen>
+    <dimen name="space_36dp">36dp</dimen>
+    <dimen name="space_64dp">64dp</dimen>
+    <dimen name="space_26dp">26dp</dimen>
+    <dimen name="space_52dp">52dp</dimen>
 </resources>
