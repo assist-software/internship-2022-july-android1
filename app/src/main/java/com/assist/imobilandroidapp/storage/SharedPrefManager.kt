@@ -26,8 +26,18 @@ class SharedPrefManager private constructor(private val mContext: Context){
         editor.apply()
     }
 
+    fun saveName(firstName: String, lastName: String) {
+        val editor = sharedPrefs.edit()
+        editor.putString("fullName", "$firstName $lastName")
+        editor.apply()
+    }
+
     fun fetchToken(): String? {
         return sharedPrefs.getString("token", null)
+    }
+
+    fun fetchName(): String? {
+        return sharedPrefs.getString("fullName", null)
     }
 
     companion object {
