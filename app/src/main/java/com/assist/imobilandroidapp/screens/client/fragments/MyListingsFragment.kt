@@ -1,4 +1,4 @@
-package com.assist.imobilandroidapp.screens.averageuser.fragments
+package com.assist.imobilandroidapp.screens.client.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,29 +10,31 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.adapters.ListingItemWithDescAdapter
+import com.assist.imobilandroidapp.databinding.FragmentAllListingsBinding
 import com.assist.imobilandroidapp.databinding.FragmentLatestBinding
-import com.assist.imobilandroidapp.items.ListingItem
 import com.assist.imobilandroidapp.items.ListingItemWithDesc
+import com.assist.imobilandroidapp.screens.averageuser.fragments.FavouritesEmptyFragment
+import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
 
-class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconCLick {
+class MyListingsFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconCLick {
 
-    private var _binding: FragmentLatestBinding? = null
+    private var _binding: FragmentAllListingsBinding? = null
     private val binding get() = _binding!!
-    private val userType: Int = StartFragment.UserTypeConstants.GUEST
+    private val userType = StartFragment.UserTypeConstants.LOGGED_IN_USER
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentLatestBinding.inflate(inflater, container, false)
+        _binding = FragmentAllListingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listingsRecyclerView: RecyclerView = binding.rvListings
+        val listingsRecyclerView: RecyclerView = binding.rvParent
         val listingItemsAdapter = ListingItemWithDescAdapter(listingsItemList(), this)
 
         listingsRecyclerView.adapter = listingItemsAdapter
@@ -82,12 +84,7 @@ class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconCLick {
     }
 
     override fun onFavIconClick(listingItemWithDesc: ListingItemWithDesc) {
-        val fragment = FavouritesEmptyFragment()
-        val fragmentManager = activity?.supportFragmentManager
-        val fragmentTransaction = fragmentManager?.beginTransaction()
-        fragmentTransaction?.replace(R.id.fc_fragments, fragment)
-        fragmentTransaction?.addToBackStack(null)
-        fragmentTransaction?.commit()
+        // Do nothing
     }
 
     override fun onListingClick(ListingItemWithDesc: ListingItemWithDesc) {

@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
+import com.assist.imobilandroidapp.items.ListingItem
 import com.assist.imobilandroidapp.items.ListingItemWithDesc
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 
@@ -39,6 +40,11 @@ class ListingItemWithDescAdapter(
             listingTitle.text = listingItemWithDesc.listingTitle
             listingDescription.text = listingItemWithDesc.listingDescription
             listingPrice.text = listingItemWithDesc.listingPrice
+
+            itemView.setOnClickListener {
+                onFavIconClick.onListingClick(listingItemWithDesc)
+            }
+
             favIcon.setOnClickListener {
                 if (userType == StartFragment.UserTypeConstants.GUEST) {
                     onFavIconClick.onFavIconClick(listingItemWithDesc)
@@ -68,5 +74,6 @@ class ListingItemWithDescAdapter(
 
     interface OnFavIconCLick {
         fun onFavIconClick(listingItemWithDesc: ListingItemWithDesc)
+        fun onListingClick(ListingItemWithDesc: ListingItemWithDesc)
     }
 }
