@@ -2,16 +2,18 @@ package com.assist.imobilandroidapp.storage
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.assist.imobilandroidapp.ImobilApp
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.apiinterface.models.RegisterResponse
 
 
 class SharedPrefManager private constructor(private val mContext: Context){
 
-    private var sharedPrefs: SharedPreferences = mContext.getSharedPreferences(mContext.getString(R.string.app_name), Context.MODE_PRIVATE)
+
+    private var sharedPrefs: SharedPreferences = ImobilApp.instance.getSharedPreferences(mContext.getString(R.string.app_name), Context.MODE_PRIVATE)
     val isLoggedIn: Boolean
         get() {
-            return sharedPrefs.getString("token", null) != null
+            return sharedPrefs.getString("token", "")?.isNotEmpty() == true
         }
 
     fun clear() {
@@ -33,19 +35,19 @@ class SharedPrefManager private constructor(private val mContext: Context){
     }
 
     fun fetchToken(): String? {
-        return sharedPrefs.getString("token", null)
+        return sharedPrefs.getString("token", "")
     }
 
     fun fetchName(): String? {
-        return sharedPrefs.getString("fullName", null)
+        return sharedPrefs.getString("fullName", "")
     }
 
     companion object {
         private var mInstance: SharedPrefManager? = null
         @Synchronized
-        fun getInstance(mContext: Context): SharedPrefManager {
+        fun getInstance(): SharedPrefManager {
             if(mInstance == null) {
-                mInstance = SharedPrefManager(mContext)
+                mInstance = SharedPrefManager(ImobilApp.instance)
             }
             return mInstance as SharedPrefManager
         }

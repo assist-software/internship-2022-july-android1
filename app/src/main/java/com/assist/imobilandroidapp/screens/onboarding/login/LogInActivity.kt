@@ -92,7 +92,7 @@ class LogInActivity : AppCompatActivity() {
                 response: Response<RegisterResponse>
             ) {
                 if (response.code() == 200) {
-                    SharedPrefManager.getInstance(applicationContext).saveToken(response.body())
+                    SharedPrefManager.getInstance().saveToken(response.body())
 
                     intent = Intent(this@LogInActivity, ClientActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -130,7 +130,7 @@ class LogInActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        if(SharedPrefManager.getInstance(this).isLoggedIn) {
+        if(SharedPrefManager.getInstance().isLoggedIn) {
             intent = Intent(this@LogInActivity, ClientActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
