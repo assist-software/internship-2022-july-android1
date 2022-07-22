@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.profile.MainProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_layout" />
+
+            <TextView
+                android:id="@+id/tv_title_profile"
+                style="@style/styleTitleOnboarding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_32dp"
+                android:text="@string/profile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_big_profile_pic"
+                android:layout_width="@dimen/space_112dp"
+                android:layout_height="@dimen/space_112dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                app:cardBackgroundColor="@color/blue_500"
+                app:cardCornerRadius="250dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_profile">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="112dp"
+                    android:layout_height="112dp"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="250dp">
+
+                    <ImageView
+                        android:id="@+id/iv_big_profile_picture"
+                        android:layout_width="112dp"
+                        android:layout_height="112dp"
+                        android:importantForAccessibility="no"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/logo_assist_tagline" />
+                </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/space_32dp"
+                android:layout_height="@dimen/space_32dp"
+                android:scaleType="center"
+                android:src="@drawable/edit_icon_full"
+                app:cardCornerRadius="250dp"
+                app:layout_constraintBottom_toBottomOf="@id/cv_big_profile_pic"
+                app:layout_constraintEnd_toEndOf="@id/cv_big_profile_pic">
+
+                <ImageButton
+                    android:layout_width="@dimen/space_32dp"
+                    android:layout_height="@dimen/space_32dp"
+                    android:background="@color/white"
+                    android:importantForAccessibility="no"
+                    android:scaleType="center"
+                    android:src="@drawable/edit_icon" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_title_full_name"
+                style="@style/profile_edit_option_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_36dp"
+                android:text="@string/full_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_big_profile_pic" />
+
+            <TextView
+                android:id="@+id/tv_edit_full_name"
+                style="@style/sign_up_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_28dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/edit"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_full_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_full_name" />
+
+            <TextView
+                android:id="@+id/tv_cancel_full_name"
+                style="@style/sign_up_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_28dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/cancel"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_full_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_full_name" />
+
+
+            <TextView
+                android:id="@+id/tv_full_name_preview"
+                style="@style/profile_edit_option_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_8dp"
+                android:text="@string/full_name_placeholder"
+                app:layout_constraintStart_toStartOf="@id/tv_title_full_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_full_name" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_parent_full_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/tv_full_name_preview"
+                app:layout_constraintTop_toBottomOf="@id/tv_full_name_preview">
+
+                <TextView
+                    android:id="@+id/tv_title_first_name"
+                    style="@style/title_hidden_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_18dp"
+                    android:text="@string/first_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_first_name_input"
+                    style="@style/edit_text_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_4dp"
+                    android:layout_marginEnd="@dimen/space_16dp"
+                    android:background="@drawable/input_border_normal"
+                    android:inputType="text"
+                    android:padding="@dimen/space_12dp"
+                    android:text="@string/placeholder"
+                    app:layout_constraintStart_toStartOf="@id/tv_title_first_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_first_name"
+                    app:layout_goneMarginTop="@dimen/space_16dp" />
+
+                <TextView
+                    android:id="@+id/tv_title_last_name"
+                    style="@style/title_hidden_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16dp"
+                    android:text="@string/last_name"
+                    app:layout_constraintStart_toStartOf="@+id/tv_title_first_name"
+                    app:layout_constraintTop_toBottomOf="@id/et_first_name_input" />
+
+                <EditText
+                    android:id="@+id/et_last_name_input"
+                    style="@style/edit_text_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_4dp"
+                    android:layout_marginEnd="@dimen/space_16dp"
+                    android:background="@drawable/input_border_normal"
+                    android:inputType="text"
+                    android:padding="@dimen/space_12dp"
+                    android:text="@string/placeholder"
+                    app:layout_constraintStart_toStartOf="@id/tv_title_last_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_last_name"
+                    app:layout_goneMarginTop="@dimen/space_16dp" />
+
+                <Button
+                    android:id="@+id/btn_full_name_save"
+                    style="@style/styleLoginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_16dp"
+                    android:layout_marginEnd="@dimen/space_16dp"
+                    android:background="@drawable/login_button_border"
+                    android:fontFamily="@font/inter"
+                    android:text="@string/save"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/sign_up_google"
+                    android:textFontWeight="600"
+                    app:backgroundTint="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_last_name_input" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/v_line_full_name"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@color/gray_200"
+                app:layout_constraintTop_toBottomOf="@id/cl_parent_full_name" />
+
+            <TextView
+                android:id="@+id/tv_title_gender"
+                style="@style/profile_edit_option_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:text="@string/gender"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_line_full_name" />
+
+            <TextView
+                android:id="@+id/tv_edit_gender"
+                style="@style/sign_up_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_28dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/edit"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_gender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_gender" />
+
+            <TextView
+                android:id="@+id/tv_cancel_gender"
+                style="@style/sign_up_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_28dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/cancel"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_gender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_gender" />
+
+            <TextView
+                android:id="@+id/tv_gender_preview"
+                style="@style/profile_edit_option_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_8dp"
+                android:text="@string/gender_male"
+                app:layout_constraintStart_toStartOf="@id/tv_title_gender"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_gender" />
+
+            <RadioGroup
+                android:id="@+id/rg_gender_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_gender_preview"
+                app:layout_constraintTop_toBottomOf="@id/tv_gender_preview">
+
+                <RadioButton
+                    android:id="@+id/rb_male_option"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender_male" />
+
+                <RadioButton
+                    android:id="@+id/rb_female_option"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender_female" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btn_gender_save"
+                style="@style/styleLoginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@drawable/login_button_border"
+                android:fontFamily="@font/inter"
+                android:text="@string/save"
+                android:textAlignment="center"
+                android:textAppearance="@style/sign_up_google"
+                android:textFontWeight="600"
+                android:visibility="gone"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rg_gender_options" />
+
+            <View
+                android:id="@+id/v_line_gender"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@color/gray_200"
+                app:layout_constraintTop_toBottomOf="@id/btn_gender_save" />
+
+            <TextView
+                android:id="@+id/tv_title_birth_date"
+                style="@style/profile_edit_option_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:text="@string/date_of_birth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_line_gender" />
+
+            <TextView
+                android:id="@+id/tv_edit_birth_date"
+                style="@style/sign_up_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_28dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/edit"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_birth_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_birth_date" />
+
+            <TextView
+                android:id="@+id/tv_birth_date_preview"
+                style="@style/profile_edit_option_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_8dp"
+                android:text="@string/birth_date_placeholder"
+                app:layout_constraintStart_toStartOf="@id/tv_title_birth_date"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_birth_date" />
+
+            <View
+                android:id="@+id/v_line_birth_date"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@color/gray_200"
+                app:layout_constraintTop_toBottomOf="@id/tv_birth_date_preview" />
+
+            <TextView
+                android:id="@+id/tv_title_email"
+                style="@style/profile_edit_option_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:text="@string/email_address"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_line_birth_date" />
+
+            <TextView
+                android:id="@+id/tv_edit_email"
+                style="@style/sign_up_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_28dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/edit"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_email" />
+
+            <TextView
+                android:id="@+id/tv_cancel_email"
+                style="@style/sign_up_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_28dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/cancel"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_email" />
+
+            <TextView
+                android:id="@+id/tv_email_preview"
+                style="@style/profile_edit_option_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_8dp"
+                android:text="@string/email_placeholder"
+                app:layout_constraintStart_toStartOf="@id/tv_title_email"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_email" />
+
+            <EditText
+                android:id="@+id/et_email_input"
+                style="@style/edit_text_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_8dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@drawable/input_border_normal"
+                android:padding="@dimen/space_12dp"
+                android:text="@string/placeholder"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_email_preview"
+                app:layout_constraintTop_toBottomOf="@id/tv_email_preview"
+                app:layout_goneMarginTop="@dimen/space_16dp"
+                android:inputType="textEmailAddress" />
+
+            <Button
+                android:id="@+id/btn_email_save"
+                style="@style/styleLoginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@drawable/login_button_border"
+                android:fontFamily="@font/inter"
+                android:text="@string/save"
+                android:textAlignment="center"
+                android:textAppearance="@style/sign_up_google"
+                android:textFontWeight="600"
+                android:visibility="gone"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="@id/et_email_input"
+                app:layout_constraintTop_toBottomOf="@id/et_email_input" />
+
+            <View
+                android:id="@+id/v_line_email"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@color/gray_200"
+                app:layout_constraintTop_toBottomOf="@id/btn_email_save" />
+
+            <TextView
+                android:id="@+id/tv_title_phone"
+                style="@style/profile_edit_option_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:text="@string/phone_number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_line_email" />
+
+            <TextView
+                android:id="@+id/tv_edit_phone"
+                style="@style/sign_up_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_28dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/edit"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_phone" />
+
+            <TextView
+                android:id="@+id/tv_cancel_phone"
+                style="@style/sign_up_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_28dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/cancel"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_phone" />
+
+            <TextView
+                android:id="@+id/tv_phone_preview"
+                style="@style/profile_edit_option_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_8dp"
+                android:text="@string/phone_placeholder"
+                app:layout_constraintStart_toStartOf="@id/tv_title_phone"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_phone" />
+
+            <EditText
+                android:id="@+id/et_phone_input"
+                style="@style/edit_text_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_8dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@drawable/input_border_normal"
+                android:padding="@dimen/space_12dp"
+                android:text="@string/placeholder"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_phone_preview"
+                app:layout_constraintTop_toBottomOf="@id/tv_phone_preview"
+                app:layout_goneMarginTop="@dimen/space_16dp"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btn_phone_save"
+                style="@style/styleLoginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@drawable/login_button_border"
+                android:fontFamily="@font/inter"
+                android:text="@string/save"
+                android:textAlignment="center"
+                android:textAppearance="@style/sign_up_google"
+                android:textFontWeight="600"
+                android:visibility="gone"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="@id/et_phone_input"
+                app:layout_constraintTop_toBottomOf="@id/et_phone_input" />
+
+            <View
+                android:id="@+id/v_line_phone"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@color/gray_200"
+                app:layout_constraintTop_toBottomOf="@id/btn_phone_save" />
+
+            <TextView
+                android:id="@+id/tv_title_address"
+                style="@style/profile_edit_option_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_20dp"
+                android:text="@string/address"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_line_phone" />
+
+            <TextView
+                android:id="@+id/tv_edit_address"
+                style="@style/sign_up_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_28dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/edit"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_address"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_address" />
+
+            <TextView
+                android:id="@+id/tv_cancel_address"
+                style="@style/sign_up_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_28dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/cancel"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_title_address"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title_address" />
+
+            <TextView
+                android:id="@+id/tv_address_preview"
+                style="@style/profile_edit_option_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_8dp"
+                android:text="@string/address_not_provided"
+                app:layout_constraintStart_toStartOf="@id/tv_title_address"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_address" />
+
+            <EditText
+                android:id="@+id/et_address_input"
+                style="@style/edit_text_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_8dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@drawable/input_border_normal"
+                android:padding="@dimen/space_12dp"
+                android:text="@string/placeholder"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_address_preview"
+                app:layout_constraintTop_toBottomOf="@id/tv_address_preview"
+                app:layout_goneMarginTop="@dimen/space_16dp" />
+
+            <Button
+                android:id="@+id/btn_address_save"
+                style="@style/styleLoginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@drawable/login_button_border"
+                android:fontFamily="@font/inter"
+                android:text="@string/save"
+                android:textAlignment="center"
+                android:textAppearance="@style/sign_up_google"
+                android:textFontWeight="600"
+                android:visibility="gone"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="@id/et_address_input"
+                app:layout_constraintTop_toBottomOf="@id/et_address_input" />
+
+            <View
+                android:id="@+id/v_line_address"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_16dp"
+                android:layout_marginEnd="@dimen/space_16dp"
+                android:background="@color/gray_200"
+                app:layout_constraintTop_toBottomOf="@id/btn_address_save" />
+
+            <LinearLayout
+                android:id="@+id/ll_menu_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_20dp"
+                android:layout_marginTop="@dimen/space_64dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_line_address">
+
+                <ImageView
+                    android:layout_width="@dimen/space_16dp"
+                    android:layout_height="@dimen/space_16dp"
+                    android:layout_gravity="center"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/profile_icon_blue" />
+
+                <TextView
+                    style="@style/profile_menu_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/space_12dp"
+                    android:text="@string/profile" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_menu_login_security"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_20dp"
+                android:layout_marginTop="@dimen/space_26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_menu_profile">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/login_security_icon" />
+
+                <TextView
+                    style="@style/profile_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/space_12dp"
+                    android:text="@string/login_security" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_menu_notifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_20dp"
+                android:layout_marginTop="@dimen/space_26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_menu_login_security">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/notifications_icon" />
+
+                <TextView
+                    style="@style/profile_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/space_12dp"
+                    android:text="@string/notifications" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_menu_messages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_20dp"
+                android:layout_marginTop="@dimen/space_26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_menu_notifications">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/messages_icon" />
+
+                <TextView
+                    style="@style/profile_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/space_12dp"
+                    android:text="@string/messages" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_menu_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_20dp"
+                android:layout_marginTop="@dimen/space_26dp"
+                android:layout_marginBottom="@dimen/space_32dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_menu_messages">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/logout_icon" />
+
+                <TextView
+                    style="@style/profile_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/space_12dp"
+                    android:text="@string/logout" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/space_16dp"
+        android:layout_marginBottom="@dimen/space_16dp"
+        android:importantForAccessibility="no"
+        android:backgroundTint="@color/gray_200"
+        android:src="@drawable/icon_msg"
+        app:borderWidth="0dp" />
+
+</RelativeLayout>
