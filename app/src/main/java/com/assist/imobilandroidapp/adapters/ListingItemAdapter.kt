@@ -6,20 +6,18 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
-import com.assist.imobilandroidapp.items.ListingItem
+import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 
 class ListingItemAdapter(
-    listingItemList: List<ListingItem>,
-    private val onFavIconClickCallback: OnFavIconClick
+    listingItemList: List<ListingFromDBObject>,
+    private val onFavIconClickCallback: OnFavIconClickSmallRV
 ) :
     RecyclerView.Adapter<ListingItemAdapter.ListingViewHolder>() {
 
-    private var listingItemList: List<ListingItem>
+    private var listingItemList: List<ListingFromDBObject>
     private var userType: Int = 0
 
     fun setUserType(userType: Int) {
@@ -38,13 +36,13 @@ class ListingItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ListingViewHolder, position: Int) {
-        val listingItem: ListingItem = listingItemList.get(position)
+        val listingItem: ListingFromDBObject = listingItemList[position]
 
         holder.apply {
-            listingImage.setImageResource(listingItem.listingImage)
-            listingTitle.text = listingItem.listingTitle
-            listingLocation.text = listingItem.listingLocation
-            listingPrice.text = listingItem.listingPrice
+            //listingImage.setImageResource(listingItem.images)
+            listingTitle.text = listingItem.title
+            listingLocation.text = listingItem.location
+            listingPrice.text = listingItem.price.toString()
 
             itemView.setOnClickListener {
                 onFavIconClickCallback.onListingItemClick(listingItem)
@@ -72,8 +70,8 @@ class ListingItemAdapter(
         val addToFavourites: ImageButton = itemView.findViewById(R.id.ib_favourites)
     }
 
-    interface OnFavIconClick {
-        fun onFavIconClick(listingItem: ListingItem)
-        fun onListingItemClick(listingItem: ListingItem)
+    interface OnFavIconClickSmallRV {
+        fun onFavIconClick(listingItem: ListingFromDBObject)
+        fun onListingItemClick(listingItem: ListingFromDBObject)
     }
 }

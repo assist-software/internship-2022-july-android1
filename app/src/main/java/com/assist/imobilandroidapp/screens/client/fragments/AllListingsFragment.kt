@@ -6,26 +6,33 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.adapters.CarouselItemAdapter
 import com.assist.imobilandroidapp.adapters.ListingItemAdapter
+import com.assist.imobilandroidapp.apiinterface.RetrofitClient
+import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
 import com.assist.imobilandroidapp.databinding.FragmentAllListingsBinding
-import com.assist.imobilandroidapp.databinding.FragmentStartBinding
 import com.assist.imobilandroidapp.items.CarouselItem
-import com.assist.imobilandroidapp.items.ListingItem
-import com.assist.imobilandroidapp.screens.averageuser.fragments.FavouritesEmptyFragment
-import com.assist.imobilandroidapp.screens.averageuser.fragments.LatestFragment
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
+import com.assist.imobilandroidapp.screens.client.main.ListingSingleCategoryActivity
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemAdapter.OnFavIconClick {
+class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemAdapter.OnFavIconClickSmallRV {
 
     private var _binding: FragmentAllListingsBinding? = null
     private val binding get() = _binding!!
     private var userType = StartFragment.UserTypeConstants.LOGGED_IN_USER
     private var carouselItemAdapter: CarouselItemAdapter ?= null
+
+    val bigHouseListings: ArrayList<ListingFromDBObject> = arrayListOf()
+    val smallHouseListings: ArrayList<ListingFromDBObject> = arrayListOf()
+    val foundListings: ArrayList<ListingFromDBObject> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +45,10 @@ class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemA
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       getListings()
+    }
+
+    private fun initRV() {
         val carouselRecyclerViewItem: RecyclerView = binding.rvParent
         val layoutManager = LinearLayoutManager(activity)
         carouselItemAdapter = CarouselItemAdapter(carouselItemList(), this, this)
@@ -50,57 +61,62 @@ class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemA
     private fun carouselItemList(): List<CarouselItem> {
         val categoryList = ArrayList<CarouselItem>()
 
-        val latestListings = CarouselItem(getText(R.string.latest).toString(), listingItemList())
+        val latestListings = CarouselItem(getText(R.string.latest).toString(), foundListings)
         categoryList.add(latestListings)
 
-        val bigHouse = CarouselItem(getText(R.string.big_house).toString(), listingItemList())
+        val bigHouse = CarouselItem(getText(R.string.big_house).toString(), bigHouseListings)
         categoryList.add(bigHouse)
 
-        val smallHouse = CarouselItem(getText(R.string.small_house).toString(), listingItemList())
+        val smallHouse = CarouselItem(getText(R.string.small_house).toString(), smallHouseListings)
         categoryList.add(smallHouse)
 
         return categoryList
     }
 
-    private fun listingItemList(): List<ListingItem> {
-        val ListingItemList = ArrayList<ListingItem>()
+    private fun getListings() {
+        RetrofitClient.instance.getListings().enqueue(object : Callback<List<ListingFromDBObject>> {
+            override fun onResponse(
+                call: Call<List<ListingFromDBObject>>,
+                response: Response<List<ListingFromDBObject>>
+            ) {
+                when (response.code()) {
+                    400, 401 -> {
+                        Toast.makeText(
+                            activity,
+                            getText(R.string.something_wrong).toString() + "400",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
 
-        ListingItemList.add(
-            ListingItem(
-                R.drawable.fav_heart_icon_red,
-                getText(R.string.house_random_name_1).toString(),
-                getText(R.string.location_suceava).toString(),
-                getText(R.string.price_1).toString()
-            )
-        )
+                    200 -> {
+                        if (response.body()?.isNotEmpty() == true) {
+                            foundListings.addAll(response.body()!!)
+                            for (item in foundListings) {
+                                when(item.category) {
+                                    0 -> bigHouseListings.add(item)
+                                    1 -> smallHouseListings.add(item)
+                                }
+                            }
+                            initRV()
+                        } else {
+                            Toast.makeText(
+                                activity,
+                                getText(R.string.nothing_found).toString(),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                }
+            }
 
-        ListingItemList.add(
-            ListingItem(
-                R.drawable.photo_replacement_1,
-                getText(R.string.house_random_name_2).toString(),
-                getText(R.string.location_suceava).toString(),
-                getText(R.string.price_2).toString()
-            )
-        )
-
-        ListingItemList.add(
-            ListingItem(
-                R.drawable.logo_assist_tagline,
-                getText(R.string.house_random_name_3).toString(),
-                getText(R.string.location_bucuresti).toString(),
-                getText(R.string.price_3).toString()
-            )
-        )
-
-        ListingItemList.add(
-            ListingItem(
-                R.drawable.search_icon,
-                getText(R.string.house_random_name_4).toString(),
-                getText(R.string.location_cluj).toString(),
-                getText(R.string.price_1).toString()
-            )
-        )
-        return ListingItemList
+            override fun onFailure(call: Call<List<ListingFromDBObject>>, t: Throwable) {
+                Toast.makeText(
+                    activity,
+                    t.message,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        })
     }
 
     override fun onDestroyView() {
@@ -108,15 +124,17 @@ class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemA
         _binding = null
     }
 
-    override fun onItemCLick(carouselItem: CarouselItem) {
+    override fun onItemClick(carouselItem: CarouselItem) {
+        val intent = Intent(activity, ListingSingleCategoryActivity::class.java)
+        intent.putExtra("title", carouselItem.carouselTitle)
+        startActivity(intent)
+    }
+
+    override fun onFavIconClick(listingItem: ListingFromDBObject) {
         // Do nothing
     }
 
-    override fun onFavIconClick(listingItem: ListingItem) {
-        // Do nothing
-    }
-
-    override fun onListingItemClick(listingItem: ListingItem) {
+    override fun onListingItemClick(listingItem: ListingFromDBObject) {
         val intent = Intent(activity, ListingScreenActivity::class.java)
         startActivity(intent)
     }

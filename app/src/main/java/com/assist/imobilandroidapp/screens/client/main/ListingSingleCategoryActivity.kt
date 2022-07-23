@@ -1,58 +1,80 @@
-package com.assist.imobilandroidapp.screens.averageuser.fragments
+package com.assist.imobilandroidapp.screens.client.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.adapters.ListingItemWithDescAdapter
 import com.assist.imobilandroidapp.apiinterface.RetrofitClient
 import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
-import com.assist.imobilandroidapp.databinding.FragmentLatestBinding
+import com.assist.imobilandroidapp.databinding.ActivityClientBinding
+import com.assist.imobilandroidapp.databinding.ActivityListingSingleCategoryBinding
+import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
+import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
+import com.assist.imobilandroidapp.screens.search.SearchActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconClick {
+class ListingSingleCategoryActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIconClick {
 
-    private var _binding: FragmentLatestBinding? = null
-    private val binding get() = _binding!!
-    private val userType: Int = StartFragment.UserTypeConstants.GUEST
+    private lateinit var binding: ActivityListingSingleCategoryBinding
+    private var searchQuery = ""
+    private var userType = StartFragment.UserTypeConstants.LOGGED_IN_USER
+    private var categoryTitle: String? = ""
 
     val bigHouseListings: ArrayList<ListingFromDBObject> = arrayListOf()
     val smallHouseListings: ArrayList<ListingFromDBObject> = arrayListOf()
     val foundListings: ArrayList<ListingFromDBObject> = arrayListOf()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentLatestBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityListingSingleCategoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val bundle = intent.extras
+        categoryTitle = bundle?.getString("title")
+        binding.tvTitle.text = categoryTitle
+
+        getListings()
+        onSearchIconClick()
+        onProfileIconClick()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun onSearchIconClick() {
+        binding.toolbar.ivSearchIcon.setOnClickListener {
+            binding.svSearch.isVisible = true
+            binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    return false
+                }
 
-        val bundle = this.arguments
-        if (bundle != null) {
-            binding.tvTitle.text = bundle.getString("title")
-            println(bundle.getString("title"))
+                override fun onQueryTextSubmit(text: String): Boolean {
+                    searchQuery = text
+                    binding.svSearch.isGone = true
+                    val intent =
+                        Intent(this@ListingSingleCategoryActivity, SearchActivity::class.java)
+                    intent.putExtra("searchQuery", searchQuery)
+                    intent.putExtra("userType", userType)
+                    startActivity(intent)
+                    return false
+                }
+            })
         }
-        getListings()
     }
 
     private fun initRV() {
         val listingsRecyclerView: RecyclerView = binding.rvListings
         var listingItemsAdapter = ListingItemWithDescAdapter(emptyList(), this)
 
-        when (arguments?.getString("title")) {
+        when (categoryTitle) {
             getText(R.string.latest).toString() -> listingItemsAdapter =
                 ListingItemWithDescAdapter(foundListings, this)
 
@@ -64,13 +86,12 @@ class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconClick {
         }
 
         listingsRecyclerView.adapter = listingItemsAdapter
-        listingsRecyclerView.layoutManager = LinearLayoutManager(activity)
+        listingsRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
         listingItemsAdapter.setUserType(userType)
     }
 
     private fun getListings() {
-        RetrofitClient.instance.getListings().enqueue(object :
-            Callback<List<ListingFromDBObject>> {
+        RetrofitClient.instance.getListings().enqueue(object : Callback<List<ListingFromDBObject>> {
             override fun onResponse(
                 call: Call<List<ListingFromDBObject>>,
                 response: Response<List<ListingFromDBObject>>
@@ -78,8 +99,8 @@ class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconClick {
                 when (response.code()) {
                     400, 401 -> {
                         Toast.makeText(
-                            activity,
-                            getText(R.string.something_wrong).toString(),
+                           applicationContext,
+                            getText(R.string.something_wrong).toString() + "400",
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -88,7 +109,7 @@ class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconClick {
                         if (response.body()?.isNotEmpty() == true) {
                             foundListings.addAll(response.body()!!)
                             for (item in foundListings) {
-                                when (item.category) {
+                                when(item.category) {
                                     0 -> bigHouseListings.add(item)
                                     1 -> smallHouseListings.add(item)
                                 }
@@ -96,7 +117,7 @@ class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconClick {
                             initRV()
                         } else {
                             Toast.makeText(
-                                activity,
+                                applicationContext,
                                 getText(R.string.nothing_found).toString(),
                                 Toast.LENGTH_LONG
                             ).show()
@@ -107,7 +128,7 @@ class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconClick {
 
             override fun onFailure(call: Call<List<ListingFromDBObject>>, t: Throwable) {
                 Toast.makeText(
-                    activity,
+                    applicationContext,
                     t.message,
                     Toast.LENGTH_LONG
                 ).show()
@@ -116,21 +137,18 @@ class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconClick {
     }
 
     override fun onFavIconClick(listingItemWithDesc: ListingFromDBObject) {
-        val fragment = FavouritesEmptyFragment()
-        val fragmentManager = activity?.supportFragmentManager
-        val fragmentTransaction = fragmentManager?.beginTransaction()
-        fragmentTransaction?.replace(R.id.fc_fragments, fragment)
-        fragmentTransaction?.addToBackStack(null)
-        fragmentTransaction?.commit()
+        // Do nothing
     }
 
     override fun onListingClick(ListingItemWithDesc: ListingFromDBObject) {
-        val intent = Intent(activity, ListingScreenActivity::class.java)
+        val intent = Intent(this, ListingScreenActivity::class.java)
         startActivity(intent)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun onProfileIconClick() {
+        binding.toolbar.ivProfilePic.setOnClickListener {
+            intent = Intent(this, MainProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

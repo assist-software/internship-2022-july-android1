@@ -11,9 +11,12 @@ import androidx.fragment.app.Fragment
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.adapters.ViewPagerAdapter
 import com.assist.imobilandroidapp.databinding.ActivityClientBinding
+import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.client.fragments.AllListingsFragment
 import com.assist.imobilandroidapp.screens.client.fragments.MyListingsFragment
 import com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity
+import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
+import com.assist.imobilandroidapp.screens.search.SearchActivity
 import com.assist.imobilandroidapp.storage.SharedPrefManager
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -21,6 +24,7 @@ class ClientActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityClientBinding
     private var searchQuery = ""
+    private var userType = StartFragment.UserTypeConstants.LOGGED_IN_USER
 
     private val pages: ArrayList<String> = arrayListOf(
         "All Listings",
@@ -40,6 +44,7 @@ class ClientActivity : AppCompatActivity() {
         }.attach()
 
         onSearchIconClick()
+        onProfileIconClick()
     }
 
     private fun onSearchIconClick() {
@@ -53,11 +58,10 @@ class ClientActivity : AppCompatActivity() {
                 override fun onQueryTextSubmit(text: String): Boolean {
                     searchQuery = text
                     binding.svSearch.isGone = true
-                    Toast.makeText(
-                        applicationContext,
-                        getText(R.string.searched_for).toString() + searchQuery,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    val intent = Intent(this@ClientActivity, SearchActivity::class.java)
+                    intent.putExtra("searchQuery", searchQuery)
+                    intent.putExtra("userType", userType)
+                    startActivity(intent)
                     return false
                 }
             })
@@ -70,6 +74,13 @@ class ClientActivity : AppCompatActivity() {
         if(!SharedPrefManager.getInstance().isLoggedIn) {
             intent = Intent(this@ClientActivity, LogInActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+    }
+
+    private fun onProfileIconClick() {
+        binding.toolbar.ivProfilePic.setOnClickListener {
+            intent = Intent(this, MainProfileActivity::class.java)
             startActivity(intent)
         }
     }

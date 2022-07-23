@@ -28,9 +28,15 @@ class SharedPrefManager private constructor(private val mContext: Context){
         editor.apply()
     }
 
-    fun saveName(firstName: String, lastName: String) {
+    fun saveName(firstName: String?, lastName: String?) {
         val editor = sharedPrefs.edit()
         editor.putString("fullName", "$firstName $lastName")
+        editor.apply()
+    }
+
+    fun saveUserID(response: RegisterResponse?) {
+        val editor = sharedPrefs.edit()
+        editor.putString("userID", response?.userID)
         editor.apply()
     }
 
@@ -40,6 +46,10 @@ class SharedPrefManager private constructor(private val mContext: Context){
 
     fun fetchName(): String? {
         return sharedPrefs.getString("fullName", "")
+    }
+
+    fun fetchUserID(): String? {
+        return sharedPrefs.getString("userID", "")
     }
 
     companion object {

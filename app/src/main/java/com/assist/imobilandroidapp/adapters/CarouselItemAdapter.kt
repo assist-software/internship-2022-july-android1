@@ -5,16 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.items.CarouselItem
-import com.assist.imobilandroidapp.items.ListingItem
-import com.assist.imobilandroidapp.screens.averageuser.fragments.LatestFragment
 
-class CarouselItemAdapter(itemList: List<CarouselItem>, private  val onItemCallback: OnItem, private val onFavIconClick: ListingItemAdapter.OnFavIconClick):
+class CarouselItemAdapter(itemList: List<CarouselItem>, private  val onItemCallback: OnItem, private val onFavIconClick: ListingItemAdapter.OnFavIconClickSmallRV):
     RecyclerView.Adapter<CarouselItemAdapter.CarouselViewHolder>() {
 
     private var viewPool = RecyclerView.RecycledViewPool()
@@ -33,7 +29,7 @@ class CarouselItemAdapter(itemList: List<CarouselItem>, private  val onItemCallb
     }
 
     override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
-        val carouselItem: CarouselItem = carouselItemList.get(position)
+        val carouselItem: CarouselItem = carouselItemList[position]
 
         holder.carouselTitle.text = carouselItem.carouselTitle
 
@@ -51,7 +47,7 @@ class CarouselItemAdapter(itemList: List<CarouselItem>, private  val onItemCallb
             listingItemList.adapter = listingItemAdapter
             listingItemList.setRecycledViewPool(viewPool)
             seeEverything.setOnClickListener {
-                onItemCallback.onItemCLick(carouselItem)
+                onItemCallback.onItemClick(carouselItem)
             }
         }
 
@@ -73,6 +69,6 @@ class CarouselItemAdapter(itemList: List<CarouselItem>, private  val onItemCallb
     }
 
     interface OnItem {
-        fun onItemCLick(carouselItem: CarouselItem)
+        fun onItemClick(carouselItem: CarouselItem)
     }
 }

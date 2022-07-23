@@ -130,4 +130,11 @@
     <string name="space">" "</string>
     <string name="point">.</string>
     <string name="shared_pref">MyPref</string>
+    <string name="search_results_placeholder">74 results for "Dreamy"</string>
+    <string name="search_results_placeholder_activity">results for: </string>
+    <string name="nothing_found">Nothing found!</string>
+    <string name="something_wrong">Something went wrong</string>
+    <string name="you_need_to_have_account">You must be logged in to access your profile</string>
+    <string name="understood">I understand</string>
+    <string name="to_login">Take me to login</string>
 </resources>

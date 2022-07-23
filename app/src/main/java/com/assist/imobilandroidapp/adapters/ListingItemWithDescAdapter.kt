@@ -8,17 +8,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
-import com.assist.imobilandroidapp.items.ListingItem
-import com.assist.imobilandroidapp.items.ListingItemWithDesc
+import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
+import com.bumptech.glide.Glide
 
 class ListingItemWithDescAdapter(
-    listingItemWithDescList: List<ListingItemWithDesc>,
-    private val onFavIconClick: ListingItemWithDescAdapter.OnFavIconCLick
+    listingItemWithDescList: List<ListingFromDBObject>,
+    private val onFavIconClick: OnFavIconClick
 ) :
     RecyclerView.Adapter<ListingItemWithDescAdapter.ListingWithDescViewHolder>() {
 
-    private var listingItemWithDescList: List<ListingItemWithDesc>
+    private var listingItemWithDescList: List<ListingFromDBObject>
     private var userType: Int = 0
 
     init {
@@ -33,13 +33,13 @@ class ListingItemWithDescAdapter(
     }
 
     override fun onBindViewHolder(holder: ListingWithDescViewHolder, position: Int) {
-        val listingItemWithDesc: ListingItemWithDesc = listingItemWithDescList.get(position)
+        val listingItemWithDesc: ListingFromDBObject = listingItemWithDescList[position]
 
         holder.apply {
-            listingImage.setImageResource(listingItemWithDesc.listingImage)
-            listingTitle.text = listingItemWithDesc.listingTitle
-            listingDescription.text = listingItemWithDesc.listingDescription
-            listingPrice.text = listingItemWithDesc.listingPrice
+            Glide.with(listingImage).load(listingItemWithDesc.images).into(itemView.findViewById(R.id.iv_photo))
+            listingTitle.text = listingItemWithDesc.title
+            listingDescription.text = listingItemWithDesc.shortDescription
+            listingPrice.text = listingItemWithDesc.price.toString()
 
             itemView.setOnClickListener {
                 onFavIconClick.onListingClick(listingItemWithDesc)
@@ -72,8 +72,8 @@ class ListingItemWithDescAdapter(
         val favIcon: ImageButton = itemView.findViewById(R.id.ib_favourites)
     }
 
-    interface OnFavIconCLick {
-        fun onFavIconClick(listingItemWithDesc: ListingItemWithDesc)
-        fun onListingClick(ListingItemWithDesc: ListingItemWithDesc)
+    interface OnFavIconClick {
+        fun onFavIconClick(listingItemWithDesc: ListingFromDBObject)
+        fun onListingClick(ListingItemWithDesc: ListingFromDBObject)
     }
 }

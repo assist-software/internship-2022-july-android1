@@ -21,32 +21,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_profile_pic"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="@dimen/space_16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="@dimen/space_10dp"
-                app:cardBackgroundColor="@color/blue_500"
-                app:cardCornerRadius="250dp"
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/cv_profile_pic"-->
+<!--                android:layout_width="32dp"-->
+<!--                android:layout_height="32dp"-->
+<!--                android:layout_marginStart="@dimen/space_16dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginBottom="@dimen/space_10dp"-->
+<!--                app:cardBackgroundColor="@color/blue_500"-->
+<!--                app:cardCornerRadius="250dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="32dp"-->
+<!--                    android:layout_height="32dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    app:cardCornerRadius="250dp">-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="150dp"-->
+<!--                        android:layout_height="150dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/no_pfp_icon" />-->
+<!--                </androidx.cardview.widget.CardView>-->
+<!--            </androidx.cardview.widget.CardView>-->
+
+            <ImageView
+                android:id="@+id/iv_profile_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/no_pfp_icon"
+                android:layout_marginStart="@dimen/space_16dp"
+                android:layout_marginTop="@dimen/space_8dp"
+                android:layout_marginBottom="@dimen/space_10dp"/>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="250dp">
-
-                    <ImageView
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/logo_assist_tagline" />
-                </androidx.cardview.widget.CardView>
-            </androidx.cardview.widget.CardView>
 
             <ImageView
                 android:id="@+id/iv_logo_assist"
@@ -58,7 +71,7 @@
                 android:src="@drawable/logo_assist_tagline"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_search_icon"
-                app:layout_constraintStart_toEndOf="@id/cv_profile_pic"
+                app:layout_constraintStart_toEndOf="@id/iv_profile_pic"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
