@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.adapters.ViewPagerAdapter
 import com.assist.imobilandroidapp.databinding.ActivityClientBinding
+import com.assist.imobilandroidapp.screens.add.AddListingActivity
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.client.fragments.AllListingsFragment
 import com.assist.imobilandroidapp.screens.client.fragments.MyListingsFragment
@@ -45,6 +46,7 @@ class ClientActivity : AppCompatActivity() {
 
         onSearchIconClick()
         onProfileIconClick()
+        onAddFABClick()
     }
 
     private fun onSearchIconClick() {
@@ -81,6 +83,13 @@ class ClientActivity : AppCompatActivity() {
     private fun onProfileIconClick() {
         binding.toolbar.ivProfilePic.setOnClickListener {
             intent = Intent(this, MainProfileActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun onAddFABClick() {
+        binding.fabAddListing.setOnClickListener {
+            intent = Intent(this, AddListingActivity::class.java)
             startActivity(intent)
         }
     }

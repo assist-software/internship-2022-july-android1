@@ -137,4 +137,25 @@
     <string name="you_need_to_have_account">You must be logged in to access your profile</string>
     <string name="understood">I understand</string>
     <string name="to_login">Take me to login</string>
+    <string name="add_new"> Add new</string>
+    <string name="details"> Details</string>
+    <string name="be_thorough"> Be as thorough as you can</string>
+    <string name="title">Title</string>
+    <string name="select_category">Select category</string>
+    <string name="choose_category">Choose a category</string>
+    <string name="price">Price (lei)</string>
+    <string name="name_your_price">Name your price</string>
+    <string name="photos_and_videos">Photos &amp; videos</string>
+    <string name="add_photos">Add your photos here</string>
+    <string name="enter_description">Enter a description</string>
+    <string name="description_details">Description details</string>
+    <string name="description_helper">0/100 mandatory characters</string>
+    <string name="contact_info">Contact info</string>
+    <string name="preview">Preview</string>
+    <string name="publish">Publish</string>
+
+    <string-array name="spinner_categories">
+        <item>Big Houses</item>
+        <item>Small Houses</item>
+    </string-array>
 </resources>

@@ -2,8 +2,11 @@ package com.assist.imobilandroidapp.screens.search
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
@@ -40,6 +43,7 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
         getListings()
         editSearchText()
         onProfileIconClick()
+        onSearchIconClick()
     }
 
     private fun editSearchText() {
@@ -129,6 +133,27 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
             else {
                LoginDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
            }
+        }
+    }
+
+    private fun onSearchIconClick() {
+        binding.toolbar.ivSearchIcon.setOnClickListener {
+            binding.svSearch.isVisible = true
+            binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextSubmit(text: String): Boolean {
+                    searchQuery = text
+                    binding.svSearch.isGone = true
+                    val intent = Intent(this@SearchActivity, SearchActivity::class.java)
+                    intent.putExtra("searchQuery", searchQuery)
+                    intent.putExtra("userType", userType)
+                    startActivity(intent)
+                    return false
+                }
+            })
         }
     }
 }
