@@ -1,6 +1,7 @@
 package com.assist.imobilandroidapp.apiinterface
 
 import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
+import com.assist.imobilandroidapp.apiinterface.models.PostListing
 import com.assist.imobilandroidapp.apiinterface.models.RegisterRequest
 import com.assist.imobilandroidapp.apiinterface.models.RegisterResponse
 import retrofit2.Call
@@ -26,4 +27,10 @@ interface ApiInterface {
 
     @GET("api/Listing")
     fun getListings(): Call<List<ListingFromDBObject>>
+
+    @POST("api/Listing/Create")
+    fun addListing(
+        @Body postingRequest: PostListing,
+        @Header("token") token: String?
+    ): Call<String>
 }

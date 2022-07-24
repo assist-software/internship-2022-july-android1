@@ -13,7 +13,7 @@
     <SearchView
         android:id="@+id/sv_search"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space_16dp"
         android:layout_marginEnd="@dimen/space_16dp"
         android:iconifiedByDefault="false"
@@ -25,10 +25,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sv_search">
+        app:layout_constraintTop_toBottomOf="@id/sv_search"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -153,7 +154,6 @@
                     android:layout_centerVertical="true"
                     android:background="@android:color/transparent"
                     android:gravity="center"
-                    android:padding="@dimen/space_12dp"
                     android:spinnerMode="dropdown" />
 
                 <ImageView
@@ -174,17 +174,17 @@
                     android:foregroundGravity="center"
                     android:src="@drawable/vertical_line" />
 
-                <TextView
-                    android:id="@+id/tv_spinner_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/inter"
-                    android:text="@string/select_category"
-                    android:textColor="@color/gray_200"
-                    android:textFontWeight="500"
-                    android:textSize="@dimen/text_16sp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_spinner_hint"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:fontFamily="@font/inter"-->
+<!--                    android:text="@string/select_category"-->
+<!--                    android:textColor="@color/gray_200"-->
+<!--                    android:textFontWeight="500"-->
+<!--                    android:textSize="@dimen/text_16sp" />-->
             </RelativeLayout>
 
             <TextView
@@ -225,7 +225,7 @@
                 android:layout_marginEnd="@dimen/space_16dp"
                 android:background="@drawable/input_border_normal"
                 android:importantForAutofill="no"
-                android:inputType="text"
+                android:inputType="numberDecimal"
                 android:padding="@dimen/space_12dp"
                 android:textSize="@dimen/text_16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -429,7 +429,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_description_helper" />
 
             <EditText
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:id="@+id/et_listing_description"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -629,7 +629,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_preview"
-                android:layout_marginBottom="@dimen/space_48dp"
+                android:layout_marginBottom="@dimen/space_160dp"
                 android:textAlignment="center"
                 android:textAppearance="@style/sign_up_google"
                 android:textFontWeight="600"

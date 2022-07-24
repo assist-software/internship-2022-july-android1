@@ -36,7 +36,7 @@ class SharedPrefManager private constructor(private val mContext: Context){
 
     fun saveUserID(response: RegisterResponse?) {
         val editor = sharedPrefs.edit()
-        editor.putString("userID", response?.userID)
+        editor.putString("userId", response?.userId)
         editor.apply()
     }
 
@@ -49,7 +49,7 @@ class SharedPrefManager private constructor(private val mContext: Context){
     }
 
     fun fetchUserID(): String? {
-        return sharedPrefs.getString("userID", "")
+        return sharedPrefs.getString("userId", "")
     }
 
     companion object {

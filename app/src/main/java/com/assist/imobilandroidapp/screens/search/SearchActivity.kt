@@ -79,7 +79,7 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
                                 400, 401 -> {
                                     Toast.makeText(
                                         applicationContext,
-                                        getText(R.string.something_wrong).toString() + "400",
+                                        getText(R.string.something_wrong).toString(),
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }

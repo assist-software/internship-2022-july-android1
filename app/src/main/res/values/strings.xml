@@ -150,9 +150,12 @@
     <string name="enter_description">Enter a description</string>
     <string name="description_details">Description details</string>
     <string name="description_helper">0/100 mandatory characters</string>
+    <string name="description_helper_2">/100 mandatory characters</string>
     <string name="contact_info">Contact info</string>
     <string name="preview">Preview</string>
     <string name="publish">Publish</string>
+    <string name="positive">All Good</string>
+    <string name="success_create_listing">Listing posted successfully!</string>
 
     <string-array name="spinner_categories">
         <item>Big Houses</item>
