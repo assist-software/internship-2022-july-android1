@@ -130,4 +130,7 @@
     <string name="space">" "</string>
     <string name="point">.</string>
     <string name="shared_pref">MyPref</string>
+    <string name="success">Success</string>
+    <string name="error_code">"Error code: "</string>
+    <string name="failed">Failed</string>
 </resources>

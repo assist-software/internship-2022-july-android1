@@ -29,32 +29,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_big_profile_pic"
-                android:layout_width="@dimen/space_112dp"
-                android:layout_height="@dimen/space_112dp"
+            <ImageView
+                android:id="@+id/iv_big_profile_picture"
+                android:layout_width="112dp"
+                android:layout_height="112dp"
                 android:layout_marginTop="@dimen/space_16dp"
-                app:cardBackgroundColor="@color/blue_500"
-                app:cardCornerRadius="250dp"
+                android:importantForAccessibility="no"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_title_profile">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="112dp"
-                    android:layout_height="112dp"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="250dp">
-
-                    <ImageView
-                        android:id="@+id/iv_big_profile_picture"
-                        android:layout_width="112dp"
-                        android:layout_height="112dp"
-                        android:importantForAccessibility="no"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/logo_assist_tagline" />
-                </androidx.cardview.widget.CardView>
-            </androidx.cardview.widget.CardView>
+                app:layout_constraintTop_toBottomOf="@id/tv_title_profile" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="@dimen/space_32dp"
@@ -62,10 +46,11 @@
                 android:scaleType="center"
                 android:src="@drawable/edit_icon_full"
                 app:cardCornerRadius="250dp"
-                app:layout_constraintBottom_toBottomOf="@id/cv_big_profile_pic"
-                app:layout_constraintEnd_toEndOf="@id/cv_big_profile_pic">
+                app:layout_constraintBottom_toBottomOf="@id/iv_big_profile_picture"
+                app:layout_constraintEnd_toEndOf="@id/iv_big_profile_picture">
 
                 <ImageButton
+                    android:id="@+id/iv_edit_photo"
                     android:layout_width="@dimen/space_32dp"
                     android:layout_height="@dimen/space_32dp"
                     android:background="@color/white"
@@ -83,7 +68,7 @@
                 android:layout_marginTop="@dimen/space_36dp"
                 android:text="@string/full_name"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cv_big_profile_pic" />
+                app:layout_constraintTop_toBottomOf="@id/iv_big_profile_picture" />
 
             <TextView
                 android:id="@+id/tv_edit_full_name"
@@ -419,13 +404,13 @@
                 android:layout_marginTop="@dimen/space_8dp"
                 android:layout_marginEnd="@dimen/space_16dp"
                 android:background="@drawable/input_border_normal"
+                android:inputType="textEmailAddress"
                 android:padding="@dimen/space_12dp"
                 android:text="@string/placeholder"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/tv_email_preview"
                 app:layout_constraintTop_toBottomOf="@id/tv_email_preview"
-                app:layout_goneMarginTop="@dimen/space_16dp"
-                android:inputType="textEmailAddress" />
+                app:layout_goneMarginTop="@dimen/space_16dp" />
 
             <Button
                 android:id="@+id/btn_email_save"
@@ -515,13 +500,13 @@
                 android:layout_marginTop="@dimen/space_8dp"
                 android:layout_marginEnd="@dimen/space_16dp"
                 android:background="@drawable/input_border_normal"
+                android:inputType="number"
                 android:padding="@dimen/space_12dp"
                 android:text="@string/placeholder"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/tv_phone_preview"
                 app:layout_constraintTop_toBottomOf="@id/tv_phone_preview"
-                app:layout_goneMarginTop="@dimen/space_16dp"
-                android:inputType="number" />
+                app:layout_goneMarginTop="@dimen/space_16dp" />
 
             <Button
                 android:id="@+id/btn_phone_save"
@@ -797,8 +782,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="@dimen/space_16dp"
         android:layout_marginBottom="@dimen/space_16dp"
-        android:importantForAccessibility="no"
         android:backgroundTint="@color/gray_200"
+        android:importantForAccessibility="no"
         android:src="@drawable/icon_msg"
         app:borderWidth="0dp" />
 

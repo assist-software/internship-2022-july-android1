@@ -101,7 +101,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun onSignUpBtnClick() {
         binding.btnSignUp.setOnClickListener {
-            if(validateEmail() and validatePassword()) {
+            if (validateEmail() and validatePassword()) {
                 registerUser()
             }
         }

@@ -11,7 +11,7 @@ object RetrofitClient {
     private val token = SharedPrefManager.getInstance().fetchToken()
     private val okHttpClient = OkHttpClient.Builder().addInterceptor { chain ->
         val original = chain.request()
-        val requestBuilder = original.newBuilder().addHeader("Bearer", token)
+        val requestBuilder = original.newBuilder().addHeader("Authorization","Bearer "+ token)
             .method(original.method(), original.body())
         val request = requestBuilder.build()
         chain.proceed(request)

@@ -1,6 +1,6 @@
 package com.assist.imobilandroidapp.screens.onboarding.login
 
-import android.content.Intent
+import  android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -93,6 +93,7 @@ class LogInActivity : AppCompatActivity() {
             ) {
                 if (response.code() == 200) {
                     SharedPrefManager.getInstance().saveToken(response.body())
+                    SharedPrefManager.getInstance().saveUserId(response.body())
 
                     intent = Intent(this@LogInActivity, ClientActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
