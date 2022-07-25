@@ -1,5 +1,7 @@
 package com.assist.imobilandroidapp.apiinterface.models
 
+import java.util.ArrayList
+
 data class ListingFromDBObject (
     val id: String,
     val title: String,

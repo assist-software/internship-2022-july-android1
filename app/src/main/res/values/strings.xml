@@ -156,6 +156,7 @@
     <string name="publish">Publish</string>
     <string name="positive">All Good</string>
     <string name="success_create_listing">Listing posted successfully!</string>
+    <string name="this_is_a_preview">This is a preview of your listing</string>
 
     <string-array name="spinner_categories">
         <item>Big Houses</item>

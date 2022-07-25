@@ -27,9 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_16dp"
+        android:fillViewport="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sv_search"
-        android:fillViewport="true">
+        app:layout_constraintTop_toBottomOf="@id/sv_search">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -174,17 +174,17 @@
                     android:foregroundGravity="center"
                     android:src="@drawable/vertical_line" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_spinner_hint"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_alignParentStart="true"-->
-<!--                    android:layout_centerVertical="true"-->
-<!--                    android:fontFamily="@font/inter"-->
-<!--                    android:text="@string/select_category"-->
-<!--                    android:textColor="@color/gray_200"-->
-<!--                    android:textFontWeight="500"-->
-<!--                    android:textSize="@dimen/text_16sp" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tv_spinner_hint"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_alignParentStart="true"-->
+                <!--                    android:layout_centerVertical="true"-->
+                <!--                    android:fontFamily="@font/inter"-->
+                <!--                    android:text="@string/select_category"-->
+                <!--                    android:textColor="@color/gray_200"-->
+                <!--                    android:textFontWeight="500"-->
+                <!--                    android:textSize="@dimen/text_16sp" />-->
             </RelativeLayout>
 
             <TextView
@@ -286,93 +286,119 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_add_photos"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/space_16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_add_photos_helper">
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btn_1"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/add_photo_btn"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btn_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/add_photo_btn"
-                    app:layout_constraintStart_toEndOf="@id/btn_1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btn_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/add_photo_btn"
-                    app:layout_constraintStart_toEndOf="@id/btn_2"
-                    app:layout_constraintTop_toTopOf="parent" />
+                        <ImageView
+                            android:id="@+id/btn_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_8dp"
+                            android:layout_marginTop="@dimen/space_8dp"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/add_photo_btn" />
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btn_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/add_photo_btn"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btn_1" />
+                        <ImageView
+                            android:id="@+id/btn_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_8dp"
+                            android:layout_marginTop="@dimen/space_8dp"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/add_photo_btn" />
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btn_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/add_photo_btn"
-                    app:layout_constraintStart_toEndOf="@id/btn_4"
-                    app:layout_constraintTop_toBottomOf="@id/btn_1" />
+                        <ImageView
+                            android:id="@+id/btn_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_8dp"
+                            android:layout_marginTop="@dimen/space_8dp"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/add_photo_btn" />
+                    </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btn_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/add_photo_btn"
-                    app:layout_constraintStart_toEndOf="@id/btn_5"
-                    app:layout_constraintTop_toBottomOf="@id/btn_1" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btn_7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/add_photo_btn"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/btn_4" />
+                        <ImageView
+                            android:id="@+id/btn_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_8dp"
+                            android:layout_marginTop="@dimen/space_8dp"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/add_photo_btn" />
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btn_8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/add_photo_btn"
-                    app:layout_constraintStart_toEndOf="@id/btn_7"
-                    app:layout_constraintTop_toBottomOf="@id/btn_4" />
+                        <ImageView
+                            android:id="@+id/btn_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_8dp"
+                            android:layout_marginTop="@dimen/space_8dp"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/add_photo_btn" />
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btn_9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/add_photo_btn"
-                    app:layout_constraintStart_toEndOf="@id/btn_8"
-                    app:layout_constraintTop_toBottomOf="@id/btn_4" />
+                        <ImageView
+                            android:id="@+id/btn_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_8dp"
+                            android:layout_marginTop="@dimen/space_8dp"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/add_photo_btn" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/btn_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_8dp"
+                            android:layout_marginTop="@dimen/space_8dp"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/add_photo_btn" />
+
+                        <ImageView
+                            android:id="@+id/btn_8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_8dp"
+                            android:layout_marginTop="@dimen/space_8dp"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/add_photo_btn" />
+
+                        <ImageView
+                            android:id="@+id/btn_9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_8dp"
+                            android:layout_marginTop="@dimen/space_8dp"
+                            android:backgroundTint="@color/white"
+                            android:src="@drawable/add_photo_btn" />
+                    </LinearLayout>
+                </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
@@ -429,7 +455,6 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_description_helper" />
 
             <EditText
-                android:inputType="textMultiLine"
                 android:id="@+id/et_listing_description"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -439,6 +464,7 @@
                 android:background="@drawable/spinner_shape"
                 android:gravity="top"
                 android:hint="@string/enter_description"
+                android:inputType="textMultiLine"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_description_details" />
@@ -514,8 +540,9 @@
                 android:id="@+id/et_listing_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tv_location"
+                android:layout_marginStart="@dimen/space_16dp"
                 android:layout_marginTop="@dimen/space_4dp"
+                android:layout_marginEnd="@dimen/space_16dp"
                 android:background="@drawable/input_border_normal"
                 android:hint="@string/location"
                 android:importantForAutofill="no"
@@ -523,8 +550,7 @@
                 android:padding="@dimen/space_12dp"
                 android:textSize="@dimen/text_16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/space_16dp"
-                android:layout_marginEnd="@dimen/space_16dp"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_location" />
 
             <TextView
                 android:id="@+id/tv_location_error"
@@ -545,31 +571,30 @@
                 android:id="@+id/tv_phone_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tv_location_error"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="@dimen/space_16dp"
                 android:layout_marginTop="@dimen/space_32dp"
-                android:text="@string/phone_number"
                 android:fontFamily="@font/inter"
+                android:text="@string/phone_number"
                 android:textColor="@color/gray_600"
                 android:textFontWeight="500"
                 android:textSize="@dimen/text_14sp"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_location_error" />
 
             <EditText
                 android:id="@+id/et_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tv_phone_number"
+                android:layout_marginStart="@dimen/space_16dp"
                 android:layout_marginTop="@dimen/space_4dp"
+                android:layout_marginEnd="@dimen/space_16dp"
                 android:background="@drawable/input_border_normal"
                 android:importantForAutofill="no"
                 android:inputType="phone"
                 android:padding="@dimen/space_12dp"
                 android:textSize="@dimen/text_16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/space_16dp"
-                android:layout_marginEnd="@dimen/space_16dp"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_phone_number" />
 
             <TextView
                 android:id="@+id/tv_phone_number_error"
@@ -604,15 +629,15 @@
                 android:layout_marginStart="@dimen/space_16dp"
                 android:layout_marginTop="@dimen/space_32dp"
                 android:layout_marginEnd="@dimen/space_16dp"
-                android:text="@string/preview"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_line_4"
                 android:background="@drawable/login_button_border"
                 android:fontFamily="@font/inter"
+                android:text="@string/preview"
                 android:textAlignment="center"
                 android:textAppearance="@style/sign_up_google"
-                android:textFontWeight="600"/>
+                android:textFontWeight="600"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_line_4" />
 
             <Button
                 android:id="@+id/btn_publish"
@@ -622,18 +647,18 @@
                 android:layout_marginStart="@dimen/space_16dp"
                 android:layout_marginTop="@dimen/space_8dp"
                 android:layout_marginEnd="@dimen/space_16dp"
-                android:background="@drawable/login_button_border"
-                android:text="@string/publish"
-                app:backgroundTint="@null"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_preview"
                 android:layout_marginBottom="@dimen/space_160dp"
+                android:background="@drawable/login_button_border"
+                android:fontFamily="@font/inter"
+                android:text="@string/publish"
                 android:textAlignment="center"
                 android:textAppearance="@style/sign_up_google"
                 android:textFontWeight="600"
-                android:fontFamily="@font/inter"/>
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_preview" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

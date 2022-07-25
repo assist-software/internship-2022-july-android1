@@ -1,5 +1,6 @@
 package com.assist.imobilandroidapp.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 
 class ListingItemAdapter(
     listingItemList: List<ListingFromDBObject>,
@@ -37,9 +42,13 @@ class ListingItemAdapter(
 
     override fun onBindViewHolder(holder: ListingViewHolder, position: Int) {
         val listingItem: ListingFromDBObject = listingItemList[position]
+        val context: Context = holder.listingImage.context
 
         holder.apply {
-            //listingImage.setImageResource(listingItem.images)
+            Glide.with(context).load(listingItem.images)
+                .override(150, 68)
+                .transform(MultiTransformation(CenterCrop(), GranularRoundedCorners(12f, 12f, 0f, 0f)))
+                .error(R.drawable.photo_replacement_1).into(itemView.findViewById(R.id.iv_photo))
             listingTitle.text = listingItem.title
             listingLocation.text = listingItem.location
             listingPrice.text = listingItem.price.toString()
@@ -51,8 +60,6 @@ class ListingItemAdapter(
             addToFavourites.setOnClickListener {
                 if (userType == StartFragment.UserTypeConstants.GUEST) {
                     onFavIconClickCallback.onFavIconClick(listingItem)
-                } else {
-                    println("This is a logged in user!")
                 }
             }
         }

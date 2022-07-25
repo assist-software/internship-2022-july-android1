@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.listing.ListingScreenActivity">
+    tools:context=".screens.add.PreviewListingActivity">
+
     <include
         android:id="@+id/toolbar"
 
         layout="@layout/toolbar_layout" />
 
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar">
@@ -279,4 +281,64 @@
         android:src="@drawable/icon_msg"
         app:borderWidth="0dp"
         />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray_200">
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/this_is_a_preview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/space_24dp"
+            android:textColor="@color/gray_600"
+            android:fontFamily="inter"
+            android:textSize="@dimen/text_14sp"
+            android:textFontWeight="600"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_16dp"
+            android:layout_marginTop="@dimen/space_24dp"
+            android:layout_marginEnd="@dimen/space_16dp"
+            android:text="@string/edit"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_info"
+            android:background="@drawable/login_button_border"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/inter"
+            android:textAlignment="center"
+            android:textAppearance="@style/sign_up_google"
+            android:textFontWeight="600"/>
+
+        <Button
+            android:id="@+id/btn_publish"
+            style="@style/styleLoginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_16dp"
+            android:layout_marginTop="@dimen/space_8dp"
+            android:layout_marginEnd="@dimen/space_16dp"
+            android:background="@drawable/login_button_border"
+            android:text="@string/publish"
+            app:backgroundTint="@null"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_edit"
+            android:layout_marginBottom="@dimen/space_24dp"
+            android:textAlignment="center"
+            android:textAppearance="@style/sign_up_google"
+            android:textFontWeight="600"
+            android:fontFamily="@font/inter"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

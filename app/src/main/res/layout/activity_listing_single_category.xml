@@ -10,6 +10,30 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar_layout" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_send_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="@dimen/space_16dp"
+        android:layout_marginBottom="@dimen/space_16dp"
+        android:src="@drawable/chat_for_fab"
+        app:backgroundTint="@color/for_fab"
+        app:layout_constraintBottom_toTopOf="@id/fab_add_listing"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_listing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="@dimen/space_16dp"
+        android:layout_marginBottom="@dimen/space_71dp"
+        android:backgroundTint="@color/blue_400"
+        android:src="@drawable/add_listing_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <SearchView
         android:id="@+id/sv_search"
         android:layout_width="match_parent"
@@ -212,29 +236,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_order_by" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_send_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_marginEnd="@dimen/space_16dp"
-                android:layout_marginBottom="@dimen/space_16dp"
-                android:src="@drawable/chat_for_fab"
-                app:backgroundTint="@color/for_fab"
-                app:layout_constraintBottom_toTopOf="@id/fab_add_listing"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_add_listing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_marginEnd="@dimen/space_16dp"
-                android:layout_marginBottom="@dimen/space_71dp"
-                android:backgroundTint="@color/blue_400"
-                android:src="@drawable/add_listing_icon"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

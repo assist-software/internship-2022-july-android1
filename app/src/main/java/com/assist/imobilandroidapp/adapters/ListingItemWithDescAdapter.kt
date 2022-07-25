@@ -1,5 +1,6 @@
 package com.assist.imobilandroidapp.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,9 @@ import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 
 class ListingItemWithDescAdapter(
     listingItemWithDescList: List<ListingFromDBObject>,
@@ -25,7 +29,10 @@ class ListingItemWithDescAdapter(
         this.listingItemWithDescList = listingItemWithDescList
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ListingWithDescViewHolder {
+    override fun onCreateViewHolder(
+        viewGroup: ViewGroup,
+        viewType: Int
+    ): ListingWithDescViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item_listing_with_desc, viewGroup, false)
 
@@ -34,9 +41,12 @@ class ListingItemWithDescAdapter(
 
     override fun onBindViewHolder(holder: ListingWithDescViewHolder, position: Int) {
         val listingItemWithDesc: ListingFromDBObject = listingItemWithDescList[position]
+        val context: Context = holder.listingImage.context
 
         holder.apply {
-            Glide.with(listingImage).load(listingItemWithDesc.images).into(itemView.findViewById(R.id.iv_photo))
+            Glide.with(context).load(listingItemWithDesc.images).override(154, 143)
+                .transform(MultiTransformation(CenterCrop(), GranularRoundedCorners(6f, 6f, 6f, 6f)))
+                .error(R.drawable.photo_replacement_1).into(listingImage)
             listingTitle.text = listingItemWithDesc.title
             listingDescription.text = listingItemWithDesc.shortDescription
             listingPrice.text = listingItemWithDesc.price.toString()
