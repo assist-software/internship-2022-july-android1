@@ -15,6 +15,7 @@ import com.assist.imobilandroidapp.apiinterface.RetrofitClient
 import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
 import com.assist.imobilandroidapp.databinding.ActivityClientBinding
 import com.assist.imobilandroidapp.databinding.ActivityListingSingleCategoryBinding
+import com.assist.imobilandroidapp.screens.add.AddListingActivity
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
 import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
@@ -46,6 +47,7 @@ class ListingSingleCategoryActivity : AppCompatActivity(), ListingItemWithDescAd
         getListings()
         onSearchIconClick()
         onProfileIconClick()
+        onAddFABClick()
     }
 
     private fun onSearchIconClick() {
@@ -148,6 +150,13 @@ class ListingSingleCategoryActivity : AppCompatActivity(), ListingItemWithDescAd
     private fun onProfileIconClick() {
         binding.toolbar.ivProfilePic.setOnClickListener {
             intent = Intent(this, MainProfileActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun onAddFABClick() {
+        binding.fabAddListing.setOnClickListener {
+            intent = Intent(this, AddListingActivity::class.java)
             startActivity(intent)
         }
     }

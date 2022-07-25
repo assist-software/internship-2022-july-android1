@@ -2,15 +2,11 @@ package com.assist.imobilandroidapp.screens.add
 
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
@@ -19,6 +15,9 @@ import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.apiinterface.RetrofitClient
 import com.assist.imobilandroidapp.apiinterface.models.PostListing
 import com.assist.imobilandroidapp.databinding.ActivityAddListingBinding
+import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
+import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
+import com.assist.imobilandroidapp.screens.search.SearchActivity
 import com.assist.imobilandroidapp.storage.SharedPrefManager
 import com.assist.imobilandroidapp.utils.Validator
 import com.bumptech.glide.Glide
@@ -29,14 +28,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
-import java.util.Base64.getEncoder
-import kotlin.collections.ArrayList
 
 class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private lateinit var binding: ActivityAddListingBinding
     private var listingCategory: Int = 0
-    private var listingImages: ArrayList<String> = ArrayList()
+    private var listingImages: ArrayList<String> = ArrayList()  // We'll send this to the DB
+    private var listingImagesPreview: ArrayList<Uri> = ArrayList()  // We'll send this to the Listing Preview
+
+    private var searchQuery: String = ""
+    private var userType = StartFragment.UserTypeConstants.LOGGED_IN_USER
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,13 +45,15 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         setContentView(binding.root)
 
         initSpinner()
+        onPreviewBtnClick()
         onPublishBtnClick()
-        onPreviewBtnCLick()
         addPhotos()
+        onProfileIconClick()
+        onSearchIconClick()
     }
 
     private fun allFieldsValidated(): Boolean {
-        return !(!validateTitle() or !validateLocation() or !validatePrice() or !validateDescription() or !validatePhoneNumber())
+        return !(!validateTitle() or !validateLocation() or !validatePrice() or !validateDescription() or !validatePhoneNumber() or !validatePhotos())
     }
 
     private fun onPublishBtnClick() {
@@ -77,12 +80,14 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
                                     getText(R.string.success_create_listing).toString(),
                                     Toast.LENGTH_LONG
                                 ).show()
+                                val intent = Intent(this@AddListingActivity, ListingConfirmedActivity::class.java)
+                                startActivity(intent)
                             }
 
                             else -> {
                                 Toast.makeText(
                                     applicationContext,
-                                    getText(R.string.something_wrong).toString() + " Got Response",
+                                    getText(R.string.something_wrong).toString(),
                                     Toast.LENGTH_LONG
                                 ).show()
                             }
@@ -92,7 +97,7 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
                     override fun onFailure(call: Call<String>, t: Throwable) {
                         Toast.makeText(
                             applicationContext,
-                            t.message + " It failed!",
+                            t.message,
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -182,6 +187,16 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         }
     }
 
+    private fun validatePhotos(): Boolean {
+        return if (listingImages.size == 0) {
+            binding.tvAddPhotosHelper.setTextColor(resources.getColor(R.color.red_400))
+            false
+        } else {
+            binding.tvAddPhotosHelper.setTextColor(resources.getColor(R.color.gray_400))
+            true
+        }
+    }
+
     private fun initSpinner() {
         ArrayAdapter.createFromResource(
             this,
@@ -217,7 +232,7 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         binding.rlSpinner.setPadding(padding, padding, padding, padding)
     }
 
-    private fun onPreviewBtnCLick() {
+    private fun onPreviewBtnClick() {
         binding.btnPreview.setOnClickListener {
             if (allFieldsValidated()) {
                 val intent = Intent(this, PreviewListingActivity::class.java)
@@ -225,24 +240,60 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
                 intent.putExtra("description", binding.etListingDescription.text.toString())
                 intent.putExtra("location", binding.etListingLocation.text.toString())
                 intent.putExtra("price", binding.etListingPrice.text.toString())
-                intent.putExtra("images", listingImages)
-                intent.putExtra("category", listingCategory.toString())
+                intent.putExtra("priceDouble", binding.etListingPrice.text.toString().toDouble())
+                intent.putExtra("images", listingImagesPreview)
+                intent.putExtra("category", listingCategory)
                 intent.putExtra("phoneNumber", binding.etPhoneNumber.text.toString())
                 startActivity(intent)
             }
         }
     }
 
-    private fun encodeImage(bm: Bitmap): String {
-        val baos = ByteArrayOutputStream()
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val bytes = baos.toByteArray()
-
-        return Base64.encodeToString(bytes, Base64.DEFAULT)
-    }
+    private lateinit var clickedButton: ImageView
 
     private fun addPhotos() {
         binding.btn1.setOnClickListener {
+            clickedButton = binding.btn1
+            imageChooser()
+        }
+
+        binding.btn2.setOnClickListener {
+            clickedButton = binding.btn2
+            imageChooser()
+        }
+
+        binding.btn3.setOnClickListener {
+            clickedButton = binding.btn3
+            imageChooser()
+        }
+
+        binding.btn4.setOnClickListener {
+            clickedButton = binding.btn4
+            imageChooser()
+        }
+
+        binding.btn5.setOnClickListener {
+            clickedButton = binding.btn5
+            imageChooser()
+        }
+
+        binding.btn6.setOnClickListener {
+            clickedButton = binding.btn6
+            imageChooser()
+        }
+
+        binding.btn7.setOnClickListener {
+            clickedButton = binding.btn7
+            imageChooser()
+        }
+
+        binding.btn8.setOnClickListener {
+            clickedButton = binding.btn8
+            imageChooser()
+        }
+
+        binding.btn9.setOnClickListener {
+            clickedButton = binding.btn9
             imageChooser()
         }
     }
@@ -255,34 +306,13 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         startActivityForResult(intent, 100)
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if (resultCode == RESULT_OK && (data != null)) run {
-//            val selectedImage: Uri = data.data!!
-//            val imageStream = contentResolver.openInputStream(selectedImage)
-//            val bitmap = BitmapFactory.decodeStream(imageStream)
-//            listingImages.add(encodeImage(bitmap))
-//            println(listingImages)
-//
-//            Glide.with(applicationContext).load(selectedImage).override(345, 240).transform(
-//                MultiTransformation(CenterCrop(), GranularRoundedCorners(12f, 12f, 12f, 12f))
-//            ).error(R.drawable.photo_replacement_1).into(binding.btn1)
-//        }
-//    }
-
-        private var sImage: String = ""
-//    private fun imageChooser() {
-//        val intent = Intent(Intent.ACTION_VIEW)
-//        intent.type = "image/*"
-//        startActivityForResult(Intent.createChooser(intent, "Select Image"), 100)
-//    }
-
+    private var sImage: String = ""
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == 100 && resultCode == RESULT_OK && data != null) {
+        if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
             val uri = data.data
+            listingImagesPreview.add(uri!!)
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
             val stream = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
@@ -292,7 +322,35 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
             println(listingImages[0])
             Glide.with(applicationContext).load(uri).override(345, 240).transform(
                 MultiTransformation(CenterCrop(), GranularRoundedCorners(12f, 12f, 12f, 12f))
-           ).error(R.drawable.photo_replacement_1).into(binding.btn1)
+            ).error(R.drawable.photo_replacement_1).into(clickedButton)
+        }
+    }
+
+    private fun onProfileIconClick() {
+        binding.toolbar.ivProfilePic.setOnClickListener {
+            intent = Intent(this, MainProfileActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun onSearchIconClick() {
+        binding.toolbar.ivSearchIcon.setOnClickListener {
+            binding.svSearch.isVisible = true
+            binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextSubmit(text: String): Boolean {
+                    searchQuery = text
+                    binding.svSearch.isGone = true
+                    val intent = Intent(this@AddListingActivity, SearchActivity::class.java)
+                    intent.putExtra("searchQuery", searchQuery)
+                    intent.putExtra("userType", userType)
+                    startActivity(intent)
+                    return false
+                }
+            })
         }
     }
 }

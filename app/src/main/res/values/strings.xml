@@ -157,6 +157,8 @@
     <string name="positive">All Good</string>
     <string name="success_create_listing">Listing posted successfully!</string>
     <string name="this_is_a_preview">This is a preview of your listing</string>
+    <string name="you_must_add_photos">You must add at least one photo</string>
+    <string name="add_new_listing">Add new listing</string>
 
     <string-array name="spinner_categories">
         <item>Big Houses</item>

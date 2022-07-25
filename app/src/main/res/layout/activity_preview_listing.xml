@@ -8,14 +8,22 @@
 
     <include
         android:id="@+id/toolbar"
-
         layout="@layout/toolbar_layout" />
+
+    <SearchView
+        android:id="@+id/sv_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_16dp"
+        android:layout_marginEnd="@dimen/space_16dp"
+        android:layout_below="@id/toolbar"
+        android:visibility="gone"/>
 
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/sv_search">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

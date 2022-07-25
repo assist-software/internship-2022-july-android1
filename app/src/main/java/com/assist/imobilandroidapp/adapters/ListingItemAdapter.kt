@@ -24,6 +24,7 @@ class ListingItemAdapter(
 
     private var listingItemList: List<ListingFromDBObject>
     private var userType: Int = 0
+    private val listingLimit = 10
 
     fun setUserType(userType: Int) {
         this.userType = userType
@@ -66,7 +67,11 @@ class ListingItemAdapter(
     }
 
     override fun getItemCount(): Int {
-        return listingItemList.size
+        return if(listingItemList.size > listingLimit) {
+            listingLimit
+        } else {
+            listingItemList.size
+        }
     }
 
     inner class ListingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
