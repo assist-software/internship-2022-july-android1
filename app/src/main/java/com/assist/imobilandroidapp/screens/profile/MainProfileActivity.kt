@@ -12,7 +12,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.assist.imobilandroidapp.R
@@ -71,16 +70,7 @@ class MainProfileActivity : AppCompatActivity() {
             binding.vLineAddress,
             binding.tvCancelAddress
         )
-        initFullNameEdit(
-            binding.clParentFullName,
-            binding.etFirstNameInput,
-            binding.etLastNameInput,
-            binding.btnFullNameSave,
-            binding.tvEditFullName,
-            binding.tvCancelFullName,
-            binding.tvFullNamePreview,
-            binding.vLineFullName
-        )
+        initFullNameEdit()
         initGenderEdit()
         initEditPhotoButton()
     }
@@ -95,18 +85,6 @@ class MainProfileActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-//        if (resultCode == Activity.RESULT_OK && data != null){
-//            Glide.with(applicationContext)
-//                .load(data.data)
-//                .placeholder(R.drawable.border_passwd)
-//                .error(R.drawable.filter_drop_down_icon)
-//                .circleCrop()
-//                .into(
-//                    binding.ivBigProfilePicture
-//                )
-//
-//        }
-
         if (resultCode == Activity.RESULT_OK && data != null) {
             val uri = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
@@ -143,17 +121,6 @@ class MainProfileActivity : AppCompatActivity() {
                                 GranularRoundedCorners(12f, 12f, 12f, 12f)
                             )
                         ).error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
-//                        binding.ivBigProfilePicture.let {
-//                            Glide.with(this@MainProfileActivity)
-//                                .load(specificUser.photo)
-//                                .override(100, 100)
-//                                .placeholder(R.drawable.border_passwd)
-//                                .error(R.drawable.filter_drop_down_icon)
-//                                .circleCrop()
-//                                .into(
-//                                    it
-//                                )
-//                        }
                         if (specificUser.gender == 0) {
                             binding.tvGenderPreview.text = getString(R.string.gender_male)
                         } else {
@@ -312,55 +279,48 @@ class MainProfileActivity : AppCompatActivity() {
 
     }
 
-    private fun initFullNameEdit(
-        clParentFullName: ConstraintLayout,
-        etFirstNameInput: EditText,
-        etLastNameInput: EditText,
-        btnFullNameSave: Button,
-        tvEditFullName: TextView,
-        tvCancelFullName: TextView,
-        tvFullNamePreview: TextView,
-        vLineFullName: View
-    ) {
-        tvEditFullName.setOnClickListener {
-            if (tvFullNamePreview.text != "") {
-                etLastNameInput.setText(
-                    tvFullNamePreview.text.toString().substring(
-                        tvFullNamePreview.text.toString().lastIndexOf(getString(R.string.space)) + 1
+    private fun initFullNameEdit() {
+        binding.tvEditFullName.setOnClickListener {
+            if (binding.tvFullNamePreview.text != "") {
+                binding.etLastNameInput.setText(
+                    binding.tvFullNamePreview.text.toString().substring(
+                        binding.tvFullNamePreview.text.toString()
+                            .lastIndexOf(getString(R.string.space)) + 1
                     )
                 )
-                etFirstNameInput.setText(
-                    tvFullNamePreview.text.toString().substring(
+                binding.etFirstNameInput.setText(
+                    binding.tvFullNamePreview.text.toString().substring(
                         0,
-                        tvFullNamePreview.text.toString().lastIndexOf(getString(R.string.space))
+                        binding.tvFullNamePreview.text.toString()
+                            .lastIndexOf(getString(R.string.space))
                     )
                 )
             } else {
-                etLastNameInput.setText("")
-                etFirstNameInput.setText("")
+                binding.etLastNameInput.setText("")
+                binding.etFirstNameInput.setText("")
             }
 
-            clParentFullName.isVisible = true
-            tvEditFullName.isGone = true
-            tvCancelFullName.isVisible = true
-            vLineFullName.isGone = true
+            binding.clParentFullName.isVisible = true
+            binding.tvEditFullName.isGone = true
+            binding.tvCancelFullName.isVisible = true
+            binding.vLineFullName.isGone = true
         }
-        tvCancelFullName.setOnClickListener {
-            clParentFullName.isGone = true
-            tvEditFullName.isVisible = true
-            tvCancelFullName.isGone = true
-            vLineFullName.isVisible = true
+        binding.tvCancelFullName.setOnClickListener {
+            binding.clParentFullName.isGone = true
+            binding.tvEditFullName.isVisible = true
+            binding.tvCancelFullName.isGone = true
+            binding.vLineFullName.isVisible = true
         }
-        btnFullNameSave.setOnClickListener {
+        binding.btnFullNameSave.setOnClickListener {
 
             val fullNamePlaceholder =
-                etFirstNameInput.text.toString() + getString(R.string.space) + etLastNameInput.text.toString()
-            tvFullNamePreview.text =
+                binding.etFirstNameInput.text.toString() + getString(R.string.space) + binding.etLastNameInput.text.toString()
+            binding.tvFullNamePreview.text =
                 fullNamePlaceholder
-            clParentFullName.isGone = true
-            tvEditFullName.isVisible = true
-            tvCancelFullName.isGone = true
-            vLineFullName.isVisible = true
+            binding.clParentFullName.isGone = true
+            binding.tvEditFullName.isVisible = true
+            binding.tvCancelFullName.isGone = true
+            binding.vLineFullName.isVisible = true
             setupModifiUserData()
         }
     }
