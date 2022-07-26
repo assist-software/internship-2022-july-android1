@@ -98,8 +98,8 @@
             android:layout_gravity="end|bottom"
             android:layout_marginEnd="@dimen/space_16dp"
             android:layout_marginBottom="@dimen/space_71dp"
-            android:backgroundTint="@color/blue_400"
             android:src="@drawable/add_listing_icon"
+            app:tint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

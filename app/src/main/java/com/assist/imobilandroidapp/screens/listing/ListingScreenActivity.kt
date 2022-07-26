@@ -35,7 +35,7 @@ class ListingScreenActivity : AppCompatActivity() {
         binding.btnContactSeller.setOnClickListener {
             contactSellerButton()
         }
-        binding.toolbar.cvProfilePic.setOnClickListener {
+        binding.toolbar.ivProfilePic.setOnClickListener {
             profilePicButton()
         }
     }

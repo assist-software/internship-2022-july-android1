@@ -4,18 +4,17 @@ import com.assist.imobilandroidapp.storage.SharedPrefManager
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
-
-    //private val AUTH = Base64.encodeToString("emailcorect:parolacorecta01".toByteArray(), Base64.NO_WRAP)
     private val token = SharedPrefManager.getInstance().fetchToken()
     private val okHttpClient = OkHttpClient.Builder().addInterceptor { chain ->
         val original = chain.request()
-        val requestBuilder = original.newBuilder().addHeader("Authorization","Bearer "+ token)
+        val requestBuilder = original.newBuilder().addHeader("Authorization", "Bearer $token")
             .method(original.method(), original.body())
         val request = requestBuilder.build()
         chain.proceed(request)
-    }.build()
+    }.writeTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build()
 
     private const val BASE_URL = "http://assist-jully-2022-be1.azurewebsites.net/"
 

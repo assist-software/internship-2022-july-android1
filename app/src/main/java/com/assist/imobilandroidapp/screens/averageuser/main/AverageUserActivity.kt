@@ -1,5 +1,6 @@
 package com.assist.imobilandroidapp.screens.averageuser.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SearchView
@@ -11,12 +12,15 @@ import androidx.fragment.app.Fragment
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.databinding.ActivityAverageUserBinding
 import com.assist.imobilandroidapp.screens.averageuser.fragments.FavouritesEmptyFragment
+import com.assist.imobilandroidapp.screens.averageuser.fragments.LoginDialogFragment
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
+import com.assist.imobilandroidapp.screens.search.SearchActivity
 
 class AverageUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAverageUserBinding
     private var searchQuery: String = ""
+    private var userType = StartFragment.UserTypeConstants.GUEST
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +28,9 @@ class AverageUserActivity : AppCompatActivity() {
         binding = ActivityAverageUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.toolbar.ivFavouritesIcon.setOnClickListener {
-            replaceFragment(favouritesFragment)
-        }
-
+        onFavouritesIconCLick()
         onSearchIconClick()
+        onProfileIconClick()
         replaceFragment(startFragment)
     }
 
@@ -54,11 +56,25 @@ class AverageUserActivity : AppCompatActivity() {
 
                 override fun onQueryTextSubmit(text: String): Boolean {
                     searchQuery = text
-                    binding.svSearch.isGone = true
-                    Toast.makeText(applicationContext, getText(R.string.searched_for).toString() + searchQuery, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@AverageUserActivity, SearchActivity::class.java)
+                    intent.putExtra("searchQuery", searchQuery)
+                    intent.putExtra("userType", userType)
+                    startActivity(intent)
                     return false
                 }
             })
+        }
+    }
+
+    private fun onFavouritesIconCLick() {
+        binding.toolbar.ivFavouritesIcon.setOnClickListener {
+            replaceFragment(favouritesFragment)
+        }
+    }
+
+    private fun onProfileIconClick() {
+        binding.toolbar.ivProfilePic.setOnClickListener {
+            LoginDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
         }
     }
 }

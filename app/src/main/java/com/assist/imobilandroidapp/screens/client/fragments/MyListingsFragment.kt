@@ -10,16 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.adapters.ListingItemWithDescAdapter
+import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
 import com.assist.imobilandroidapp.databinding.FragmentAllListingsBinding
-import com.assist.imobilandroidapp.databinding.FragmentLatestBinding
-import com.assist.imobilandroidapp.items.ListingItemWithDesc
-import com.assist.imobilandroidapp.screens.averageuser.fragments.FavouritesEmptyFragment
+import com.assist.imobilandroidapp.databinding.FragmentMyListingsBinding
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
 
-class MyListingsFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconCLick {
+class MyListingsFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconClick{
 
-    private var _binding: FragmentAllListingsBinding? = null
+    private var _binding: FragmentMyListingsBinding? = null
     private val binding get() = _binding!!
     private val userType = StartFragment.UserTypeConstants.LOGGED_IN_USER
 
@@ -27,7 +26,7 @@ class MyListingsFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconCLick
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAllListingsBinding.inflate(inflater, container, false)
+        _binding = FragmentMyListingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,52 +41,76 @@ class MyListingsFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconCLick
         listingItemsAdapter.setUserType(userType)
     }
 
-    private fun listingsItemList(): List<ListingItemWithDesc> {
-        val ListingItemList = ArrayList<ListingItemWithDesc>()
+    private fun listingsItemList(): List<ListingFromDBObject> {
+        val listingItemList = ArrayList<ListingFromDBObject>()
 
-        ListingItemList.add(
-            ListingItemWithDesc(
-                R.drawable.fav_heart_icon_red,
+        listingItemList.add(
+            ListingFromDBObject(
+                "this",
+                // R.drawable.fav_heart_icon_red,
                 getText(R.string.house_random_name_1).toString(),
                 getText(R.string.lorem_ipsum).toString(),
-                getText(R.string.price_1).toString()
+                "",
+                0.0,
+                "",
+                0,
+                false,
+                ""
             )
         )
 
-        ListingItemList.add(
-            ListingItemWithDesc(
-                R.drawable.photo_replacement_1,
+        listingItemList.add(
+            ListingFromDBObject(
+                "this",
+                //  R.drawable.photo_replacement_1,
                 getText(R.string.house_random_name_2).toString(),
                 getText(R.string.lorem_ipsum).toString(),
-                getText(R.string.price_2).toString()
+                "",
+                0.0,
+                "",
+                0,
+                false,
+                ""
             )
         )
 
-        ListingItemList.add(
-            ListingItemWithDesc(
-                R.drawable.logo_assist_tagline,
+        listingItemList.add(
+            ListingFromDBObject(
+                "this",
+                // R.drawable.logo_assist_tagline,
                 getText(R.string.house_random_name_3).toString(),
                 getText(R.string.lorem_ipsum).toString(),
-                getText(R.string.price_3).toString()
+                "",
+                0.0,
+                "",
+                0,
+                false,
+                ""
             )
         )
 
-        ListingItemList.add(
-            ListingItemWithDesc(
-                R.drawable.search_icon,
+        listingItemList.add(
+            ListingFromDBObject(
+                "this",
+                // R.drawable.search_icon,
                 getText(R.string.house_random_name_4).toString(),
                 getText(R.string.lorem_ipsum).toString(),
-                getText(R.string.price_1).toString()
+                "",
+                0.0,
+                "",
+                0,
+                false,
+                ""
             )
         )
-        return ListingItemList
+        return listingItemList
     }
 
-    override fun onFavIconClick(listingItemWithDesc: ListingItemWithDesc) {
+    override fun onFavIconClick(listingItemWithDesc: ListingFromDBObject) {
         // Do nothing
     }
 
-    override fun onListingClick(ListingItemWithDesc: ListingItemWithDesc) {
+    override fun onListingClick(ListingItemWithDesc: ListingFromDBObject) {
         val intent = Intent(activity, ListingScreenActivity::class.java)
         startActivity(intent)
     }
