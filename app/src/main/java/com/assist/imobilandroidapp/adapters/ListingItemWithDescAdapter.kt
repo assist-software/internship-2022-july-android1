@@ -1,5 +1,6 @@
 package com.assist.imobilandroidapp.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,24 +9,30 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
-import com.assist.imobilandroidapp.items.ListingItem
-import com.assist.imobilandroidapp.items.ListingItemWithDesc
+import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 
 class ListingItemWithDescAdapter(
-    listingItemWithDescList: List<ListingItemWithDesc>,
-    private val onFavIconClick: ListingItemWithDescAdapter.OnFavIconCLick
+    listingItemWithDescList: List<ListingFromDBObject>,
+    private val onFavIconClick: OnFavIconClick
 ) :
     RecyclerView.Adapter<ListingItemWithDescAdapter.ListingWithDescViewHolder>() {
 
-    private var listingItemWithDescList: List<ListingItemWithDesc>
+    private var listingItemWithDescList: List<ListingFromDBObject>
     private var userType: Int = 0
 
     init {
         this.listingItemWithDescList = listingItemWithDescList
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ListingWithDescViewHolder {
+    override fun onCreateViewHolder(
+        viewGroup: ViewGroup,
+        viewType: Int
+    ): ListingWithDescViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.item_listing_with_desc, viewGroup, false)
 
@@ -33,13 +40,16 @@ class ListingItemWithDescAdapter(
     }
 
     override fun onBindViewHolder(holder: ListingWithDescViewHolder, position: Int) {
-        val listingItemWithDesc: ListingItemWithDesc = listingItemWithDescList.get(position)
+        val listingItemWithDesc: ListingFromDBObject = listingItemWithDescList[position]
+        val context: Context = holder.listingImage.context
 
         holder.apply {
-            listingImage.setImageResource(listingItemWithDesc.listingImage)
-            listingTitle.text = listingItemWithDesc.listingTitle
-            listingDescription.text = listingItemWithDesc.listingDescription
-            listingPrice.text = listingItemWithDesc.listingPrice
+            Glide.with(context).load(listingItemWithDesc.images).override(154, 143)
+                .transform(MultiTransformation(CenterCrop(), GranularRoundedCorners(6f, 6f, 6f, 6f)))
+                .error(R.drawable.photo_replacement_1).into(listingImage)
+            listingTitle.text = listingItemWithDesc.title
+            listingDescription.text = listingItemWithDesc.shortDescription
+            listingPrice.text = listingItemWithDesc.price.toString()
 
             itemView.setOnClickListener {
                 onFavIconClick.onListingClick(listingItemWithDesc)
@@ -72,8 +82,8 @@ class ListingItemWithDescAdapter(
         val favIcon: ImageButton = itemView.findViewById(R.id.ib_favourites)
     }
 
-    interface OnFavIconCLick {
-        fun onFavIconClick(listingItemWithDesc: ListingItemWithDesc)
-        fun onListingClick(ListingItemWithDesc: ListingItemWithDesc)
+    interface OnFavIconClick {
+        fun onFavIconClick(listingItemWithDesc: ListingFromDBObject)
+        fun onListingClick(ListingItemWithDesc: ListingFromDBObject)
     }
 }

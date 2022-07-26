@@ -83,4 +83,5 @@
     <dimen name="space_64dp">64dp</dimen>
     <dimen name="space_26dp">26dp</dimen>
     <dimen name="space_52dp">52dp</dimen>
+    <dimen name="space_100dp">100dp</dimen>
 </resources>

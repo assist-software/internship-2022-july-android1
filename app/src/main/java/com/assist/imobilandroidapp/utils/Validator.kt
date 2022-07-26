@@ -28,7 +28,7 @@ class Validator(editText: EditText, errorMsg: TextView, context: Context, resour
         this.resource = resource
     }
 
-    private fun getText(): String {
+    private fun getTextFromEditText(): String {
         return editText.text.toString()
     }
 
@@ -60,7 +60,7 @@ class Validator(editText: EditText, errorMsg: TextView, context: Context, resour
     }
 
     fun validateEmail(): Boolean {
-        val email = getText()
+        val email = getTextFromEditText()
         val padding = getPadding()
         editText.setPadding(padding, padding, padding, padding)
 
@@ -90,7 +90,7 @@ class Validator(editText: EditText, errorMsg: TextView, context: Context, resour
     }
 
     fun validatePassword(): Boolean {
-        val passwd = getText()
+        val passwd = getTextFromEditText()
         val padding = getPadding()
         editText.setPadding(padding, padding, padding, padding)
 
@@ -129,7 +129,7 @@ class Validator(editText: EditText, errorMsg: TextView, context: Context, resour
     }
 
     fun validateConfirmPassword(newPassword: String): Boolean {
-        val confirmPassword = getText()
+        val confirmPassword = getTextFromEditText()
         val padding = getPadding()
 
         if (newPassword.isEmpty()) {
@@ -178,7 +178,7 @@ class Validator(editText: EditText, errorMsg: TextView, context: Context, resour
     }
 
     fun validateLogInPassword(): Boolean {
-        val passwd = getText()
+        val passwd = getTextFromEditText()
         val padding = getPadding()
         editText.setPadding(padding, padding, padding, padding)
 
@@ -216,6 +216,56 @@ class Validator(editText: EditText, errorMsg: TextView, context: Context, resour
                 )
                 errorMsg.isVisible = false
                 return true
+            }
+        }
+    }
+
+    fun validateNewListingFields(): Boolean {
+        // For title, location
+        val title = getTextFromEditText()
+        val padding = getPadding()
+        editText.setPadding(padding, padding, padding, padding)
+
+        when {
+            title.isEmpty() -> {
+                editMessageTextViewsEmail(
+                    R.string.empty_field,
+                    true, R.drawable.input_border_red, padding
+                )
+                return false
+            }
+
+            else -> {
+                editMessageTextViewsEmail(
+                    R.string.my_listings, false, R.drawable.input_border_normal, padding
+                )
+                return true
+            }
+        }
+    }
+
+    fun validateListingDescription(): Boolean {
+        val description = getTextFromEditText()
+        val padding = getPadding()
+        editText.setPadding(padding, padding, padding, padding)
+
+        return when {
+            description.length < 100 -> {
+                editText.background = ContextCompat.getDrawable(context, R.drawable.input_border_red)
+                editText.setPadding(padding, padding, padding, padding)
+                val string = description.length.toString() + resource.getString(R.string.description_helper_2)
+                errorMsg.text = string
+                errorMsg.setTextColor(resource.getColor(R.color.red_400))
+                false
+            }
+
+            else -> {
+                editText.background = ContextCompat.getDrawable(context, R.drawable.input_border_normal)
+                editText.setPadding(padding, padding, padding, padding)
+                val string = description.length.toString() + resource.getString(R.string.description_helper_2)
+                errorMsg.text = string
+                errorMsg.setTextColor(resource.getColor(R.color.gray_500))
+                true
             }
         }
     }
