@@ -29,12 +29,20 @@ class LogoutDialogFragment : DialogFragment() {
 
     private fun initButtons() {
         binding.yesButton.setOnClickListener {
-            SharedPrefManager.getInstance().logout()
-            val intent = Intent(this.requireActivity(), LogInActivity::class.java)
-            this.startActivity(intent)
+            yesButton()
         }
         binding.noButton.setOnClickListener {
-            dismiss()
+            noButton()
         }
+    }
+
+    private fun noButton() {
+        dismiss()
+    }
+
+    private fun yesButton() {
+        SharedPrefManager.getInstance().logout()
+        val intent = Intent(this.requireActivity(), LogInActivity::class.java)
+        this.startActivity(intent)
     }
 }
