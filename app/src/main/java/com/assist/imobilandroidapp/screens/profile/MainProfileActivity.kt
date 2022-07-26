@@ -4,13 +4,13 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64.DEFAULT
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isGone
@@ -22,12 +22,13 @@ import com.assist.imobilandroidapp.apiinterface.models.SpecificUser
 import com.assist.imobilandroidapp.databinding.ActivityMainProfileBinding
 import com.assist.imobilandroidapp.storage.SharedPrefManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
-import java.net.URI
-import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,6 +37,8 @@ class MainProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainProfileBinding
     private var calendar: Calendar = Calendar.getInstance()
     private lateinit var specificUser: SpecificUser
+    private var profileImg = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainProfileBinding.inflate(layoutInflater)
@@ -78,16 +81,7 @@ class MainProfileActivity : AppCompatActivity() {
             binding.tvFullNamePreview,
             binding.vLineFullName
         )
-        initGenderEdit(
-            binding.tvEditGender,
-            binding.tvCancelGender,
-            binding.tvGenderPreview,
-            binding.rbMaleOption,
-            binding.rbFemaleOption,
-            binding.rgGenderOptions,
-            binding.btnGenderSave,
-            binding.vLineGender,
-        )
+        initGenderEdit()
         initEditPhotoButton()
     }
 
@@ -95,22 +89,35 @@ class MainProfileActivity : AppCompatActivity() {
         binding.ivEditPhoto.setOnClickListener() {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(intent,1)
+            startActivityForResult(intent, 1)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && data != null){
-            Glide.with(applicationContext)
-                .load(data.data)
-                .placeholder(R.drawable.border_passwd)
-                .error(R.drawable.filter_drop_down_icon)
-                .circleCrop()
-                .into(
-                    binding.ivBigProfilePicture
-                )
+//        if (resultCode == Activity.RESULT_OK && data != null){
+//            Glide.with(applicationContext)
+//                .load(data.data)
+//                .placeholder(R.drawable.border_passwd)
+//                .error(R.drawable.filter_drop_down_icon)
+//                .circleCrop()
+//                .into(
+//                    binding.ivBigProfilePicture
+//                )
+//
+//        }
 
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            val uri = data.data
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+            val stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+            val bytes = stream.toByteArray()
+            profileImg = java.util.Base64.getEncoder().encodeToString(bytes)
+
+            Glide.with(applicationContext).load(uri).override(345, 240).transform(
+                MultiTransformation(CenterCrop(), GranularRoundedCorners(12f, 12f, 12f, 12f))
+            ).error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
         }
     }
 
@@ -125,43 +132,34 @@ class MainProfileActivity : AppCompatActivity() {
                     response: Response<SpecificUser>
                 ) {
                     if (response.code() == 200) {
-
                         specificUser = response.body()!!
-                        val birthDate = specificUser.dateOfBirth
                         binding.tvEmailPreview.text = specificUser.email
                         binding.tvFullNamePreview.text = specificUser.fullName
                         binding.tvPhonePreview.text = specificUser.phone
                         binding.tvAddressPreview.text = specificUser.address
-                        binding.ivBigProfilePicture.let {
-                            Glide.with(applicationContext)
-                                .load(specificUser.photo)
-                                .placeholder(R.drawable.border_passwd)
-                                .error(R.drawable.filter_drop_down_icon)
-                                .circleCrop()
-                                .into(
-                                    it
-                                )
-                        }
+                        Glide.with(applicationContext).load(specificUser.photo).transform(
+                            MultiTransformation(
+                                CenterCrop(),
+                                GranularRoundedCorners(12f, 12f, 12f, 12f)
+                            )
+                        ).error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
+//                        binding.ivBigProfilePicture.let {
+//                            Glide.with(this@MainProfileActivity)
+//                                .load(specificUser.photo)
+//                                .override(100, 100)
+//                                .placeholder(R.drawable.border_passwd)
+//                                .error(R.drawable.filter_drop_down_icon)
+//                                .circleCrop()
+//                                .into(
+//                                    it
+//                                )
+//                        }
                         if (specificUser.gender == 0) {
                             binding.tvGenderPreview.text = getString(R.string.gender_male)
                         } else {
                             binding.tvGenderPreview.text = getString(R.string.gender_female)
                         }
-                        if (birthDate != null) {
-                            val formattedBirthDate = birthDate.substring(
-                                birthDate.lastIndexOf("-") + 1,
-                                birthDate.lastIndexOf("-") + 3
-                            ) + "." + birthDate.substring(
-                                birthDate.indexOf("-") + 1,
-                                birthDate.indexOf("-") + 3
-                            ) + "." + birthDate.substring(
-                                0, 4
-                            )
-                            binding.tvBirthDatePreview.text = formattedBirthDate
-                        } else {
-                            binding.tvBirthDatePreview.text = ""
-                        }
-
+                        formatBirthDateForTV(specificUser.dateOfBirth)
                     } else {
                         Toast.makeText(
                             applicationContext,
@@ -181,23 +179,31 @@ class MainProfileActivity : AppCompatActivity() {
             })
     }
 
+    private fun formatBirthDateForTV(dateOfBirth: String?) {
+        if (dateOfBirth != null) {
+            val formattedBirthDate = dateOfBirth.substring(
+                dateOfBirth.lastIndexOf("-") + 1,
+                dateOfBirth.lastIndexOf("-") + 3
+            ) + "." + dateOfBirth.substring(
+                dateOfBirth.indexOf("-") + 1,
+                dateOfBirth.indexOf("-") + 3
+            ) + "." + dateOfBirth.substring(
+                0, 4
+            )
+            binding.tvBirthDatePreview.text = formattedBirthDate
+        } else {
+            binding.tvBirthDatePreview.text = ""
+        }
+    }
+
     private fun setupModifiUserData() {
-        val token = SharedPrefManager.getInstance().fetchToken()
-        val id = SharedPrefManager.getInstance().fetchUserId()
-        val fullName = binding.tvFullNamePreview.text.toString()
-        val email = binding.tvEmailPreview.text.toString()
-        val phone = binding.tvPhonePreview.text.toString()
-        val role = 0
         var gender = 0
         if (binding.tvGenderPreview.text.toString() == getString(R.string.gender_female)) {
             gender = 1
         }
-        val imageurl =
-            URL("https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2021/08/download-23.jpg")
+
         //val bitmap = BitmapFactory.decodeStream(imageurl.openConnection().getInputStream())
-        val picture =
-            "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2021/08/download-23.jpg"
-        var bitmap = (binding.ivBigProfilePicture.drawable as BitmapDrawable).bitmap
+        /*var bitmap = (binding.ivBigProfilePicture.drawable as BitmapDrawable).bitmap
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val b = baos.toByteArray()
@@ -207,34 +213,21 @@ class MainProfileActivity : AppCompatActivity() {
             applicationContext,
             photo.toString(),
             Toast.LENGTH_LONG
-        ).show()
-        val birthDate = binding.tvBirthDatePreview.text.toString()
-        val dateOfBirth = birthDate.substring(
-            birthDate.lastIndexOf(".") + 1,
-            birthDate.lastIndexOf(".") + 5
-        ) + "-" + birthDate.substring(
-            birthDate.indexOf(".") + 1,
-            birthDate.indexOf(".") + 3
-        ) + "-" + birthDate.substring(
-            0,
-            birthDate.indexOf(".")
-        )
-        val address = binding.tvAddressPreview.text.toString()
-        val isActive = true
+        ).show()*/
 
         RetrofitClient.instance.putModifiUserData(
             ModifiUserData(
-                id,
-                fullName,
-                email,
-                phone,
-                role,
+                SharedPrefManager.getInstance().fetchUserId(),
+                binding.tvFullNamePreview.text.toString(),
+                binding.tvEmailPreview.text.toString(),
+                binding.tvPhonePreview.text.toString(),
+                0,
                 gender,
-                photo,
-                dateOfBirth,
-                address,
-                isActive
-            ), token
+                profileImg,
+                formatBirthDateForDataBase(binding.tvBirthDatePreview.text.toString()),
+                binding.tvAddressPreview.text.toString(),
+                true
+            ), SharedPrefManager.getInstance().fetchToken()
         ).enqueue(object : Callback<String> {
             override fun onResponse(
                 call: Call<String>,
@@ -265,51 +258,55 @@ class MainProfileActivity : AppCompatActivity() {
         })
     }
 
-    private fun initGenderEdit(
-        tvEditGender: TextView,
-        tvCancelGender: TextView,
-        tvGenderPreview: TextView,
-        rbMaleOption: RadioButton,
-        rbFemaleOption: RadioButton,
-        rgGenderOptions: RadioGroup,
-        btnGenderSave: Button,
-        vLineGender: View
-    ) {
-        tvEditGender.setOnClickListener {
-            if (tvGenderPreview.text.toString() == getString(R.string.gender_male)) {
-                rbMaleOption.isChecked = true
+    private fun formatBirthDateForDataBase(birthDate: String): String? {
+        return birthDate.substring(
+            birthDate.lastIndexOf(".") + 1,
+            birthDate.lastIndexOf(".") + 5
+        ) + "-" + birthDate.substring(
+            birthDate.indexOf(".") + 1,
+            birthDate.indexOf(".") + 3
+        ) + "-" + birthDate.substring(
+            0,
+            birthDate.indexOf(".")
+        )
+    }
+
+    private fun initGenderEdit() {
+        binding.tvEditGender.setOnClickListener {
+            if (binding.tvGenderPreview.text.toString() == getString(R.string.gender_male)) {
+                binding.rbMaleOption.isChecked = true
             }
-            if (tvGenderPreview.text.toString() == getString(R.string.gender_female)) {
-                rbFemaleOption.isChecked = true
+            if (binding.tvGenderPreview.text.toString() == getString(R.string.gender_female)) {
+                binding.rbFemaleOption.isChecked = true
             }
-            tvEditGender.isGone = true
-            tvCancelGender.isVisible = true
-            tvGenderPreview.isGone = true
-            rgGenderOptions.isVisible = true
-            btnGenderSave.isVisible = true
-            vLineGender.isGone = true
+            binding.tvEditGender.isGone = true
+            binding.tvCancelGender.isVisible = true
+            binding.tvGenderPreview.isGone = true
+            binding.rgGenderOptions.isVisible = true
+            binding.btnGenderSave.isVisible = true
+            binding.vLineGender.isGone = true
         }
-        tvCancelGender.setOnClickListener {
-            tvEditGender.isVisible = true
-            tvCancelGender.isGone = true
-            tvGenderPreview.isVisible = true
-            rgGenderOptions.isGone = true
-            btnGenderSave.isGone = true
-            vLineGender.isVisible = true
+        binding.tvCancelGender.setOnClickListener {
+            binding.tvEditGender.isVisible = true
+            binding.tvCancelGender.isGone = true
+            binding.tvGenderPreview.isVisible = true
+            binding.rgGenderOptions.isGone = true
+            binding.btnGenderSave.isGone = true
+            binding.vLineGender.isVisible = true
         }
-        btnGenderSave.setOnClickListener {
-            if (rbMaleOption.isChecked) {
-                tvGenderPreview.text = getString(R.string.gender_male)
+        binding.btnGenderSave.setOnClickListener {
+            if (binding.rbMaleOption.isChecked) {
+                binding.tvGenderPreview.text = getString(R.string.gender_male)
             }
-            if (rbFemaleOption.isChecked) {
-                tvGenderPreview.text = getString(R.string.gender_female)
+            if (binding.rbFemaleOption.isChecked) {
+                binding.tvGenderPreview.text = getString(R.string.gender_female)
             }
-            tvEditGender.isVisible = true
-            tvCancelGender.isGone = true
-            tvGenderPreview.isVisible = true
-            rgGenderOptions.isGone = true
-            btnGenderSave.isGone = true
-            vLineGender.isVisible = true
+            binding.tvEditGender.isVisible = true
+            binding.tvCancelGender.isGone = true
+            binding.tvGenderPreview.isVisible = true
+            binding.rgGenderOptions.isGone = true
+            binding.btnGenderSave.isGone = true
+            binding.vLineGender.isVisible = true
             setupModifiUserData()
         }
 
@@ -432,7 +429,6 @@ class MainProfileActivity : AppCompatActivity() {
                     getString(R.string.date_format),
                     Locale.UK
                 ).format(calendar.time)
-
             }
         calendar.set(
             binding.tvBirthDatePreview.text.toString()
