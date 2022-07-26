@@ -168,7 +168,6 @@ class MainProfileActivity : AppCompatActivity() {
         if (binding.tvGenderPreview.text.toString() == getString(R.string.gender_female)) {
             gender = 1
         }
-
         //val bitmap = BitmapFactory.decodeStream(imageurl.openConnection().getInputStream())
         /*var bitmap = (binding.ivBigProfilePicture.drawable as BitmapDrawable).bitmap
         val baos = ByteArrayOutputStream()
@@ -181,7 +180,6 @@ class MainProfileActivity : AppCompatActivity() {
             photo.toString(),
             Toast.LENGTH_LONG
         ).show()*/
-
         RetrofitClient.instance.putModifiUserData(
             ModifiUserData(
                 SharedPrefManager.getInstance().fetchUserId(),
@@ -276,7 +274,6 @@ class MainProfileActivity : AppCompatActivity() {
             binding.vLineGender.isVisible = true
             setupModifiUserData()
         }
-
     }
 
     private fun initFullNameEdit() {

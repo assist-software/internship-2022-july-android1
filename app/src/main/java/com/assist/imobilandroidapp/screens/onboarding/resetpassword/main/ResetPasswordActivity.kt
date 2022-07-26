@@ -43,6 +43,4 @@ class ResetPasswordActivity : AppCompatActivity() {
         val newPassword = binding.textInputEditTextNewPasswd.text.toString()
         return validate.validateConfirmPassword(newPassword)
     }
-
-
 }
