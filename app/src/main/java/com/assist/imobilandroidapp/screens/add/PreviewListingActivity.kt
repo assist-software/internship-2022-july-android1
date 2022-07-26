@@ -35,13 +35,10 @@ class PreviewListingActivity : AppCompatActivity() {
     private var listingTitle: String = ""
     private var listingDescription: String = ""
     private var listingLocation: String = ""
-    private var listingPrice: String = ""
     private var listingImages: ArrayList<Uri> = ArrayList()
     private var listingImagesToDB: ArrayList<String> = ArrayList()
-    private var listingCategory: String = ""
     private var phoneNumber: String = ""
     private var priceDouble: Double = 0.0
-
     private var searchQuery: String = ""
     private var userType = StartFragment.UserTypeConstants.LOGGED_IN_USER
 
