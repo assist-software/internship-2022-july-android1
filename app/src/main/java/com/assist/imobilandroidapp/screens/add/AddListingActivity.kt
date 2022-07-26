@@ -68,7 +68,7 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
                         binding.etListingPrice.text.toString().toDouble(),
                         listingImages,
                         listingCategory,
-                        SharedPrefManager.getInstance().fetchUserID().toString(),
+                        SharedPrefManager.getInstance().fetchUserId().toString(),
                         true,
                         binding.etPhoneNumber.text.toString()
                     ), SharedPrefManager.getInstance().fetchToken()

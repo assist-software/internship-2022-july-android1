@@ -88,7 +88,7 @@ class PreviewListingActivity : AppCompatActivity() {
                     priceDouble,
                     listingImagesToDB,
                     intent.extras?.getInt("category")!!,
-                    SharedPrefManager.getInstance().fetchUserID().toString(),
+                    SharedPrefManager.getInstance().fetchUserId().toString(),
                     true,
                     phoneNumber
                 ), SharedPrefManager.getInstance().fetchToken()

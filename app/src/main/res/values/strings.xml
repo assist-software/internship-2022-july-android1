@@ -130,6 +130,9 @@
     <string name="space">" "</string>
     <string name="point">.</string>
     <string name="shared_pref">MyPref</string>
+    <string name="success">Success</string>
+    <string name="error_code">"Error code: "</string>
+    <string name="failed">Failed</string>
     <string name="search_results_placeholder">74 results for "Dreamy"</string>
     <string name="search_results_placeholder_activity">results for: </string>
     <string name="nothing_found">Nothing found!</string>
@@ -165,4 +168,5 @@
         <item>Big Houses</item>
         <item>Small Houses</item>
     </string-array>
+>>>>>>> 53f5211e3c91e7d493a73928c9239138356a75b7
 </resources>

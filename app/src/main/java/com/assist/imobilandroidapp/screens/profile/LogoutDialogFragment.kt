@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.assist.imobilandroidapp.databinding.FragmentLogoutDialogBinding
 import com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity
+import com.assist.imobilandroidapp.storage.SharedPrefManager
 
 class LogoutDialogFragment : DialogFragment() {
     private var _binding: FragmentLogoutDialogBinding? = null
@@ -28,11 +29,20 @@ class LogoutDialogFragment : DialogFragment() {
 
     private fun initButtons() {
         binding.yesButton.setOnClickListener {
-            val intent = Intent(this.requireActivity(), LogInActivity::class.java)
-            this.startActivity(intent)
+            yesButton()
         }
         binding.noButton.setOnClickListener {
-            dismiss()
+            noButton()
         }
+    }
+
+    private fun noButton() {
+        dismiss()
+    }
+
+    private fun yesButton() {
+        SharedPrefManager.getInstance().logout()
+        val intent = Intent(this.requireActivity(), LogInActivity::class.java)
+        this.startActivity(intent)
     }
 }

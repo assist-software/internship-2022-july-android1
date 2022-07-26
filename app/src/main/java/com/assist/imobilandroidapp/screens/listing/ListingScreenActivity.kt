@@ -1,12 +1,12 @@
 package com.assist.imobilandroidapp.screens.listing
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.databinding.ActivityListingScreenBinding
-import com.assist.imobilandroidapp.screens.onboarding.forgotpassword.ForgotPasswordActivity
+import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
 
 class ListingScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityListingScreenBinding
@@ -21,21 +21,50 @@ class ListingScreenActivity : AppCompatActivity() {
     private fun initButtons() {
 
         binding.ivMorePictureButton.setOnClickListener {
-            Toast.makeText(this, getString(R.string.placeholder), Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, ViewImagesActivity::class.java)
-            this.startActivity(intent)
+            morePictureButton()
         }
         binding.btnShare.setOnClickListener {
-            Toast.makeText(this, getString(R.string.share), Toast.LENGTH_SHORT).show()
+            shareButton()
         }
         binding.btnPurchase.setOnClickListener {
-            Toast.makeText(this, getString(R.string.purchase), Toast.LENGTH_SHORT).show()
+            purchaseButton()
         }
         binding.btnHeart.setOnClickListener {
-            Toast.makeText(this, getString(R.string.favorites), Toast.LENGTH_SHORT).show()
+            heartButton()
         }
         binding.btnContactSeller.setOnClickListener {
-            Toast.makeText(this, getString(R.string.contact_seller), Toast.LENGTH_SHORT).show()
+            contactSellerButton()
         }
+        binding.toolbar.ivProfilePic.setOnClickListener {
+            profilePicButton()
+        }
+    }
+
+    private fun morePictureButton() {
+        Toast.makeText(this, getString(R.string.placeholder), Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, ViewImagesActivity::class.java)
+        this.startActivity(intent)
+    }
+
+    private fun profilePicButton() {
+        Toast.makeText(this, getString(R.string.placeholder), Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MainProfileActivity::class.java)
+        this.startActivity(intent)
+    }
+
+    private fun contactSellerButton() {
+        Toast.makeText(this, getString(R.string.contact_seller), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun heartButton() {
+        Toast.makeText(this, getString(R.string.favorites), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun purchaseButton() {
+        Toast.makeText(this, getString(R.string.purchase), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun shareButton() {
+        Toast.makeText(this, getString(R.string.share), Toast.LENGTH_SHORT).show()
     }
 }
