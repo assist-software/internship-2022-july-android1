@@ -34,7 +34,8 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
     private lateinit var binding: ActivityAddListingBinding
     private var listingCategory: Int = 0
     private var listingImages: ArrayList<String> = ArrayList()  // We'll send this to the DB
-    private var listingImagesPreview: ArrayList<Uri> = ArrayList()  // We'll send this to the Listing Preview
+    private var listingImagesPreview: ArrayList<Uri> =
+        ArrayList()  // We'll send this to the Listing Preview
 
     private var searchQuery: String = ""
     private var userType = StartFragment.UserTypeConstants.LOGGED_IN_USER
@@ -45,11 +46,11 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         setContentView(binding.root)
 
         initSpinner()
-        onPreviewBtnClick()
-        onPublishBtnClick()
         addPhotos()
         onProfileIconClick()
         onSearchIconClick()
+        onPreviewBtnClick()
+        onPublishBtnClick()
     }
 
     private fun allFieldsValidated(): Boolean {
@@ -80,7 +81,10 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
                                     getText(R.string.success_create_listing).toString(),
                                     Toast.LENGTH_LONG
                                 ).show()
-                                val intent = Intent(this@AddListingActivity, ListingConfirmedActivity::class.java)
+                                val intent = Intent(
+                                    this@AddListingActivity,
+                                    ListingConfirmedActivity::class.java
+                                )
                                 startActivity(intent)
                             }
 
@@ -250,51 +254,96 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
     }
 
     private lateinit var clickedButton: ImageView
-
+    private var position = 0
     private fun addPhotos() {
         binding.btn1.setOnClickListener {
-            clickedButton = binding.btn1
-            imageChooser()
+            if (listingImages.size < 9) {
+                clickedButton = binding.btn1
+                position = 0
+                imageChooser()
+            } else {
+                Toast.makeText(this, R.string.only_9_photos, Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.btn2.setOnClickListener {
-            clickedButton = binding.btn2
-            imageChooser()
+            if (listingImages.size < 9) {
+                clickedButton = binding.btn2
+                position = 1
+                imageChooser()
+            } else {
+                Toast.makeText(this, R.string.only_9_photos, Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.btn3.setOnClickListener {
-            clickedButton = binding.btn3
-            imageChooser()
+            if (listingImages.size < 9) {
+                clickedButton = binding.btn3
+                position = 2
+                imageChooser()
+            } else {
+                Toast.makeText(this, R.string.only_9_photos, Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.btn4.setOnClickListener {
-            clickedButton = binding.btn4
-            imageChooser()
+            if (listingImages.size < 9) {
+                clickedButton = binding.btn4
+                position = 3
+                imageChooser()
+            } else {
+                Toast.makeText(this, R.string.only_9_photos, Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.btn5.setOnClickListener {
-            clickedButton = binding.btn5
-            imageChooser()
+            if (listingImages.size < 9) {
+                clickedButton = binding.btn5
+                position = 4
+                imageChooser()
+            } else {
+                Toast.makeText(this, R.string.only_9_photos, Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.btn6.setOnClickListener {
-            clickedButton = binding.btn6
-            imageChooser()
+            if (listingImages.size < 9) {
+                clickedButton = binding.btn6
+                position = 5
+                imageChooser()
+            } else {
+                Toast.makeText(this, R.string.only_9_photos, Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.btn7.setOnClickListener {
-            clickedButton = binding.btn7
-            imageChooser()
+            if (listingImages.size < 9) {
+                clickedButton = binding.btn7
+                position = 6
+                imageChooser()
+            } else {
+                Toast.makeText(this, R.string.only_9_photos, Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.btn8.setOnClickListener {
-            clickedButton = binding.btn8
-            imageChooser()
+            if (listingImages.size < 9) {
+                clickedButton = binding.btn8
+                position = 7
+                imageChooser()
+            } else {
+                Toast.makeText(this, R.string.only_9_photos, Toast.LENGTH_LONG).show()
+            }
         }
 
         binding.btn9.setOnClickListener {
-            clickedButton = binding.btn9
-            imageChooser()
+            if (listingImages.size < 9) {
+                clickedButton = binding.btn9
+                position = 8
+                imageChooser()
+            } else {
+                Toast.makeText(this, R.string.only_9_photos, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -307,19 +356,28 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
     }
 
     private var sImage: String = ""
+    private var uri: Uri = Uri.EMPTY
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
-            val uri = data.data
-            listingImagesPreview.add(uri!!)
+            uri = data.data!!
+            if (position in listingImagesPreview.indices) {
+                listingImagesPreview[position] = uri
+            } else {
+                listingImagesPreview.add(uri)
+            }
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
             val stream = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
             val bytes = stream.toByteArray()
             sImage = java.util.Base64.getEncoder().encodeToString(bytes)
-            listingImages.add(sImage)
-            println(listingImages[0])
+            if (position in listingImages.indices) {
+                listingImages[position] = sImage
+            } else {
+                listingImages.add(sImage)
+            }
+
             Glide.with(applicationContext).load(uri).override(345, 240).transform(
                 MultiTransformation(CenterCrop(), GranularRoundedCorners(12f, 12f, 12f, 12f))
             ).error(R.drawable.photo_replacement_1).into(clickedButton)
