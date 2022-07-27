@@ -29,6 +29,7 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
     private var searchQuery: String? = ""
     private var userType: Int? = 0
     val foundListings: ArrayList<ListingFromDBObject> = arrayListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -43,6 +44,7 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
         onMessageClick()
         onToolbarFavIconClick()
     }
+
     private fun editSearchText() {
         var newText = ""
         newText = if (foundListings.size != 0) {
@@ -53,6 +55,7 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
         }
         binding.tvTitle.text = newText
     }
+
     private fun initRV() {
         val listingsRecyclerView: RecyclerView = binding.rvListings
         val listingItemsAdapter = ListingItemWithDescAdapter(foundListings, this)
@@ -60,6 +63,7 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
         listingsRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
         userType?.let { listingItemsAdapter.setUserType(it) }
     }
+
     private fun getListings() {
         searchQuery.let { query ->
             if (query != null) {
@@ -106,6 +110,7 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
             }
         }
     }
+
     override fun onFavIconClick(listingItemWithDesc: ListingFromDBObject) {
         if (userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
             SharedPrefManager.getInstance().fetchUserId()?.let {
@@ -123,6 +128,7 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
+
                                 200 -> {
                                     if (response.body()?.isNotEmpty() == true) {
                                         Toast.makeText(
@@ -140,6 +146,7 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
                                 }
                             }
                         }
+
                         override fun onFailure(call: Call<String>, t: Throwable) {
                             Toast.makeText(
                                 applicationContext,
@@ -154,12 +161,14 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
             FavoritesDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
         }
     }
+
     override fun onListingClick(ListingItemWithDesc: ListingFromDBObject) {
         val intent = Intent(this, ListingScreenActivity::class.java)
         intent.putExtra("userType", userType)
         intent.putExtra("id", ListingItemWithDesc.id)
         startActivity(intent)
     }
+
     private fun onProfileIconClick() {
         binding.toolbar.ivProfilePic.setOnClickListener {
             if (userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
@@ -170,6 +179,7 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
             }
         }
     }
+
     private fun onSearchIconClick() {
         binding.toolbar.ivSearchIcon.setOnClickListener {
             binding.svSearch.isVisible = true
@@ -189,12 +199,14 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
             })
         }
     }
+
     private fun onMessageClick() {
         binding.fab.setOnClickListener {
             val intent = Intent(applicationContext, MessagesActivity::class.java)
             startActivity(intent)
         }
     }
+
     private fun onToolbarFavIconClick() {
         binding.toolbar.ivFavouritesIcon.setOnClickListener {
             if(userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {

@@ -11,6 +11,7 @@ import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.adapters.ListingPictureAdapter
 import com.assist.imobilandroidapp.adapters.ListingPictureAdapterUri
 import com.assist.imobilandroidapp.databinding.ActivityViewImagesBinding
+import com.assist.imobilandroidapp.screens.favorites.FavoritesActivity
 
 
 class ViewImagesActivity : AppCompatActivity(), ListingPictureAdapter.OnImageClickUrl,
@@ -26,9 +27,11 @@ class ViewImagesActivity : AppCompatActivity(), ListingPictureAdapter.OnImageCli
         super.onCreate(savedInstanceState)
         binding = ActivityViewImagesBinding.inflate(layoutInflater)
         val view = binding.root
+
         setContentView(view)
         initOnExitButtonClick()
         showImages()
+        onToolbarFavIconClick()
     }
 
     private fun showImages() {
@@ -79,6 +82,13 @@ class ViewImagesActivity : AppCompatActivity(), ListingPictureAdapter.OnImageCli
         val intent = Intent(this, FullScreenImageActivity::class.java)
         intent.putExtra("imageUri", image.toString())
         startActivity(intent)
+    }
+
+    private fun onToolbarFavIconClick() {
+        binding.toolbar.ivFavouritesIcon.setOnClickListener {
+            val intent = Intent(applicationContext, FavoritesActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }

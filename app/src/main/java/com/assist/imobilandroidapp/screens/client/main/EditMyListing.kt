@@ -19,6 +19,7 @@ import com.assist.imobilandroidapp.apiinterface.models.UpdateListingRequest
 import com.assist.imobilandroidapp.databinding.ActivityEditMyListingBinding
 import com.assist.imobilandroidapp.screens.add.ListingConfirmedActivity
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
+import com.assist.imobilandroidapp.screens.favorites.FavoritesActivity
 import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
 import com.assist.imobilandroidapp.screens.search.SearchActivity
 import com.assist.imobilandroidapp.storage.SharedPrefManager
@@ -62,6 +63,7 @@ class EditMyListing : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         onSearchIconClick()
         onPreviewBtnClick()
         onPublishBtnClick()
+        onToolbarFavIconClick()
     }
 
     private fun allFieldsValidated(): Boolean {
@@ -482,6 +484,13 @@ class EditMyListing : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     }
                 })
             }
+        }
+    }
+
+    private fun onToolbarFavIconClick() {
+        binding.toolbar.ivFavouritesIcon.setOnClickListener {
+            val intent = Intent(applicationContext, FavoritesActivity::class.java)
+            startActivity(intent)
         }
     }
 }

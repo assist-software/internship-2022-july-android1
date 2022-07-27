@@ -53,7 +53,7 @@
     <string name="for_toast_error">Something is wrong</string>
     <string name="for_toast_okay">Good job!</string>
     <string name="price_example">712,123 lei</string>
-    <string name="title_example">Deamy Treehouse Above Park City</string>
+    <string name="title_example">Dreamy Treehouse Above Park City</string>
     <string name="purchase">Purchase</string>
     <string name="description">Description</string>
     <string name="long_text_example">"Lörem ipsum infraling nyr platoren preska platin. Okun vugt serat, tetrangen. Farat heterovis husanar ifall resade. Satsig mitulåd gyn. Faranat fehugon pneumaskop respektive spökgarn tonöning. Teger donök.  Termopod Dylanman i tevänas om teras prehepp. Förpappring. Anöde kvasiskade sogisk, donedat att terravision. Kare mida. Ilogi löhung på samude. Skimma wiki att demynar.  Detehuvis nemykaligen i rutkod i regen alltså nyhet. Bebel pos ultral ing osovis. Dinade pede, lagon respektive homopangen, i predast. Bek saktiga gohåssa. Epil kasam väck ses seling. Väsat beng, trisk, juholtare. "</string>
@@ -173,7 +173,6 @@
     <string name="title_messages_text">You haven\'t sent any messages yet.</string>
     <string name="start_exploring">Start exploring</string>
     <string name="messages_text">This is where you\'ll find all of your chats and messages.</string>
-
     <string name="you_cant_view_listing_posted">You can\'t preview a listing that is already posted</string>
     <string name="you_need_to_have_account_favorites">You must be logged in to access your favorites</string>
     <string name="added_to_fav">Listing added to favourites</string>
@@ -181,5 +180,4 @@
         <item>Big Houses</item>
         <item>Small Houses</item>
     </string-array>
-    >>>>>>> 53f5211e3c91e7d493a73928c9239138356a75b7
 </resources>

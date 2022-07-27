@@ -17,9 +17,12 @@ import com.assist.imobilandroidapp.databinding.ActivityClientBinding
 import com.assist.imobilandroidapp.databinding.ActivityListingSingleCategoryBinding
 import com.assist.imobilandroidapp.screens.add.AddListingActivity
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
+import com.assist.imobilandroidapp.screens.favorites.FavoritesActivity
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
 import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
+import com.assist.imobilandroidapp.screens.profile.MessagesActivity
 import com.assist.imobilandroidapp.screens.search.SearchActivity
+import com.assist.imobilandroidapp.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,6 +51,8 @@ class ListingSingleCategoryActivity : AppCompatActivity(), ListingItemWithDescAd
         onSearchIconClick()
         onProfileIconClick()
         onAddFABClick()
+        onMessageClick()
+        onToolbarFavIconClick()
     }
 
     private fun onSearchIconClick() {
@@ -102,7 +107,7 @@ class ListingSingleCategoryActivity : AppCompatActivity(), ListingItemWithDescAd
                     400, 401 -> {
                         Toast.makeText(
                            applicationContext,
-                            getText(R.string.something_wrong).toString() + "400",
+                            getText(R.string.something_wrong).toString(),
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -139,7 +144,49 @@ class ListingSingleCategoryActivity : AppCompatActivity(), ListingItemWithDescAd
     }
 
     override fun onFavIconClick(listingItemWithDesc: ListingFromDBObject) {
-        // Do nothing
+        SharedPrefManager.getInstance().fetchUserId()?.let {
+            RetrofitClient.instance.addToFavoritesList(it, listingItemWithDesc.id)
+                .enqueue(object : Callback<String> {
+                    override fun onResponse(
+                        call: Call<String>,
+                        response: Response<String>
+                    ) {
+                        when (response.code()) {
+                            400, 401 -> {
+                                Toast.makeText(
+                                    applicationContext,
+                                    getText(R.string.something_wrong).toString(),
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+
+                            200 -> {
+                                if (response.body()?.isNotEmpty() == true) {
+                                    Toast.makeText(
+                                        applicationContext,
+                                        getText(R.string.added_to_fav).toString(),
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                } else {
+                                    Toast.makeText(
+                                        applicationContext,
+                                        getText(R.string.nothing_found).toString(),
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<String>, t: Throwable) {
+                        Toast.makeText(
+                            applicationContext,
+                            t.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
+        }
     }
 
     override fun onListingClick(ListingItemWithDesc: ListingFromDBObject) {
@@ -161,6 +208,20 @@ class ListingSingleCategoryActivity : AppCompatActivity(), ListingItemWithDescAd
     private fun onAddFABClick() {
         binding.fabAddListing.setOnClickListener {
             intent = Intent(this, AddListingActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun onMessageClick() {
+        binding.fabSendMessage.setOnClickListener {
+            intent = Intent(applicationContext, MessagesActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun onToolbarFavIconClick() {
+        binding.toolbar.ivFavouritesIcon.setOnClickListener {
+            intent = Intent(applicationContext, FavoritesActivity::class.java)
             startActivity(intent)
         }
     }

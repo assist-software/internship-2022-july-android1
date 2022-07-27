@@ -10,7 +10,9 @@ import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.databinding.ActivityListingConfirmedBinding
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.client.main.ClientActivity
+import com.assist.imobilandroidapp.screens.favorites.FavoritesActivity
 import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
+import com.assist.imobilandroidapp.screens.profile.MessagesActivity
 import com.assist.imobilandroidapp.screens.search.SearchActivity
 
 class ListingConfirmedActivity : AppCompatActivity() {
@@ -28,6 +30,8 @@ class ListingConfirmedActivity : AppCompatActivity() {
         onProfileIconClick()
         onHomeBtnClick()
         onAddNewBtnClick()
+        onMessageClick()
+        onFavIconClick()
     }
 
     private fun onSearchIconClick() {
@@ -68,6 +72,20 @@ class ListingConfirmedActivity : AppCompatActivity() {
     private fun onAddNewBtnClick() {
         binding.btnAddNewListing.setOnClickListener {
             val intent = Intent(this, AddListingActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun onMessageClick() {
+        binding.fabSendMessage.setOnClickListener {
+            intent = Intent(applicationContext, MessagesActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun onFavIconClick() {
+        binding.toolbar.ivFavouritesIcon.setOnClickListener {
+            intent = Intent(applicationContext, FavoritesActivity::class.java)
             startActivity(intent)
         }
     }
