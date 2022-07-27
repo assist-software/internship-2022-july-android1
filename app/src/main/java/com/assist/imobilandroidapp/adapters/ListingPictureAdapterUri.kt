@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
 import com.bumptech.glide.Glide
 
-class ListingPictureAdapterUri(var context: Context) :
+class ListingPictureAdapterUri(var context: Context, private val onImageCLickUri: OnImageCLickUri) :
     RecyclerView.Adapter<ListingPictureAdapterUri.ViewHolder>() {
 
     private var dataList = emptyList<Uri>()
@@ -45,4 +45,7 @@ class ListingPictureAdapterUri(var context: Context) :
 
     override fun getItemCount() = dataList.size
 
+    interface OnImageCLickUri {
+        fun onUriImageClick(image: Uri)
+    }
 }

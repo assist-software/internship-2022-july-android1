@@ -132,12 +132,16 @@ class StartFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemAdapter
     }
 
     override fun onFavIconClick(listingItem: ListingFromDBObject) {
-        val fragment = FavouritesEmptyFragment()
-        changeFragment(fragment)
+        FavouritesDialogFragment().show(
+            activity?.supportFragmentManager!!,
+            FavouritesDialogFragment.TAG)
     }
 
     override fun onListingItemClick(listingItem: ListingFromDBObject) {
         val intent = Intent(activity, ListingScreenActivity::class.java)
+        val listingId = listingItem.id
+        intent.putExtra("id", listingId)
+        intent.putExtra("userType", userType)
         startActivity(intent)
     }
 

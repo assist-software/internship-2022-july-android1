@@ -16,8 +16,13 @@
         <activity
             android:name=".screens.profile.MessagesActivity"
             android:exported="false" />
+        <activity android:name=".screens.favorites.FavoritesActivity"
+            android:exported="false"/>
         <activity
-            android:name=".screens.favorites.FavoritesActivity"
+            android:name="com.assist.imobilandroidapp.screens.client.main.EditMyListing"
+            android:exported="false" />
+        <activity
+            android:name="com.assist.imobilandroidapp.screens.listing.FullScreenImageActivity"
             android:exported="false" />
         <activity
             android:name="com.assist.imobilandroidapp.screens.add.ListingConfirmedActivity"

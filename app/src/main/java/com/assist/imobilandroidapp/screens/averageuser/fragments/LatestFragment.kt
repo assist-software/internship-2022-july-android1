@@ -116,16 +116,16 @@ class LatestFragment : Fragment(), ListingItemWithDescAdapter.OnFavIconClick {
     }
 
     override fun onFavIconClick(listingItemWithDesc: ListingFromDBObject) {
-        val fragment = FavouritesEmptyFragment()
-        val fragmentManager = activity?.supportFragmentManager
-        val fragmentTransaction = fragmentManager?.beginTransaction()
-        fragmentTransaction?.replace(R.id.fc_fragments, fragment)
-        fragmentTransaction?.addToBackStack(null)
-        fragmentTransaction?.commit()
+        FavouritesDialogFragment().show(
+            activity?.supportFragmentManager!!,
+            FavouritesDialogFragment.TAG)
     }
 
     override fun onListingClick(ListingItemWithDesc: ListingFromDBObject) {
         val intent = Intent(activity, ListingScreenActivity::class.java)
+        val listingId = ListingItemWithDesc.id
+        intent.putExtra("id", listingId)
+        intent.putExtra("userType", userType)
         startActivity(intent)
     }
 

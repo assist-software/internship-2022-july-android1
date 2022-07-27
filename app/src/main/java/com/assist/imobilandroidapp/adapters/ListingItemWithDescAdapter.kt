@@ -49,7 +49,8 @@ class ListingItemWithDescAdapter(
                 .error(R.drawable.photo_replacement_1).into(listingImage)
             listingTitle.text = listingItemWithDesc.title
             listingDescription.text = listingItemWithDesc.shortDescription
-            listingPrice.text = listingItemWithDesc.price.toString()
+            val price = listingItemWithDesc.price.toString() + " lei"
+            listingPrice.text = price
 
             itemView.setOnClickListener {
                 onFavIconClick.onListingClick(listingItemWithDesc)

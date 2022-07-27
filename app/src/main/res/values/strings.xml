@@ -137,7 +137,9 @@
     <string name="search_results_placeholder_activity">results for: </string>
     <string name="nothing_found">Nothing found!</string>
     <string name="something_wrong">Something went wrong</string>
+    <string name="delete_success">Listing deleted successfully</string>
     <string name="you_need_to_have_account">You must be logged in to access your profile</string>
+    <string name="you_need_to_be_connected_to_access_favourites">You must be logged in to have access to favourites</string>
     <string name="understood">I understand</string>
     <string name="to_login">Take me to login</string>
     <string name="add_new"> Add new</string>
@@ -172,6 +174,7 @@
     <string name="start_exploring">Start exploring</string>
     <string name="messages_text">This is where you\'ll find all of your chats and messages.</string>
 
+    <string name="you_cant_view_listing_posted">You can\'t preview a listing that is already posted</string>
     <string-array name="spinner_categories">
         <item>Big Houses</item>
         <item>Small Houses</item>

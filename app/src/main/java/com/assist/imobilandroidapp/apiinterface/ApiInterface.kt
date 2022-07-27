@@ -1,6 +1,7 @@
 package com.assist.imobilandroidapp.apiinterface
 
 import com.assist.imobilandroidapp.apiinterface.models.*
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -59,4 +60,34 @@ interface ApiInterface {
     fun resetPassword(
         @Body resetPassword: ResetPassword
     ): Call<String>
+
+    @GET("api/Listing/{id}")
+    fun viewSingleListing(
+        @Path("id") listingId: String
+    ): Call<SingleListingResponse>
+
+    @GET("api/User/get/{id}")
+    fun getUser(
+        @Path("id") userId: String
+    )
+
+    @POST("api/Listing/myListings")
+    fun getMyListings(
+        @Body myListingsRequest: MyListingsRequest,
+        @Header("token") token: String?
+    ): Call<List<ListingFromDBObject>>
+
+    @DELETE("api/Listing/{id}")
+    fun deleteMyListing(
+        @Path("id") listingId: String,
+        @Header("token") token: String?
+    ): Call<ResponseBody>
+
+    @PUT("api/Listing/{id}")
+    fun editMyListing(
+        @Path("id") listingId: String,
+        @Header("token") token: String?,
+        @Body postingRequest: UpdateListingRequest,
+    ): Call<ResponseBody>
+
 }
