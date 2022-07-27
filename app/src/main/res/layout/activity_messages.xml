@@ -6,17 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".screens.profile.MessagesActivity">
 
+    <include layout="@layout/toolbar_layout"
+        android:id="@id/toolbar"
+        />
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sv_search"
+        android:layout_below="@id/toolbar"
+        android:layout_marginStart="@dimen/space_16dp"
+        android:layout_marginEnd="@dimen/space_16dp"
+        android:visibility="gone"/>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/sv_search"
+        android:layout_marginTop="@dimen/space_10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar_layout" />
 
             <TextView
                 android:id="@+id/tv_title_profile"

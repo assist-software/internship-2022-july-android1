@@ -131,6 +131,7 @@
     <string name="point">.</string>
     <string name="shared_pref">MyPref</string>
     <string name="success">Success</string>
+    <string name="added_to_fav">Listing added to favourites</string>
     <string name="error_code">"Error code: "</string>
     <string name="failed">Failed</string>
     <string name="search_results_placeholder">74 results for "Dreamy"</string>

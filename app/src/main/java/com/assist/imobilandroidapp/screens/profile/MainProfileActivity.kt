@@ -1,5 +1,4 @@
 package com.assist.imobilandroidapp.screens.profile
-
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -22,25 +21,18 @@ import com.assist.imobilandroidapp.databinding.ActivityMainProfileBinding
 import com.assist.imobilandroidapp.screens.favorites.FavoritesActivity
 import com.assist.imobilandroidapp.storage.SharedPrefManager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.MultiTransformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
-
-
 class MainProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainProfileBinding
     private var calendar: Calendar = Calendar.getInstance()
     private lateinit var specificUser: SpecificUser
     private var profileImg = ""
     private var role = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainProfileBinding.inflate(layoutInflater)
@@ -83,21 +75,18 @@ class MainProfileActivity : AppCompatActivity() {
         onMessagesBtnClick()
         onMessagesMenuBtnClick()
     }
-
     private fun onMessagesMenuBtnClick() {
         binding.llMenuMessages.setOnClickListener {
             intent = Intent(this, MessagesActivity::class.java)
             startActivity(intent)
         }
     }
-
     private fun onMessagesBtnClick() {
         binding.fabSendMessage.setOnClickListener {
             intent = Intent(this, MessagesActivity::class.java)
             startActivity(intent)
         }
     }
-
     private fun initEditPhotoButton() {
         binding.ivEditPhoto.setOnClickListener() {
             val intent = Intent(Intent.ACTION_PICK)
@@ -105,7 +94,6 @@ class MainProfileActivity : AppCompatActivity() {
             startActivityForResult(intent, 1)
         }
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && data != null) {
@@ -115,12 +103,10 @@ class MainProfileActivity : AppCompatActivity() {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
             val bytes = stream.toByteArray()
             profileImg = java.util.Base64.getEncoder().encodeToString(bytes)
-
             Glide.with(applicationContext).load(uri).circleCrop()
-            .error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
+                .error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
         }
     }
-
     private fun setupGetUserById() {
         val id = SharedPrefManager.getInstance().fetchUserId()
         val token = SharedPrefManager.getInstance().fetchToken()
@@ -143,14 +129,8 @@ class MainProfileActivity : AppCompatActivity() {
                                 it
                             )
                         }
-//                        Glide.with(applicationContext).load(specificUser.photo).transform(
-//                            MultiTransformation(
-//                                CenterCrop(),
-//                                GranularRoundedCorners(12f, 12f, 12f, 12f)
-//                            )
-//                        ).error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
-                        Glide.with(applicationContext).load(specificUser.photo).circleCrop()
-                            .error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
+                        Glide.with(applicationContext).load(specificUser.photo).circleCrop().override(128, 128)
+                            .error(R.drawable.profile_icon).into(binding.ivBigProfilePicture)
                         if (specificUser.gender == 0) {
                             binding.tvGenderPreview.text = getString(R.string.gender_male)
                         } else {
@@ -165,7 +145,6 @@ class MainProfileActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
-
                 override fun onFailure(call: Call<SpecificUser>, t: Throwable) {
                     Toast.makeText(
                         applicationContext,
@@ -175,7 +154,6 @@ class MainProfileActivity : AppCompatActivity() {
                 }
             })
     }
-
     private fun formatBirthDateForTV(dateOfBirth: String?) {
         if (dateOfBirth != null) {
             val formattedBirthDate = dateOfBirth.substring(
@@ -192,7 +170,6 @@ class MainProfileActivity : AppCompatActivity() {
             binding.tvBirthDatePreview.text = ""
         }
     }
-
     private fun setupModifiUserData() {
         var gender = 0
         if (binding.tvGenderPreview.text.toString() == getString(R.string.gender_female)) {
@@ -230,7 +207,6 @@ class MainProfileActivity : AppCompatActivity() {
                     ).show()
                 }
             }
-
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Toast.makeText(
                     applicationContext,
@@ -240,7 +216,6 @@ class MainProfileActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun roleCheck(): Int {
         if (role == "User") {
             return 2
@@ -250,7 +225,6 @@ class MainProfileActivity : AppCompatActivity() {
             return 0
         }
     }
-
     private fun formatBirthDateForDataBase(birthDate: String): String? {
         return birthDate.substring(
             birthDate.lastIndexOf(".") + 1,
@@ -263,7 +237,6 @@ class MainProfileActivity : AppCompatActivity() {
             birthDate.indexOf(".")
         )
     }
-
     private fun initGenderEdit() {
         binding.tvEditGender.setOnClickListener {
             if (binding.tvGenderPreview.text.toString() == getString(R.string.gender_male)) {
@@ -303,7 +276,6 @@ class MainProfileActivity : AppCompatActivity() {
             setupModifiUserData()
         }
     }
-
     private fun initFullNameEdit() {
         binding.tvEditFullName.setOnClickListener {
             if (binding.tvFullNamePreview.text != "") {
@@ -324,7 +296,6 @@ class MainProfileActivity : AppCompatActivity() {
                 binding.etLastNameInput.setText("")
                 binding.etFirstNameInput.setText("")
             }
-
             binding.clParentFullName.isVisible = true
             binding.tvEditFullName.isGone = true
             binding.tvCancelFullName.isVisible = true
@@ -337,7 +308,6 @@ class MainProfileActivity : AppCompatActivity() {
             binding.vLineFullName.isVisible = true
         }
         binding.btnFullNameSave.setOnClickListener {
-
             val fullNamePlaceholder =
                 binding.etFirstNameInput.text.toString() + getString(R.string.space) + binding.etLastNameInput.text.toString()
             binding.tvFullNamePreview.text =
@@ -349,7 +319,6 @@ class MainProfileActivity : AppCompatActivity() {
             setupModifiUserData()
         }
     }
-
     private fun initSingleLineEdit(
         etInput: EditText,
         btnSave: Button,
@@ -371,7 +340,6 @@ class MainProfileActivity : AppCompatActivity() {
             setupModifiUserData()
         }
     }
-
     private fun setupCancelSingleLine(
         tvEdit: TextView,
         tvCancel: TextView,
@@ -387,7 +355,6 @@ class MainProfileActivity : AppCompatActivity() {
         vLine.isVisible = true
         tvPreview.isVisible = true
     }
-
     private fun setupEditSingleLine(
         tvEdit: TextView,
         tvCancel: TextView,
@@ -403,7 +370,6 @@ class MainProfileActivity : AppCompatActivity() {
         vLine.isGone = true
         tvPreview.isGone = true
     }
-
     private fun initDatePicker() {
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -443,7 +409,6 @@ class MainProfileActivity : AppCompatActivity() {
             setupModifiUserData()
         }
     }
-
     private fun initLogoutDialog() {
         binding.llMenuLogout.setOnClickListener {
             val dialog = LogoutDialogFragment()

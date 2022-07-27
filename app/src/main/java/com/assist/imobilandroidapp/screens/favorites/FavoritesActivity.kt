@@ -2,8 +2,11 @@ package com.assist.imobilandroidapp.screens.favorites
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
@@ -14,6 +17,8 @@ import com.assist.imobilandroidapp.databinding.ActivityFavoritesBinding
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
 import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
+import com.assist.imobilandroidapp.screens.profile.MessagesActivity
+import com.assist.imobilandroidapp.screens.search.SearchActivity
 import com.assist.imobilandroidapp.storage.SharedPrefManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -25,13 +30,18 @@ class FavoritesActivity : AppCompatActivity(), FavoritesListingAdapter.OnFavIcon
     private lateinit var binding: ActivityFavoritesBinding
     private var userType: Int? = 0
     var foundListings: ArrayList<ListingFavoritesFromDB> = arrayListOf()
+    private var searchQuery: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoritesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         getListings()
         onProfileIconClick()
         onSearchIconClick()
+        onMessageClick()
+        //onToolbarFavIcon()
     }
 
     private fun initRV() {
@@ -101,7 +111,7 @@ class FavoritesActivity : AppCompatActivity(), FavoritesListingAdapter.OnFavIcon
                             400, 401 -> {
                                 Toast.makeText(
                                     this@FavoritesActivity,
-                                    getText(R.string.something_wrong).toString() + "400",
+                                    getText(R.string.something_wrong).toString(),
                                     Toast.LENGTH_LONG
                                 ).show()
                             }
@@ -110,7 +120,7 @@ class FavoritesActivity : AppCompatActivity(), FavoritesListingAdapter.OnFavIcon
                                 if (response.body()?.isNotEmpty() == true) {
                                     Toast.makeText(
                                         this@FavoritesActivity,
-                                        getText(R.string.success).toString() + "400",
+                                        getText(R.string.success).toString(),
                                         Toast.LENGTH_LONG
                                     ).show()
                                 } else {
@@ -133,12 +143,12 @@ class FavoritesActivity : AppCompatActivity(), FavoritesListingAdapter.OnFavIcon
                     }
                 })
         }
-
-
     }
 
-    override fun onListingClick(listingFavoritesFromDB: ListingFavoritesFromDB) {
+    override fun onListingClick(ListingFavoritesFromDB: ListingFavoritesFromDB) {
         val intent = Intent(this, ListingScreenActivity::class.java)
+        intent.putExtra("id", ListingFavoritesFromDB.id)
+        intent.putExtra("userType", userType)
         startActivity(intent)
     }
 
@@ -156,5 +166,30 @@ class FavoritesActivity : AppCompatActivity(), FavoritesListingAdapter.OnFavIcon
     }
 
     private fun onSearchIconClick() {
+        binding.toolbar.ivSearchIcon.setOnClickListener {
+            binding.svSearch.isVisible = true
+            binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextSubmit(text: String): Boolean {
+                    searchQuery = text
+                    binding.svSearch.isGone = true
+                    val intent = Intent(applicationContext, SearchActivity::class.java)
+                    intent.putExtra("searchQuery", searchQuery)
+                    intent.putExtra("userType", userType)
+                    startActivity(intent)
+                    return false
+                }
+            })
+        }
+    }
+
+    private fun onMessageClick() {
+        binding.fab.setOnClickListener {
+            val intent = Intent(applicationContext, MessagesActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
