@@ -94,6 +94,7 @@ class LogInActivity : AppCompatActivity() {
                 if (response.code() == 200) {
                     SharedPrefManager.getInstance().saveToken(response.body())
                     SharedPrefManager.getInstance().saveUserId(response.body())
+                    SharedPrefManager.getInstance().saveName(response.body())
 
                     intent = Intent(this@LogInActivity, ClientActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

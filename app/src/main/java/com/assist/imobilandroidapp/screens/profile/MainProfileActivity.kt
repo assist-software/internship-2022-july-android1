@@ -19,10 +19,12 @@ import com.assist.imobilandroidapp.apiinterface.RetrofitClient
 import com.assist.imobilandroidapp.apiinterface.models.ModifiUserData
 import com.assist.imobilandroidapp.apiinterface.models.SpecificUser
 import com.assist.imobilandroidapp.databinding.ActivityMainProfileBinding
+import com.assist.imobilandroidapp.screens.favorites.FavoritesActivity
 import com.assist.imobilandroidapp.storage.SharedPrefManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,6 +39,7 @@ class MainProfileActivity : AppCompatActivity() {
     private var calendar: Calendar = Calendar.getInstance()
     private lateinit var specificUser: SpecificUser
     private var profileImg = ""
+    private var role = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +76,26 @@ class MainProfileActivity : AppCompatActivity() {
         initFullNameEdit()
         initGenderEdit()
         initEditPhotoButton()
+        binding.toolbar.ivFavouritesIcon.setOnClickListener {
+            intent = Intent(this, FavoritesActivity::class.java)
+            startActivity(intent)
+        }
+        onMessagesBtnClick()
+        onMessagesMenuBtnClick()
+    }
+
+    private fun onMessagesMenuBtnClick() {
+        binding.llMenuMessages.setOnClickListener {
+            intent = Intent(this, MessagesActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun onMessagesBtnClick() {
+        binding.fabSendMessage.setOnClickListener {
+            intent = Intent(this, MessagesActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initEditPhotoButton() {
@@ -93,9 +116,8 @@ class MainProfileActivity : AppCompatActivity() {
             val bytes = stream.toByteArray()
             profileImg = java.util.Base64.getEncoder().encodeToString(bytes)
 
-            Glide.with(applicationContext).load(uri).override(345, 240).transform(
-                MultiTransformation(CenterCrop(), GranularRoundedCorners(12f, 12f, 12f, 12f))
-            ).error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
+            Glide.with(applicationContext).load(uri).circleCrop()
+            .error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
         }
     }
 
@@ -115,12 +137,20 @@ class MainProfileActivity : AppCompatActivity() {
                         binding.tvFullNamePreview.text = specificUser.fullName
                         binding.tvPhonePreview.text = specificUser.phone
                         binding.tvAddressPreview.text = specificUser.address
-                        Glide.with(applicationContext).load(specificUser.photo).transform(
-                            MultiTransformation(
-                                CenterCrop(),
-                                GranularRoundedCorners(12f, 12f, 12f, 12f)
+                        role = specificUser.role.toString()
+                        specificUser.photo?.let {
+                            SharedPrefManager.getInstance().saveImageProfilePic(
+                                it
                             )
-                        ).error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
+                        }
+//                        Glide.with(applicationContext).load(specificUser.photo).transform(
+//                            MultiTransformation(
+//                                CenterCrop(),
+//                                GranularRoundedCorners(12f, 12f, 12f, 12f)
+//                            )
+//                        ).error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
+                        Glide.with(applicationContext).load(specificUser.photo).circleCrop()
+                            .error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
                         if (specificUser.gender == 0) {
                             binding.tvGenderPreview.text = getString(R.string.gender_male)
                         } else {
@@ -168,25 +198,13 @@ class MainProfileActivity : AppCompatActivity() {
         if (binding.tvGenderPreview.text.toString() == getString(R.string.gender_female)) {
             gender = 1
         }
-        //val bitmap = BitmapFactory.decodeStream(imageurl.openConnection().getInputStream())
-        /*var bitmap = (binding.ivBigProfilePicture.drawable as BitmapDrawable).bitmap
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val b = baos.toByteArray()
-        var photo = Base64.getEncoder().encodeToString(b)
-        println(photo.toString())
-        Toast.makeText(
-            applicationContext,
-            photo.toString(),
-            Toast.LENGTH_LONG
-        ).show()*/
         RetrofitClient.instance.putModifiUserData(
             ModifiUserData(
                 SharedPrefManager.getInstance().fetchUserId(),
                 binding.tvFullNamePreview.text.toString(),
                 binding.tvEmailPreview.text.toString(),
                 binding.tvPhonePreview.text.toString(),
-                0,
+                roleCheck(),
                 gender,
                 profileImg,
                 formatBirthDateForDataBase(binding.tvBirthDatePreview.text.toString()),
@@ -221,6 +239,16 @@ class MainProfileActivity : AppCompatActivity() {
                 ).show()
             }
         })
+    }
+
+    private fun roleCheck(): Int {
+        if (role == "User") {
+            return 2
+        } else if (role == "Validator") {
+            return 1
+        } else {
+            return 0
+        }
     }
 
     private fun formatBirthDateForDataBase(birthDate: String): String? {

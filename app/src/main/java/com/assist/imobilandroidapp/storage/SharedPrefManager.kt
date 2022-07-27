@@ -24,15 +24,25 @@ class SharedPrefManager private constructor(private val mContext: Context) {
         editor.apply()
     }
 
+    fun saveImageProfilePic(image: String) {
+        val editor = sharedPrefs.edit()
+        editor.putString("profilePic", image)
+        editor.apply ()
+    }
+
+    fun fetchImageProfilePic(): String? {
+        return sharedPrefs.getString("profilePic", "")
+    }
+
     fun saveToken(response: RegisterResponse?) {
         val editor = sharedPrefs.edit()
         editor.putString("token", response?.token)
         editor.apply()
     }
 
-    fun saveName(firstName: String?, lastName: String?) {
+    fun saveName(response: RegisterResponse?) {
         val editor = sharedPrefs.edit()
-        editor.putString("fullName", "$firstName $lastName")
+        editor.putString("fullName", response?.fullName)
         editor.apply()
     }
 

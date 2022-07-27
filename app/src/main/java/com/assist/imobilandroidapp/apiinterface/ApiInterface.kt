@@ -44,6 +44,23 @@ interface ApiInterface {
         @Header("token") token: String?
     ): Call<String>
 
+    @GET("api/Favorite/get/{id}")
+    fun getFavoritesListing(
+        @Path("id") id: String?,
+        @Header("token") token: String?
+    ): Call<List<ListingFavoritesFromDB>>
+
+    @POST("api/Favorite/add")
+    fun addToFavoritesList(
+        @Query("UserId") userIdQuery: String,
+        @Query("ListingId") listingIdQuery: String
+    ): Call<String>
+
+    @POST("api/User/reset-password")
+    fun resetPassword(
+        @Body resetPassword: ResetPassword
+    ): Call<String>
+
     @GET("api/Listing/{id}")
     fun viewSingleListing(
         @Path("id") listingId: String
@@ -72,4 +89,5 @@ interface ApiInterface {
         @Header("token") token: String?,
         @Body postingRequest: UpdateListingRequest,
     ): Call<ResponseBody>
+
 }

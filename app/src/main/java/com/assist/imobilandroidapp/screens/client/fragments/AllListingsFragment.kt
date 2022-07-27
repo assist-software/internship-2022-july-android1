@@ -2,11 +2,11 @@ package com.assist.imobilandroidapp.screens.client.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
@@ -19,16 +19,18 @@ import com.assist.imobilandroidapp.items.CarouselItem
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.client.main.ListingSingleCategoryActivity
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
+import com.assist.imobilandroidapp.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemAdapter.OnFavIconClickSmallRV {
+class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem,
+    ListingItemAdapter.OnFavIconClickSmallRV {
 
     private var _binding: FragmentAllListingsBinding? = null
     private val binding get() = _binding!!
     private var userType = StartFragment.UserTypeConstants.LOGGED_IN_USER
-    private var carouselItemAdapter: CarouselItemAdapter ?= null
+    private var carouselItemAdapter: CarouselItemAdapter? = null
 
     val bigHouseListings: ArrayList<ListingFromDBObject> = arrayListOf()
     val smallHouseListings: ArrayList<ListingFromDBObject> = arrayListOf()
@@ -45,7 +47,7 @@ class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemA
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       getListings()
+        getListings()
     }
 
     private fun initRV() {
@@ -92,7 +94,7 @@ class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemA
                         if (response.body()?.isNotEmpty() == true) {
                             foundListings.addAll(response.body()!!)
                             for (item in foundListings) {
-                                when(item.category) {
+                                when (item.category) {
                                     0 -> bigHouseListings.add(item)
                                     1 -> smallHouseListings.add(item)
                                 }
@@ -132,7 +134,49 @@ class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemA
     }
 
     override fun onFavIconClick(listingItem: ListingFromDBObject) {
-        // Do nothing
+        SharedPrefManager.getInstance().fetchUserId()?.let {
+            RetrofitClient.instance.addToFavoritesList(it, listingItem.id)
+                .enqueue(object : Callback<String> {
+                    override fun onResponse(
+                        call: Call<String>,
+                        response: Response<String>
+                    ) {
+                        when (response.code()) {
+                            400, 401 -> {
+                                Toast.makeText(
+                                    activity,
+                                    getText(R.string.something_wrong).toString() + "400",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+
+                            200 -> {
+                                if (response.body()?.isNotEmpty() == true) {
+                                    Toast.makeText(
+                                        activity,
+                                        getText(R.string.success).toString() + "400",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                } else {
+                                    Toast.makeText(
+                                        activity,
+                                        getText(R.string.nothing_found).toString(),
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<String>, t: Throwable) {
+                        Toast.makeText(
+                            activity,
+                            t.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
+        }
     }
 
     override fun onListingItemClick(listingItem: ListingFromDBObject) {

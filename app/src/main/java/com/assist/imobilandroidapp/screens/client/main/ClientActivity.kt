@@ -3,20 +3,17 @@ package com.assist.imobilandroidapp.screens.client.main
 import android.content.Intent
 import android.os.Bundle
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.adapters.ViewPagerAdapter
 import com.assist.imobilandroidapp.databinding.ActivityClientBinding
 import com.assist.imobilandroidapp.screens.add.AddListingActivity
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
-import com.assist.imobilandroidapp.screens.client.fragments.AllListingsFragment
-import com.assist.imobilandroidapp.screens.client.fragments.MyListingsFragment
+import com.assist.imobilandroidapp.screens.favorites.FavoritesActivity
 import com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity
 import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
+import com.assist.imobilandroidapp.screens.profile.MessagesActivity
 import com.assist.imobilandroidapp.screens.search.SearchActivity
 import com.assist.imobilandroidapp.storage.SharedPrefManager
 import com.google.android.material.tabs.TabLayoutMediator
@@ -40,13 +37,30 @@ class ClientActivity : AppCompatActivity() {
         binding.vpViewPager.adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
         binding.vpViewPager.isUserInputEnabled = false
 
-        TabLayoutMediator(binding.tlSeeListings, binding.vpViewPager) {
-            tab, position -> tab.text = pages[position]
+        TabLayoutMediator(binding.tlSeeListings, binding.vpViewPager) { tab, position ->
+            tab.text = pages[position]
         }.attach()
+        binding.tvName.text = SharedPrefManager.getInstance().fetchName()
 
         onSearchIconClick()
         onProfileIconClick()
         onAddFABClick()
+        onFavoritesIconClick()
+        onMessagesBtnClick()
+    }
+
+    private fun onMessagesBtnClick() {
+        binding.fabSendMessage.setOnClickListener {
+            intent = Intent(this, MessagesActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun onFavoritesIconClick() {
+        binding.toolbar.ivFavouritesIcon.setOnClickListener {
+            intent = Intent(this, FavoritesActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun onSearchIconClick() {
@@ -73,7 +87,7 @@ class ClientActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        if(!SharedPrefManager.getInstance().isLoggedIn) {
+        if (!SharedPrefManager.getInstance().isLoggedIn) {
             intent = Intent(this@ClientActivity, LogInActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
