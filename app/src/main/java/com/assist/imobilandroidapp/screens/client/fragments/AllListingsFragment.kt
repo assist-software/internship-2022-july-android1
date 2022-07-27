@@ -83,7 +83,7 @@ class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemA
                     400, 401 -> {
                         Toast.makeText(
                             activity,
-                            getText(R.string.something_wrong).toString() + "400",
+                            getText(R.string.something_wrong).toString(),
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -127,6 +127,7 @@ class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemA
     override fun onItemClick(carouselItem: CarouselItem) {
         val intent = Intent(activity, ListingSingleCategoryActivity::class.java)
         intent.putExtra("title", carouselItem.carouselTitle)
+        intent.putExtra("userType", userType)
         startActivity(intent)
     }
 
@@ -136,6 +137,9 @@ class AllListingsFragment : Fragment(), CarouselItemAdapter.OnItem, ListingItemA
 
     override fun onListingItemClick(listingItem: ListingFromDBObject) {
         val intent = Intent(activity, ListingScreenActivity::class.java)
+        val listingId = listingItem.id
+        intent.putExtra("id", listingId)
+        intent.putExtra("userType", userType)
         startActivity(intent)
     }
 }

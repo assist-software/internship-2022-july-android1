@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
 import com.bumptech.glide.Glide
 
-class ListingPictureAdapter(var context: Context) :
+class ListingPictureAdapter(var context: Context, private val onImageClickUrl: OnImageClickUrl) :
     RecyclerView.Adapter<ListingPictureAdapter.ViewHolder>() {
 
-    var dataList = emptyList<String>()
+    private var dataList = emptyList<String>()
 
     internal fun setDataList(dataList: List<String>) {
         this.dataList = dataList
@@ -36,12 +36,19 @@ class ListingPictureAdapter(var context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var data = dataList[position]
+        val data = dataList[position]
         Glide.with(context)
             .load(data)
             .into(holder.image)
+
+        holder.itemView.setOnClickListener {
+            onImageClickUrl.onUrlImageClick(data)
+        }
     }
 
     override fun getItemCount() = dataList.size
 
+    interface OnImageClickUrl {
+        fun onUrlImageClick(imageUrl: String)
+    }
 }

@@ -144,6 +144,10 @@ class ListingSingleCategoryActivity : AppCompatActivity(), ListingItemWithDescAd
 
     override fun onListingClick(ListingItemWithDesc: ListingFromDBObject) {
         val intent = Intent(this, ListingScreenActivity::class.java)
+        val listingId = ListingItemWithDesc.id
+        println(listingId)
+        intent.putExtra("id", listingId)
+        intent.putExtra("userType", userType)
         startActivity(intent)
     }
 

@@ -47,6 +47,7 @@
     <string name="info_message">You can add, view, or edit your favourites once you\'ve logged in </string>
     <string name="home">Home</string>
     <string name="reset_passwd">Reset password</string>
+    <string name="delete">Delete</string>
     <string name="create_new_passwd">Create new password for your account.</string>
     <string name="confirm_passwd">Confirm password</string>
     <string name="no_match_passwd">Passwords do not match!</string>
@@ -137,7 +138,9 @@
     <string name="search_results_placeholder_activity">results for: </string>
     <string name="nothing_found">Nothing found!</string>
     <string name="something_wrong">Something went wrong</string>
+    <string name="delete_success">Listing deleted successfully</string>
     <string name="you_need_to_have_account">You must be logged in to access your profile</string>
+    <string name="you_need_to_be_connected_to_access_favourites">You must be logged in to have access to favourites</string>
     <string name="understood">I understand</string>
     <string name="to_login">Take me to login</string>
     <string name="add_new"> Add new</string>
@@ -163,10 +166,12 @@
     <string name="you_must_add_photos">You must add at least one photo</string>
     <string name="add_new_listing">Add new listing</string>
     <string name="only_9_photos">You can only add 9 photos</string>
+    <string name="invalid_phone_number">Phone number is not valid</string>
+    <string name="you_cant_view_listing_posted">You can\'t preview a listing that is already posted</string>
 
     <string-array name="spinner_categories">
         <item>Big Houses</item>
         <item>Small Houses</item>
     </string-array>
->>>>>>> 53f5211e3c91e7d493a73928c9239138356a75b7
+    >>>>>>> 53f5211e3c91e7d493a73928c9239138356a75b7
 </resources>
