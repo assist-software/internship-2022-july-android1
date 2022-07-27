@@ -1,5 +1,4 @@
 package com.assist.imobilandroidapp.screens.search
-
 import android.content.Intent
 import android.os.Bundle
 import android.widget.SearchView
@@ -25,25 +24,19 @@ import com.assist.imobilandroidapp.storage.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIconClick {
-
     private lateinit var binding: ActivitySearchBinding
     private var searchQuery: String? = ""
     private var userType: Int? = 0
-
     val foundListings: ArrayList<ListingFromDBObject> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val bundle = intent.extras
         searchQuery = bundle?.getString("searchQuery")
         userType = bundle?.getInt("userType")
-
         getListings()
         editSearchText()
         onProfileIconClick()
@@ -66,7 +59,6 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
     private fun initRV() {
         val listingsRecyclerView: RecyclerView = binding.rvListings
         val listingItemsAdapter = ListingItemWithDescAdapter(foundListings, this)
-
         listingsRecyclerView.adapter = listingItemsAdapter
         listingsRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
         userType?.let { listingItemsAdapter.setUserType(it) }
@@ -89,7 +81,6 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
-
                                 200 -> {
                                     if (response.body()?.isNotEmpty() == true) {
                                         foundListings.addAll(response.body()!!)
@@ -105,7 +96,6 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
                                 }
                             }
                         }
-
                         override fun onFailure(
                             call: Call<List<ListingFromDBObject>>,
                             t: Throwable
@@ -197,7 +187,6 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
                 override fun onQueryTextChange(p0: String?): Boolean {
                     return false
                 }
-
                 override fun onQueryTextSubmit(text: String): Boolean {
                     searchQuery = text
                     binding.svSearch.isGone = true

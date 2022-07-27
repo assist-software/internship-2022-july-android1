@@ -41,7 +41,6 @@ class ListingScreenActivity : AppCompatActivity() {
         binding = ActivityListingScreenBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         initButtons()
         onFavIconClick()
         getListingId()
@@ -74,7 +73,6 @@ class ListingScreenActivity : AppCompatActivity() {
                                 authorId = it.authorId
                             }
                         }
-
                         else -> {
                             Toast.makeText(
                                 applicationContext,
@@ -89,7 +87,6 @@ class ListingScreenActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, t.message.toString(), Toast.LENGTH_LONG)
                         .show()
                 }
-
             })
     }
 
@@ -104,7 +101,6 @@ class ListingScreenActivity : AppCompatActivity() {
                     supportFragmentManager,
                     FavouritesDialogFragment.TAG
                 )
-
                 StartFragment.UserTypeConstants.LOGGED_IN_USER -> {
                     SharedPrefManager.getInstance().fetchUserId()?.let {
                         RetrofitClient.instance.addToFavoritesList(it, listingId)
@@ -121,7 +117,6 @@ class ListingScreenActivity : AppCompatActivity() {
                                                 Toast.LENGTH_LONG
                                             ).show()
                                         }
-
                                         200 -> {
                                             if (response.body()?.isNotEmpty() == true) {
                                                 Toast.makeText(
@@ -164,7 +159,6 @@ class ListingScreenActivity : AppCompatActivity() {
         Glide.with(applicationContext).load(images[0]).transform(
             MultiTransformation(CenterCrop(), GranularRoundedCorners(12f, 12f, 12f, 12f))
         ).error(R.drawable.photo_replacement_1).into(binding.ivMainPicture)
-
         binding.tvTitleEstate.text = title
         val priceString = "$price lei"
         binding.tvPriceEstate.text = priceString
@@ -182,7 +176,6 @@ class ListingScreenActivity : AppCompatActivity() {
     }
 
     private fun initButtons() {
-
         binding.ivMorePictureButton.setOnClickListener {
             morePictureButton()
         }
@@ -205,15 +198,13 @@ class ListingScreenActivity : AppCompatActivity() {
 
     private fun profilePicButton() {
         binding.toolbar.ivProfilePic.setOnClickListener {
-            if(userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
+            if (userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
                 val intent = Intent(this, MainProfileActivity::class.java)
                 this.startActivity(intent)
-            }
-            else {
+            } else {
                 LoginDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
             }
         }
-
     }
 
     private fun contactSellerButton() {
@@ -240,31 +231,30 @@ class ListingScreenActivity : AppCompatActivity() {
             if (userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
                 val intent = Intent(applicationContext, FavoritesActivity::class.java)
                 startActivity(intent)
-            }
-            else {
+            } else {
                 FavoritesDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
             }
         }
     }
 
-        private fun onSearchIconClick() {
-            binding.toolbar.ivSearchIcon.setOnClickListener {
-                binding.svSearch.isVisible = true
-                binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                    override fun onQueryTextChange(p0: String?): Boolean {
-                        return false
-                    }
+    private fun onSearchIconClick() {
+        binding.toolbar.ivSearchIcon.setOnClickListener {
+            binding.svSearch.isVisible = true
+            binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    return false
+                }
 
-                    override fun onQueryTextSubmit(text: String): Boolean {
-                        searchQuery = text
-                        binding.svSearch.isGone = true
-                        val intent = Intent(applicationContext, SearchActivity::class.java)
-                        intent.putExtra("searchQuery", searchQuery)
-                        intent.putExtra("userType", userType)
-                        startActivity(intent)
-                        return false
-                    }
-                })
-            }
+                override fun onQueryTextSubmit(text: String): Boolean {
+                    searchQuery = text
+                    binding.svSearch.isGone = true
+                    val intent = Intent(applicationContext, SearchActivity::class.java)
+                    intent.putExtra("searchQuery", searchQuery)
+                    intent.putExtra("userType", userType)
+                    startActivity(intent)
+                    return false
+                }
+            })
         }
     }
+}
