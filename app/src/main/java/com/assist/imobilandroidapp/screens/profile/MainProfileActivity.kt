@@ -24,6 +24,7 @@ import com.assist.imobilandroidapp.storage.SharedPrefManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import retrofit2.Call
 import retrofit2.Callback
@@ -115,9 +116,8 @@ class MainProfileActivity : AppCompatActivity() {
             val bytes = stream.toByteArray()
             profileImg = java.util.Base64.getEncoder().encodeToString(bytes)
 
-            Glide.with(applicationContext).load(uri).override(345, 240).transform(
-                MultiTransformation(CenterCrop(), GranularRoundedCorners(12f, 12f, 12f, 12f))
-            ).error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
+            Glide.with(applicationContext).load(uri).circleCrop()
+            .error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
         }
     }
 
@@ -138,12 +138,19 @@ class MainProfileActivity : AppCompatActivity() {
                         binding.tvPhonePreview.text = specificUser.phone
                         binding.tvAddressPreview.text = specificUser.address
                         role = specificUser.role.toString()
-                        Glide.with(applicationContext).load(specificUser.photo).transform(
-                            MultiTransformation(
-                                CenterCrop(),
-                                GranularRoundedCorners(12f, 12f, 12f, 12f)
+                        specificUser.photo?.let {
+                            SharedPrefManager.getInstance().saveImageProfilePic(
+                                it
                             )
-                        ).error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
+                        }
+//                        Glide.with(applicationContext).load(specificUser.photo).transform(
+//                            MultiTransformation(
+//                                CenterCrop(),
+//                                GranularRoundedCorners(12f, 12f, 12f, 12f)
+//                            )
+//                        ).error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
+                        Glide.with(applicationContext).load(specificUser.photo).circleCrop()
+                            .error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
                         if (specificUser.gender == 0) {
                             binding.tvGenderPreview.text = getString(R.string.gender_male)
                         } else {

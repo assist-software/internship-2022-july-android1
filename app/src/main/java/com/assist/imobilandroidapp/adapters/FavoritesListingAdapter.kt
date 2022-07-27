@@ -80,7 +80,6 @@ class FavoritesListingAdapter(
         }
     }
 
-
     override fun getItemCount(): Int {
         return listingFavoritesList.size
     }

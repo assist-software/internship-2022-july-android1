@@ -15,6 +15,8 @@ import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
 import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
 import com.assist.imobilandroidapp.storage.SharedPrefManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
