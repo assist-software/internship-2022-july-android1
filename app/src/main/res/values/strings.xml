@@ -175,6 +175,8 @@
     <string name="messages_text">This is where you\'ll find all of your chats and messages.</string>
 
     <string name="you_cant_view_listing_posted">You can\'t preview a listing that is already posted</string>
+    <string name="you_need_to_have_account_favorites">You must be logged in to access your favorites</string>
+    <string name="added_to_fav">Listing added to favourites</string>
     <string-array name="spinner_categories">
         <item>Big Houses</item>
         <item>Small Houses</item>

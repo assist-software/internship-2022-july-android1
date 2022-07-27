@@ -8,10 +8,18 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar_layout" />
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginStart="@dimen/space_16dp"
+        android:layout_marginEnd="@dimen/space_16dp"
+        android:id="@+id/sv_search"
+        android:visibility="gone"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/sv_search">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -238,6 +246,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -246,6 +255,5 @@
         android:layout_marginBottom="@dimen/space_16dp"
         android:backgroundTint="@color/gray_200"
         android:src="@drawable/icon_msg"
-        app:borderWidth="0dp"
-        />
+        app:borderWidth="0dp" />
 </RelativeLayout>

@@ -1,12 +1,9 @@
 package com.assist.imobilandroidapp.screens.averageuser.main
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.SearchView
 import android.widget.SearchView.OnQueryTextListener
-import android.widget.Toast
-import androidx.core.view.isGone
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.assist.imobilandroidapp.R
@@ -38,7 +35,7 @@ class AverageUserActivity : AppCompatActivity() {
     private val favouritesFragment = FavouritesEmptyFragment()
 
     private fun replaceFragment(fragment: Fragment) {
-        if(fragment != null) {
+        if (fragment != null) {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fc_fragments, fragment)
             transaction.addToBackStack(null)
@@ -49,7 +46,7 @@ class AverageUserActivity : AppCompatActivity() {
     private fun onSearchIconClick() {
         binding.toolbar.ivSearchIcon.setOnClickListener {
             binding.svSearch.isVisible = true
-            binding.svSearch.setOnQueryTextListener(object: OnQueryTextListener {
+            binding.svSearch.setOnQueryTextListener(object : OnQueryTextListener {
                 override fun onQueryTextChange(p0: String?): Boolean {
                     return false
                 }
