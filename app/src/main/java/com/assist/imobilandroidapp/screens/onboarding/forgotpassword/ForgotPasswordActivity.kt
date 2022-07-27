@@ -6,9 +6,15 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import com.assist.imobilandroidapp.R
+import com.assist.imobilandroidapp.apiinterface.RetrofitClient
+import com.assist.imobilandroidapp.apiinterface.models.RegisterRequest
+import com.assist.imobilandroidapp.apiinterface.models.ResetPassword
 import com.assist.imobilandroidapp.databinding.ActivityForgotPasswordBinding
 import com.assist.imobilandroidapp.screens.onboarding.login.LogInActivity
 import com.assist.imobilandroidapp.utils.Validator
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ForgotPasswordActivity : AppCompatActivity() {
 
@@ -56,8 +62,40 @@ class ForgotPasswordActivity : AppCompatActivity() {
                     getString(R.string.correct_email),
                     Toast.LENGTH_LONG
                 ).show()
+                sendRequestForgotPass()
             }
         }
+    }
+
+    private fun sendRequestForgotPass() {
+        RetrofitClient.instance.resetPassword(
+            ResetPassword(
+                binding.etEmailInput.text.toString()
+            )
+        ).enqueue(object : Callback<String> {
+            override fun onResponse(
+                call: Call<String>,
+                response: Response<String>
+            ) {
+                if (response.code() == 200) {
+                    Toast.makeText(
+                        applicationContext,
+                        getString(R.string.email_sent),
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        getString(R.string.unable_to_send_email),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Toast.makeText(applicationContext, t.message.toString(), Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
 }

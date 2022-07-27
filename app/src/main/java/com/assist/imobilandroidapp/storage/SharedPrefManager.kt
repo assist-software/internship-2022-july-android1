@@ -30,9 +30,9 @@ class SharedPrefManager private constructor(private val mContext: Context) {
         editor.apply()
     }
 
-    fun saveName(firstName: String?, lastName: String?) {
+    fun saveName(response: RegisterResponse?) {
         val editor = sharedPrefs.edit()
-        editor.putString("fullName", "$firstName $lastName")
+        editor.putString("fullName", response?.fullName)
         editor.apply()
     }
 

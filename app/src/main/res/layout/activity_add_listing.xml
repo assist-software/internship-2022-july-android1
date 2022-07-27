@@ -615,7 +615,7 @@
                 android:layout_marginStart="@dimen/space_16dp"
                 android:layout_marginTop="@dimen/space_14dp"
                 android:fontFamily="@font/inter"
-                android:text="@string/empty_field"
+                android:text="@string/invalid_phone_number"
                 android:textColor="@color/red_500"
                 android:textFontWeight="400"
                 android:textSize="@dimen/text_12sp"

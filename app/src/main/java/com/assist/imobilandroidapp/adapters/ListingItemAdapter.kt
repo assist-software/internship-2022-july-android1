@@ -59,9 +59,7 @@ class ListingItemAdapter(
             }
 
             addToFavourites.setOnClickListener {
-                if (userType == StartFragment.UserTypeConstants.GUEST) {
-                    onFavIconClickCallback.onFavIconClick(listingItem)
-                }
+                onFavIconClickCallback.onFavIconClick(listingItem)
             }
         }
     }

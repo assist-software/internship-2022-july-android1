@@ -16,6 +16,7 @@ import com.assist.imobilandroidapp.apiinterface.RetrofitClient
 import com.assist.imobilandroidapp.apiinterface.models.PostListing
 import com.assist.imobilandroidapp.databinding.ActivityAddListingBinding
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
+import com.assist.imobilandroidapp.screens.favorites.FavoritesActivity
 import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
 import com.assist.imobilandroidapp.screens.search.SearchActivity
 import com.assist.imobilandroidapp.storage.SharedPrefManager
@@ -49,8 +50,16 @@ class AddListingActivity : AppCompatActivity(), AdapterView.OnItemSelectedListen
         addPhotos()
         onProfileIconClick()
         onSearchIconClick()
+        onFavoritesIconClick()
         onPreviewBtnClick()
         onPublishBtnClick()
+    }
+
+    private fun onFavoritesIconClick() {
+        binding.toolbar.ivFavouritesIcon.setOnClickListener {
+            intent = Intent(this, FavoritesActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun allFieldsValidated(): Boolean {

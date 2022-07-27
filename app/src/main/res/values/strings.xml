@@ -4,7 +4,7 @@
     <string name="enterYourDetails">Enter your account details below.</string>
     <string name="password">Password</string>
     <string name="RememberMe">Remember Me</string>
-    <string name="ForgotYourPassword">Forgot Your Password?</string>
+    <string name="ForgotYourPassword">Forgot your password?</string>
     <string name="Login">Login</string>
     <string name="LoginGoogle">Log in with Google</string>
     <string name="DontHaveAnAccount">Don\'t have an account?</string>
@@ -163,10 +163,18 @@
     <string name="you_must_add_photos">You must add at least one photo</string>
     <string name="add_new_listing">Add new listing</string>
     <string name="only_9_photos">You can only add 9 photos</string>
+    <string name="invalid_phone_number">Phone number is not valid</string>
+    <string name="delete">Delete</string>
+    <string name="favourites_alert_message">Are you sure you want to delete?</string>
+    <string name="unable_to_send_email">Unable to send Email</string>
+    <string name="email_sent">Email Sent</string>
+    <string name="title_messages_text">You haven\'t sent any messages yet.</string>
+    <string name="start_exploring">Start exploring</string>
+    <string name="messages_text">This is where you\'ll find all of your chats and messages.</string>
 
     <string-array name="spinner_categories">
         <item>Big Houses</item>
         <item>Small Houses</item>
     </string-array>
->>>>>>> 53f5211e3c91e7d493a73928c9239138356a75b7
+    >>>>>>> 53f5211e3c91e7d493a73928c9239138356a75b7
 </resources>
