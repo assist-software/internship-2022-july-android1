@@ -12,8 +12,10 @@ import com.assist.imobilandroidapp.apiinterface.RetrofitClient
 import com.assist.imobilandroidapp.apiinterface.models.SingleListingResponse
 import com.assist.imobilandroidapp.databinding.ActivityListingScreenBinding
 import com.assist.imobilandroidapp.screens.averageuser.fragments.FavouritesDialogFragment
+import com.assist.imobilandroidapp.screens.averageuser.fragments.LoginDialogFragment
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.favorites.FavoritesActivity
+import com.assist.imobilandroidapp.screens.favorites.FavoritesDialogFragment
 import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
 import com.assist.imobilandroidapp.screens.profile.MessagesActivity
 import com.assist.imobilandroidapp.screens.search.SearchActivity
@@ -48,6 +50,7 @@ class ListingScreenActivity : AppCompatActivity() {
         onMessageClick()
         onToolbarFavIconClick()
         onSearchIconClick()
+        profilePicButton()
     }
 
     private fun getListingData() {
@@ -192,9 +195,6 @@ class ListingScreenActivity : AppCompatActivity() {
         binding.btnContactSeller.setOnClickListener {
             contactSellerButton()
         }
-        binding.toolbar.ivProfilePic.setOnClickListener {
-            profilePicButton()
-        }
     }
 
     private fun morePictureButton() {
@@ -204,9 +204,16 @@ class ListingScreenActivity : AppCompatActivity() {
     }
 
     private fun profilePicButton() {
-        Toast.makeText(this, getString(R.string.placeholder), Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, MainProfileActivity::class.java)
-        this.startActivity(intent)
+        binding.toolbar.ivProfilePic.setOnClickListener {
+            if(userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
+                val intent = Intent(this, MainProfileActivity::class.java)
+                this.startActivity(intent)
+            }
+            else {
+                LoginDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
+            }
+        }
+
     }
 
     private fun contactSellerButton() {
@@ -230,29 +237,34 @@ class ListingScreenActivity : AppCompatActivity() {
 
     private fun onToolbarFavIconClick() {
         binding.toolbar.ivFavouritesIcon.setOnClickListener {
-            val intent = Intent(applicationContext, FavoritesActivity::class.java)
-            startActivity(intent)
+            if (userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
+                val intent = Intent(applicationContext, FavoritesActivity::class.java)
+                startActivity(intent)
+            }
+            else {
+                FavoritesDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
+            }
         }
     }
 
-    private fun onSearchIconClick() {
-        binding.toolbar.ivSearchIcon.setOnClickListener {
-            binding.svSearch.isVisible = true
-            binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextChange(p0: String?): Boolean {
-                    return false
-                }
+        private fun onSearchIconClick() {
+            binding.toolbar.ivSearchIcon.setOnClickListener {
+                binding.svSearch.isVisible = true
+                binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextChange(p0: String?): Boolean {
+                        return false
+                    }
 
-                override fun onQueryTextSubmit(text: String): Boolean {
-                    searchQuery = text
-                    binding.svSearch.isGone = true
-                    val intent = Intent(applicationContext, SearchActivity::class.java)
-                    intent.putExtra("searchQuery", searchQuery)
-                    intent.putExtra("userType", userType)
-                    startActivity(intent)
-                    return false
-                }
-            })
+                    override fun onQueryTextSubmit(text: String): Boolean {
+                        searchQuery = text
+                        binding.svSearch.isGone = true
+                        val intent = Intent(applicationContext, SearchActivity::class.java)
+                        intent.putExtra("searchQuery", searchQuery)
+                        intent.putExtra("userType", userType)
+                        startActivity(intent)
+                        return false
+                    }
+                })
+            }
         }
     }
-}

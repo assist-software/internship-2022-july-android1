@@ -17,6 +17,7 @@ import com.assist.imobilandroidapp.databinding.ActivitySearchBinding
 import com.assist.imobilandroidapp.screens.averageuser.fragments.LoginDialogFragment
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.assist.imobilandroidapp.screens.favorites.FavoritesActivity
+import com.assist.imobilandroidapp.screens.favorites.FavoritesDialogFragment
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
 import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
 import com.assist.imobilandroidapp.screens.profile.MessagesActivity
@@ -53,7 +54,7 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
 
     private fun editSearchText() {
         var newText = ""
-        newText = if(foundListings.size != 0) {
+        newText = if (foundListings.size != 0) {
             foundListings.size.toString() + " " +
                     getText(R.string.search_results_placeholder_activity).toString() + " " + searchQuery
         } else {
@@ -121,48 +122,53 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
     }
 
     override fun onFavIconClick(listingItemWithDesc: ListingFromDBObject) {
-        SharedPrefManager.getInstance().fetchUserId()?.let {
-            RetrofitClient.instance.addToFavoritesList(it, listingItemWithDesc.id)
-                .enqueue(object : Callback<String> {
-                    override fun onResponse(
-                        call: Call<String>,
-                        response: Response<String>
-                    ) {
-                        when (response.code()) {
-                            400, 401 -> {
-                                Toast.makeText(
-                                    applicationContext,
-                                    getText(R.string.something_wrong).toString(),
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
-
-                            200 -> {
-                                if (response.body()?.isNotEmpty() == true) {
+        if (userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
+            SharedPrefManager.getInstance().fetchUserId()?.let {
+                RetrofitClient.instance.addToFavoritesList(it, listingItemWithDesc.id)
+                    .enqueue(object : Callback<String> {
+                        override fun onResponse(
+                            call: Call<String>,
+                            response: Response<String>
+                        ) {
+                            when (response.code()) {
+                                400, 401 -> {
                                     Toast.makeText(
                                         applicationContext,
-                                        getText(R.string.added_to_fav).toString(),
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                } else {
-                                    Toast.makeText(
-                                        applicationContext,
-                                        getText(R.string.nothing_found).toString(),
+                                        getText(R.string.something_wrong).toString(),
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
+
+                                200 -> {
+                                    if (response.body()?.isNotEmpty() == true) {
+                                        Toast.makeText(
+                                            applicationContext,
+                                            getText(R.string.added_to_fav).toString(),
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    } else {
+                                        Toast.makeText(
+                                            applicationContext,
+                                            getText(R.string.nothing_found).toString(),
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
+                                }
                             }
                         }
-                    }
 
-                    override fun onFailure(call: Call<String>, t: Throwable) {
-                        Toast.makeText(
-                            applicationContext,
-                            t.message,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                })
+                        override fun onFailure(call: Call<String>, t: Throwable) {
+                            Toast.makeText(
+                                applicationContext,
+                                t.message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    })
+            }
+        }
+        else {
+            FavoritesDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
         }
     }
 
@@ -175,13 +181,12 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
 
     private fun onProfileIconClick() {
         binding.toolbar.ivProfilePic.setOnClickListener {
-           if(userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
-               intent = Intent(this, MainProfileActivity::class.java)
-               startActivity(intent)
-           }
-            else {
-               LoginDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
-           }
+            if (userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
+                intent = Intent(this, MainProfileActivity::class.java)
+                startActivity(intent)
+            } else {
+                LoginDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
+            }
         }
     }
 
@@ -215,8 +220,13 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
 
     private fun onToolbarFavIconClick() {
         binding.toolbar.ivFavouritesIcon.setOnClickListener {
-            val intent = Intent(applicationContext, FavoritesActivity::class.java)
-            startActivity(intent)
+            if(userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
+                val intent = Intent(applicationContext, FavoritesActivity::class.java)
+                startActivity(intent)
+            }
+            else {
+                FavoritesDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
+            }
         }
     }
 }
