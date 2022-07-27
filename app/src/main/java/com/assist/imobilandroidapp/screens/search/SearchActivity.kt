@@ -16,8 +16,11 @@ import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
 import com.assist.imobilandroidapp.databinding.ActivitySearchBinding
 import com.assist.imobilandroidapp.screens.averageuser.fragments.LoginDialogFragment
 import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
+import com.assist.imobilandroidapp.screens.favorites.FavoritesActivity
+import com.assist.imobilandroidapp.screens.favorites.FavoritesDialogFragment
 import com.assist.imobilandroidapp.screens.listing.ListingScreenActivity
 import com.assist.imobilandroidapp.screens.profile.MainProfileActivity
+import com.assist.imobilandroidapp.screens.profile.MessagesActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,6 +47,19 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
         editSearchText()
         onProfileIconClick()
         onSearchIconClick()
+        onMessagesBtnClick()
+    }
+
+    private fun onMessagesBtnClick() {
+        binding.fab.setOnClickListener {
+            if(userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
+                intent = Intent(this, MessagesActivity::class.java)
+                startActivity(intent)
+            }
+            else {
+                LoginDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
+            }
+        }
     }
 
     private fun editSearchText() {
@@ -116,7 +132,15 @@ class SearchActivity : AppCompatActivity(), ListingItemWithDescAdapter.OnFavIcon
     }
 
     override fun onFavIconClick(listingItemWithDesc: ListingFromDBObject) {
-        // Do nothing
+        binding.toolbar.ivFavouritesIcon.setOnClickListener {
+            if(userType == StartFragment.UserTypeConstants.LOGGED_IN_USER) {
+                intent = Intent(this, FavoritesActivity::class.java)
+                startActivity(intent)
+            }
+            else {
+                FavoritesDialogFragment().show(supportFragmentManager, LoginDialogFragment.TAG)
+            }
+        }
     }
 
     override fun onListingClick(ListingItemWithDesc: ListingFromDBObject) {

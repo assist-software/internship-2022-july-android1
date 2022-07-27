@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.assist.imobilandroidapp.R
 import com.assist.imobilandroidapp.apiinterface.models.ListingFromDBObject
-import com.assist.imobilandroidapp.screens.averageuser.fragments.StartFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -45,7 +44,12 @@ class ListingItemWithDescAdapter(
 
         holder.apply {
             Glide.with(context).load(listingItemWithDesc.images).override(154, 143)
-                .transform(MultiTransformation(CenterCrop(), GranularRoundedCorners(6f, 6f, 6f, 6f)))
+                .transform(
+                    MultiTransformation(
+                        CenterCrop(),
+                        GranularRoundedCorners(6f, 6f, 6f, 6f)
+                    )
+                )
                 .error(R.drawable.photo_replacement_1).into(listingImage)
             listingTitle.text = listingItemWithDesc.title
             listingDescription.text = listingItemWithDesc.shortDescription
@@ -57,11 +61,7 @@ class ListingItemWithDescAdapter(
             }
 
             favIcon.setOnClickListener {
-                if (userType == StartFragment.UserTypeConstants.GUEST) {
-                    onFavIconClick.onFavIconClick(listingItemWithDesc)
-                } else {
-                    // Do nothing, at the moment
-                }
+                onFavIconClick.onFavIconClick(listingItemWithDesc)
             }
         }
     }

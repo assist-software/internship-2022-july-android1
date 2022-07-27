@@ -143,14 +143,8 @@ class MainProfileActivity : AppCompatActivity() {
                                 it
                             )
                         }
-//                        Glide.with(applicationContext).load(specificUser.photo).transform(
-//                            MultiTransformation(
-//                                CenterCrop(),
-//                                GranularRoundedCorners(12f, 12f, 12f, 12f)
-//                            )
-//                        ).error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
-                        Glide.with(applicationContext).load(specificUser.photo).circleCrop()
-                            .error(R.drawable.photo_replacement_1).into(binding.ivBigProfilePicture)
+                        Glide.with(applicationContext).load(specificUser.photo).circleCrop().override(128, 128)
+                            .error(R.drawable.profile_icon).into(binding.ivBigProfilePicture)
                         if (specificUser.gender == 0) {
                             binding.tvGenderPreview.text = getString(R.string.gender_male)
                         } else {
