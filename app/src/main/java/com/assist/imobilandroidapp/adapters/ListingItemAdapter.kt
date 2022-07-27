@@ -52,7 +52,8 @@ class ListingItemAdapter(
                 .error(R.drawable.photo_replacement_1).into(itemView.findViewById(R.id.iv_photo))
             listingTitle.text = listingItem.title
             listingLocation.text = listingItem.location
-            listingPrice.text = listingItem.price.toString()
+            val price = listingItem.price.toString() + " lei"
+            listingPrice.text = price
 
             itemView.setOnClickListener {
                 onFavIconClickCallback.onListingItemClick(listingItem)
